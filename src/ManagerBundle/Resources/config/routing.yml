@@ -1,3 +1,8 @@
-manager:
+manager_index:
     path:     /
     defaults: { _controller: ManagerBundle:Default:index }
+    methods:  GET
+
+manager_operationtypes:
+    resource: "@ManagerBundle/Resources/config/routing/operationtype.yml"
+    prefix:   /operationtypes

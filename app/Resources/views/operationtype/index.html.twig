@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Operationtypes list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for operationType in operationTypes %}
+            <tr>
+                <td><a href="{{ path('operationtypes_show', { 'id': operationType.id }) }}">{{ operationType.id }}</a></td>
+                <td>{{ operationType.type }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('operationtypes_show', { 'id': operationType.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('operationtypes_edit', { 'id': operationType.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('operationtypes_new') }}">Create a new operationType</a>
+        </li>
+    </ul>
+{% endblock %}

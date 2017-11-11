@@ -1,0 +1,24 @@
+operationtypes_index:
+    path:     /
+    defaults: { _controller: "ManagerBundle:OperationType:index" }
+    methods:  GET
+
+operationtypes_show:
+    path:     /{id}/show
+    defaults: { _controller: "ManagerBundle:OperationType:show" }
+    methods:  GET
+
+operationtypes_new:
+    path:     /new
+    defaults: { _controller: "ManagerBundle:OperationType:new" }
+    methods:  [GET, POST]
+
+operationtypes_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ManagerBundle:OperationType:edit" }
+    methods:  [GET, POST]
+
+operationtypes_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ManagerBundle:OperationType:delete" }
+    methods:  DELETE

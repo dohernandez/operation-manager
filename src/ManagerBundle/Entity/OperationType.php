@@ -5,7 +5,7 @@ namespace ManagerBundle\Entity;
 /**
  * OperationType
  */
-class OperationType
+final class OperationType
 {
     /**
      * @var int
@@ -17,29 +17,22 @@ class OperationType
      */
     private $type;
 
+    /**
+     * @param string $type
+     */
+    public function __construct(string $type)
+    {
+        $this->type = $type;
+    }
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return OperationType
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
     }
 
     /**
@@ -47,9 +40,14 @@ class OperationType
      *
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
+    }
+
+    public function __toString(): string
+    {
+        return $this->getType();
     }
 }
 
