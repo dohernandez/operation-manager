@@ -22,11 +22,11 @@ Docker-symfony gives you everything you need for developing Symfony application.
     $ docker-compose up -d
     ```
 
-3. Update your system host file (add symfony.dev)
+3. Update your system host file (add operation-manager.dev)
 
     ```bash
     # UNIX only: get containers IP address and update host (replace IP according to your configuration) (on Windows, edit C:\Windows\System32\drivers\etc\hosts)
-    $ sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "symfony.dev" >> /etc/hosts
+    $ sudo echo $(docker network inspect bridge | grep Gateway | grep -o -E '[0-9\.]+') "operation-manager.dev" >> /etc/hosts
     ```
 
     **Note:** For **OS X**, please take a look [here](https://docs.docker.com/docker-for-mac/networking/) and for **Windows** read [this](https://docs.docker.com/docker-for-windows/#/step-4-explore-the-application-and-run-examples) (4th step).
@@ -63,9 +63,9 @@ Docker-symfony gives you everything you need for developing Symfony application.
 
 Just run `docker-compose up -d`, then:
 
-* Symfony app: visit [symfony.dev](http://symfony.dev)  
-* Symfony dev mode: visit [symfony.dev/app_dev.php](http://symfony.dev/app_dev.php)  
-* Logs (Kibana): [symfony.dev:81](http://symfony.dev:81)
+* Symfony app: visit [operation-manager.dev:8180](http://operation-manager.dev:8180)  
+* Symfony dev mode: visit [operation-manager.dev:8180/app_dev.php](http://operation-manager.dev:8180/app_dev.php)  
+* Logs (Kibana): [operation-manager.dev:8181](http://operation-manager.dev:8181)
 * Logs (files location): logs/nginx and logs/symfony
 
 ## Customize
@@ -87,10 +87,10 @@ This results in the following running containers:
 $ docker-compose ps
            Name                          Command               State              Ports            
 --------------------------------------------------------------------------------------------------
-dockersymfony_db_1            /entrypoint.sh mysqld            Up      0.0.0.0:3306->3306/tcp      
-dockersymfony_elk_1           /usr/bin/supervisord -n -c ...   Up      0.0.0.0:81->80/tcp          
-dockersymfony_nginx_1         nginx                            Up      443/tcp, 0.0.0.0:80->80/tcp
-dockersymfony_php_1           php-fpm                          Up      0.0.0.0:9000->9000/tcp      
+operationmanager_db_1            /entrypoint.sh mysqld            Up      0.0.0.0:3306->3306/tcp      
+operationmanager_elk_1           /usr/bin/supervisord -n -c ...   Up      0.0.0.0:8181->80/tcp          
+operationmanager_nginx_1         nginx                            Up      443/tcp, 0.0.0.0:8180->80/tcp
+operationmanager_php_1           php-fpm                          Up      0.0.0.0:9000->9000/tcp      
 ```
 
 ## Useful commands

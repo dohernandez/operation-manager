@@ -13,10 +13,10 @@
         phpmyadmin:
             image: phpmyadmin/phpmyadmin
             ports:
-                - "8080:80"
+                - "8183:80"
     ```
 
-2. Visit: [symfony.dev:8080](http://symfony.dev:8080)
+2. Visit: [operation-manager.dev:8183](http://operation-manager.dev:8183)
 
 ## Add Redis
 

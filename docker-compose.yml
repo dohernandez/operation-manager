@@ -3,8 +3,10 @@ version: '2'
 services:
     db:
         image: mysql
+        ports:
+            - 33060:3306
         volumes:
-            - "./.data/db:/var/lib/mysql"
+            - "./var/data/db:/var/lib/mysql"
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -17,19 +19,18 @@ services:
                 TIMEZONE: ${TIMEZONE}
         volumes:
             - ${SYMFONY_APP_PATH}:/var/www/symfony
-            - ./logs/symfony:/var/www/symfony/app/logs
     nginx:
         build: nginx
         ports:
-            - 80:80
+            - 8180:80
         volumes_from:
             - php
         volumes:
-            - ./logs/nginx/:/var/log/nginx
+            - ./var/logs/nginx/:/var/log/nginx
     elk:
         image: willdurand/elk
         ports:
-            - 81:80
+            - 8181:80
         volumes:
             - ./elk/logstash:/etc/logstash
             - ./elk/logstash/patterns:/opt/logstash/patterns
