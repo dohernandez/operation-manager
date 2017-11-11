@@ -1,0 +1,3 @@
+manager:
+    path:     /
+    defaults: { _controller: ManagerBundle:Default:index }

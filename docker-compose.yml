@@ -19,6 +19,9 @@ services:
                 TIMEZONE: ${TIMEZONE}
         volumes:
             - ${SYMFONY_APP_PATH}:/var/www/symfony
+        environment:
+            ENV: dev
+            DEBUG: 1
     nginx:
         build: nginx
         ports:
