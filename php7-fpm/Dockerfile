@@ -47,6 +47,11 @@ RUN apt-get install -y -qq \
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 
 # install bower
-RUN npm install --global bower
+RUN npm install --global bower && \
+	npm install --global less && \
+	npm install --global uglify-js && \
+	npm install --global uglifycss
+
+#RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 WORKDIR /var/www/symfony

@@ -6,7 +6,6 @@ use ManagerBundle\Entity\OperationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Operationtype controller.
@@ -18,7 +17,7 @@ class OperationTypeController extends Controller
      * Lists all operationType entities.
      *
      */
-    public function indexAction(): Response
+    public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 

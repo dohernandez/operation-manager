@@ -3,5 +3,7 @@ manager:
     prefix:   /manager
 
 app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }
+    options:
+        avanzu_admin_route: welcome

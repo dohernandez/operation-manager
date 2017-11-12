@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+{% extends 'AvanzuAdminThemeBundle:layout:default-layout.html.twig' %}
+
+{% block avanzu_logo_mini %}<b>M</b>O{% endblock %}
+{% block avanzu_logo_lg %}<b>Manager</b> Operator{% endblock %}
+
+{% block avanzu_page_title %}{% endblock %}

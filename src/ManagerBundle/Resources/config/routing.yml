@@ -2,6 +2,8 @@ manager_index:
     path:     /
     defaults: { _controller: ManagerBundle:Default:index }
     methods:  GET
+    options:
+        avanzu_admin_route: manager
 
 manager_operationtypes:
     resource: "@ManagerBundle/Resources/config/routing/operationtype.yml"
