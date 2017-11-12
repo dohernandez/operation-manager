@@ -37,4 +37,16 @@ RUN echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-x
 RUN echo 'alias sf="php app/console"' >> ~/.bashrc
 RUN echo 'alias sf3="php bin/console"' >> ~/.bashrc
 
+
+RUN apt-get install -y -qq \
+    npm \
+    curl \
+    wget
+
+# install npm
+RUN ln -s /usr/bin/nodejs /usr/bin/node
+
+# install bower
+RUN npm install --global bower
+
 WORKDIR /var/www/symfony

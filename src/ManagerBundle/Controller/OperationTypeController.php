@@ -4,7 +4,9 @@ namespace ManagerBundle\Controller;
 
 use ManagerBundle\Entity\OperationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Operationtype controller.
@@ -16,24 +18,22 @@ class OperationTypeController extends Controller
      * Lists all operationType entities.
      *
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
-//        $em = $this->getDoctrine()->getManager();
-//
-//        $operationTypes = $em->getRepository('ManagerBundle:OperationType')->findAll();
+        $em = $this->getDoctrine()->getManager();
 
-        $operationTypes = [];
+        $operationTypes = $em->getRepository('ManagerBundle:OperationType')->findAll();
 
-        return $this->render('operationtype/index.html.twig', array(
+        return $this->render('ManagerBundle:operationtype:index.html.twig', [
             'operationTypes' => $operationTypes,
-        ));
+        ]);
     }
 
     /**
      * Creates a new operationType entity.
      *
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request): Response
     {
         $operationType = new Operationtype();
         $form = $this->createForm('ManagerBundle\Form\OperationTypeType', $operationType);
@@ -44,34 +44,34 @@ class OperationTypeController extends Controller
             $em->persist($operationType);
             $em->flush();
 
-            return $this->redirectToRoute('operationtypes_show', array('id' => $operationType->getId()));
+            return $this->redirectToRoute('operationtypes_show', ['id' => $operationType->getId()]);
         }
 
-        return $this->render('operationtype/new.html.twig', array(
+        return $this->render('ManagerBundle:operationtype:new.html.twig', [
             'operationType' => $operationType,
             'form' => $form->createView(),
-        ));
+        ]);
     }
 
     /**
      * Finds and displays a operationType entity.
      *
      */
-    public function showAction(OperationType $operationType)
+    public function showAction(OperationType $operationType): Response
     {
         $deleteForm = $this->createDeleteForm($operationType);
 
-        return $this->render('operationtype/show.html.twig', array(
+        return $this->render('ManagerBundle:operationtype:show.html.twig', [
             'operationType' => $operationType,
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
      * Displays a form to edit an existing operationType entity.
      *
      */
-    public function editAction(Request $request, OperationType $operationType)
+    public function editAction(Request $request, OperationType $operationType): Response
     {
         $deleteForm = $this->createDeleteForm($operationType);
         $editForm = $this->createForm('ManagerBundle\Form\OperationTypeType', $operationType);
@@ -80,21 +80,21 @@ class OperationTypeController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('operationtypes_edit', array('id' => $operationType->getId()));
+            return $this->redirectToRoute('operationtypes_edit', ['id' => $operationType->getId()]);
         }
 
-        return $this->render('operationtype/edit.html.twig', array(
+        return $this->render('ManagerBundle:operationtype:edit.html.twig', [
             'operationType' => $operationType,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
      * Deletes a operationType entity.
      *
      */
-    public function deleteAction(Request $request, OperationType $operationType)
+    public function deleteAction(Request $request, OperationType $operationType): Response
     {
         $form = $this->createDeleteForm($operationType);
         $form->handleRequest($request);
@@ -113,12 +113,12 @@ class OperationTypeController extends Controller
      *
      * @param OperationType $operationType The operationType entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return Form The form
      */
-    private function createDeleteForm(OperationType $operationType)
+    private function createDeleteForm(OperationType $operationType): Form
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('operationtypes_delete', array('id' => $operationType->getId())))
+            ->setAction($this->generateUrl('operationtypes_delete', ['id' => $operationType->getId()]))
             ->setMethod('DELETE')
             ->getForm()
         ;

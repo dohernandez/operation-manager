@@ -5,7 +5,7 @@ namespace ManagerBundle\Entity;
 /**
  * OperationType
  */
-final class OperationType
+class OperationType
 {
     /**
      * @var int

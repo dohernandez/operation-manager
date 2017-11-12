@@ -10,4 +10,8 @@ namespace ManagerBundle\Repository;
  */
 class OperationTypeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAll(): array
+    {
+        return [];
+    }
 }
