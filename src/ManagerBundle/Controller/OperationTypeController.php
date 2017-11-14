@@ -3,9 +3,11 @@
 namespace ManagerBundle\Controller;
 
 use ManagerBundle\Entity\OperationType;
+use ManagerBundle\Repository\OperationTypeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Operationtype controller.
@@ -17,7 +19,7 @@ class OperationTypeController extends Controller
      * Lists all operationType entities.
      *
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -35,13 +37,16 @@ class OperationTypeController extends Controller
     public function newAction(Request $request): Response
     {
         $operationType = new Operationtype();
+
         $form = $this->createForm('ManagerBundle\Form\OperationTypeType', $operationType);
         $form->handleRequest($request);
+        // $operationType has been updated with the form inputs at this point when the form is submitted.
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($operationType);
-            $em->flush();
+            /* @var OperationTypeRepository $repository */
+            $repository = $this->getDoctrine()->getManager()->getRepository('ManagerBundle:OperationType');
+
+            $repository->save($operationType);
 
             return $this->redirectToRoute('operationtypes_show', ['id' => $operationType->getId()]);
         }

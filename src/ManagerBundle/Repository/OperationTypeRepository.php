@@ -2,6 +2,8 @@
 
 namespace ManagerBundle\Repository;
 
+use ManagerBundle\Entity\OperationType;
+
 /**
  * OperationTypeRepository
  *
@@ -10,8 +12,10 @@ namespace ManagerBundle\Repository;
  */
 class OperationTypeRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findAll(): array
+    public function save(OperationType $operationType): void
     {
-        return [];
+        $em = $this->getEntityManager();
+        $em->persist($operationType);
+        $em->flush();
     }
 }

@@ -84,8 +84,6 @@ avanzu_admin_theme:
     use_assetic: false
     knp_menu:                         # knp menu integration
         enable: true
-        main_menu: avanzu_admin
-        breadcrumb_menu: false
     options:
         knp_menu:                         # knp menu integration
             enable: true

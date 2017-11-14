@@ -1,0 +1,17 @@
+{% extends 'AvanzuAdminThemeBundle:layout:form-theme.html.twig' %}
+
+{% block form_label %}
+    <div class="col-sm-2">
+        {{ parent() }}
+    </div>
+{% endblock form_label %}
+
+{% block form_widget_simple %}
+    <div class="col-sm-10">
+        {{ parent() }}
+
+        {% if help is defined %}
+            <p class="help-block">{{ help }}</p>
+        {% endif %}
+    </div>
+{% endblock %}

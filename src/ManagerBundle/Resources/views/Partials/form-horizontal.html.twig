@@ -1,0 +1,21 @@
+{% form_theme form 'ManagerBundle:layout:form-theme.html.twig' %}
+
+<!-- Horizontal Form -->
+<div class="box box-info">
+    <div class="box-header with-border">
+        <h3 class="box-title">{{ block('box_title') }}</h3>
+    </div>
+    <!-- /.box-header -->
+    <!-- form start -->
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        <div class="box-body">
+            {{ form_widget(form) }}
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <button type="submit" class="btn btn-default">Cancel</button>
+            <button type="submit" class="btn btn-info pull-right"><i class="fa fa-check-square"></i> Create</button>
+        </div>
+        <!-- /.box-footer -->
+    {{ form_end(form) }}
+</div>
