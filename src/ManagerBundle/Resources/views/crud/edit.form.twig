@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block avanzu_head %} {% include 'AvanzuAdminThemeBundle:Partials:_header-form-extra.html.twig' %}{% endblock %}
+
+{% block avanzu_page_title %} {{ page_title }} {% endblock %}
+{% block avanzu_page_subtitle %} {{ page_subtitle }} {% endblock %}
+
+{% block avanzu_page_content %}
+
+    <div class="row">
+        <div class="col-md-6">
+            {% embed 'ManagerBundle:Partials:form-horizontal.html.twig'%}
+                {% block box_title %}Operation type{% endblock %}
+            {% endembed %}
+
+        </div>
+        <div class="col-md-6">
+
+        </div>
+    </div>
+
+
+{% endblock %}

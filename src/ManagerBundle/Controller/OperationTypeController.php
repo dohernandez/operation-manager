@@ -51,9 +51,14 @@ class OperationTypeController extends Controller
             return $this->redirectToRoute('operationtypes_show', ['id' => $operationType->getId()]);
         }
 
-        return $this->render('ManagerBundle:operationtype:new.html.twig', [
+        return $this->render('ManagerBundle:crud:edit.form.twig', [
             'operationType' => $operationType,
             'form' => $form->createView(),
+            'page_title' => 'Manager operation type',
+            'page_subtitle' => 'create',
+            'boxtype' => 'success',
+            'submittype' => 'Create',
+            'cancelurl' => $this->generateUrl('operationtypes_index'),
         ]);
     }
 
@@ -87,10 +92,16 @@ class OperationTypeController extends Controller
             return $this->redirectToRoute('operationtypes_edit', ['id' => $operationType->getId()]);
         }
 
-        return $this->render('ManagerBundle:operationtype:edit.html.twig', [
+        ($editForm);
+        return $this->render('ManagerBundle:crud:edit.form.twig', [
             'operationType' => $operationType,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'page_title' => 'Manager operation type',
+            'page_subtitle' => 'edit',
+            'boxtype' => 'primary',
+            'submittype' => 'Edit',
+            'cancelurl' => $this->generateUrl('operationtypes_index'),
         ]);
     }
 

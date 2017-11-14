@@ -1,24 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block avanzu_head %} {% include 'AvanzuAdminThemeBundle:Partials:_header-form-extra.html.twig' %}{% endblock %}
+{% block body %}
+    <h1>Operationtype creation</h1>
 
-{% block avanzu_page_title %} Manager {% endblock %}
-{% block avanzu_page_subtitle %} Create new operation type {% endblock %}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
 
-{% block avanzu_page_content %}
-
-    <div class="row">
-        <div class="col-md-6">
-            {% embed 'ManagerBundle:Partials:form-horizontal.html.twig' %}
-                {% block box_title %}Operation type{% endblock %}
-            {% endembed %}
-
-        </div>
-        <div class="col-md-6">
-
-        </div>
-    </div>
-
-
+    <ul>
+        <li>
+            <a href="{{ path('operationtypes_index') }}">Back to the list</a>
+        </li>
+    </ul>
 {% endblock %}
-

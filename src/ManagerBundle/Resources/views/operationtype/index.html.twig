@@ -1,38 +1,48 @@
 {% extends 'base.html.twig' %}
 
+{# % block avanzu_head %}
+    <link rel="stylesheet" href="{{ asset('theme/plugins/datatables/jquery.dataTables.min.css') }}">
+{% endblock % #}
+
 {% block avanzu_page_title %}Operation types{% endblock %}
 {% block avanzu_page_content %}
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Type</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for operationType in operationTypes %}
-            <tr>
-                <td><a href="{{ path('operationtypes_show', { 'id': operationType.id }) }}">{{ operationType.id }}</a></td>
-                <td>{{ operationType.type }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('operationtypes_show', { 'id': operationType.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('operationtypes_edit', { 'id': operationType.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('operationtypes_new') }}">Create a new operationType</a>
-        </li>
-    </ul>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <a href="{{ path('operationtypes_new') }}" class="btn btn-success pull-right">
+                        <i class="fa-plus-circle fa" aria-hidden="true"></i> Create a new operationType</a>
+                </div>
+                <div class="box-body">
+                    <table id="operationtypes" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th width="70" class="text-center" scope="col">#</th>
+                                <th scope="col">TYPE</th>
+                                <th width="100" scope="col">MANAGE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for operationType in operationTypes %}
+                            <tr>
+                                <th scope="row" class="text-center">{{ operationType.id }}</th>
+                                <td style="vertical-align: middle;">{{ operationType.type }}</td>
+                                <td>
+                                    <a href="{{ path('operationtypes_edit', { 'id': operationType.id }) }}"
+                                       class="btn btn-primary btn-sm">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="{{ path('operationtypes_delete', { 'id': operationType.id }) }}"
+                                       class="btn btn-danger btn-sm">
+                                        <i class="fa-trash-o fa" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
