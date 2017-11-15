@@ -27,7 +27,7 @@ class ActionTypeController extends CRUDController
      */
     public function indexAction(): Response
     {
-        return $this->index(['type'], [
+        return $this->index([[ 'key' => 'type' ]], [
             'new_url' => $this->generateUrl('actiontypes_new'),
             'edit_route' => 'actiontypes_edit',
             'delete_route' => 'actiontypes_delete',

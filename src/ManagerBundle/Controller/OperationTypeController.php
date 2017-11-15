@@ -26,7 +26,7 @@ class OperationTypeController extends CRUDController
      */
     public function indexAction(): Response
     {
-        return $this->index(['type'], [
+        return $this->index([[ 'key' => 'type' ]], [
             'new_url' => $this->generateUrl('operationtypes_new'),
             'edit_route' => 'operationtypes_edit',
             'delete_route' => 'operationtypes_delete',

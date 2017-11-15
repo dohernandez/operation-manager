@@ -30,7 +30,7 @@ class StockController extends CRUDController
             [
                 [ 'key' => 'symbol', 'col_with' => '150' ],
                 [ 'key' => 'company', 'col_with' => '200' ],
-                [ 'key' => 'description', 'col_with' => '' ],
+                [ 'key' => 'description'],
             ],
             [
                 'new_url' => $this->generateUrl('stocks_new'),

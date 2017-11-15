@@ -26,11 +26,17 @@ class MarketController extends CRUDController
      */
     public function indexAction(): Response
     {
-        return $this->index(['name', 'symbol'], [
-            'new_url' => $this->generateUrl('markets_new'),
-            'edit_route' => 'markets_edit',
-            'delete_route' => 'markets_delete',
-        ]);
+        return $this->index(
+            [
+                [ 'key' => 'symbol', 'col_with' => '150' ],
+                [ 'key' => 'name' ],
+            ],
+            [
+                'new_url' => $this->generateUrl('markets_new'),
+                'edit_route' => 'markets_edit',
+                'delete_route' => 'markets_delete',
+            ]
+        );
     }
 
     /**
