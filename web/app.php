@@ -8,9 +8,9 @@ if (PHP_VERSION_ID < 70000) {
     include_once __DIR__.'/../var/bootstrap.php.cache';
 }
 
-if ((bool) getenv('DEBUG') == true){
-    Debug::enable();
-}
+//if ((bool) getenv('DEBUG') == true){
+//    Debug::enable();
+//}
 
 $kernel = new AppKernel(getenv('ENV') ?: 'prod', false);
 if (PHP_VERSION_ID < 70000) {
