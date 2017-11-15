@@ -12,18 +12,12 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class OperationTypeController extends CRUDController
 {
+    use EntityController;
+
     /**
      * @var string
      */
-    private $entityClass = 'OperationType';
-
-    /**
-     * @return string
-     */
-    public function getEntityClass(): string
-    {
-        return $this->entityClass;
-    }
+    protected $entityClass = 'OperationType';
 
     /**
      * Lists all operationType entities.
