@@ -1,0 +1,23 @@
+ManagerBundle\Entity\Stock:
+    type: entity
+    table: null
+    repositoryClass: ManagerBundle\Repository\StockRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        symbol:
+            type: string
+            length: 255
+            unique: true
+        company:
+            type: string
+            length: 255
+            unique: true
+        description:
+            type: text
+            nullable: true
+    lifecycleCallbacks: {  }

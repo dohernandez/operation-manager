@@ -1,0 +1,21 @@
+stocks_index:
+    path:     /
+    defaults: { _controller: "ManagerBundle:Stock:index" }
+    methods:  GET
+    options:
+        avanzu_admin_route: stocks
+
+stocks_new:
+    path:     /new
+    defaults: { _controller: "ManagerBundle:Stock:new" }
+    methods:  [GET, POST]
+
+stocks_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ManagerBundle:Stock:edit" }
+    methods:  [GET, POST]
+
+stocks_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ManagerBundle:Stock:delete" }
+    methods:  DELETE
