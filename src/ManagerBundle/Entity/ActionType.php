@@ -5,7 +5,7 @@ namespace ManagerBundle\Entity;
 /**
  * ActionType
  */
-class ActionType extends Entity
+class ActionType extends EntityType
 {
 }
 
