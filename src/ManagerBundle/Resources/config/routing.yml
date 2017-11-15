@@ -8,3 +8,7 @@ manager_index:
 manager_operationtypes:
     resource: "@ManagerBundle/Resources/config/routing/operationtype.yml"
     prefix:   /operationtypes
+
+manager_actiontypes:
+    resource: "@ManagerBundle/Resources/config/routing/actiontype.yml"
+    prefix:   /actiontypes

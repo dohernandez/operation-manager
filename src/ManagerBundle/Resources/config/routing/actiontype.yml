@@ -1,0 +1,24 @@
+actiontypes_index:
+    path:     /
+    defaults: { _controller: "ManagerBundle:ActionType:index" }
+    methods:  GET
+
+actiontypes_show:
+    path:     /{id}/show
+    defaults: { _controller: "ManagerBundle:ActionType:show" }
+    methods:  GET
+
+actiontypes_new:
+    path:     /new
+    defaults: { _controller: "ManagerBundle:ActionType:new" }
+    methods:  [GET, POST]
+
+actiontypes_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ManagerBundle:ActionType:edit" }
+    methods:  [GET, POST]
+
+actiontypes_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ManagerBundle:ActionType:delete" }
+    methods:  DELETE
