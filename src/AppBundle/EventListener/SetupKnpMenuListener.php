@@ -17,20 +17,41 @@ class SetupKnpMenuListener
             ]
         )->setAttribute('class', 'header');
 
-        // A "regular" menu item with a link
-        $menu->addChild('ManagerMenuItem', [
-                'route' => 'manager_index',
-                'label' => 'Manager',
-                'childOptions' => $event->getChildOptions()
-            ]
-        )->setLabelAttribute('icon', 'fa fa-bars');
+        $this->addChildToParent($menu, [
+            'menu_item' => 'ManagerMenuItem',
+            'label' => 'Manager',
+            'route' => 'manager_index',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-bars',
+        ]);
 
-        // First child, a regular menu item
-        $menu->getChild('ManagerMenuItem')->addChild('OperationTypesMenuItem', [
-                'label' => 'Operation types',
-                'route' => 'operationtypes_index',
-                'childOptions' => $event->getChildOptions()
+        $managerItem = $menu->getChild('ManagerMenuItem');
+        $this->addChildToParent($managerItem, [
+            'menu_item' => 'OperationTypesMenuItem',
+            'label' => 'Operation types',
+            'route' => 'operationtypes_index',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-line-chart',
+        ]);
+        $this->addChildToParent($managerItem, [
+            'menu_item' => 'ActionTypesMenuItem',
+            'label' => 'Action types',
+            'route' => 'actiontypes_index',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-bell',
+        ]);
+    }
+
+    /**
+     * @param array $child
+     */
+    protected function addChildToParent($parent, array $child): void
+    {
+        $parent->addChild($child['menu_item'], [
+                'label'        => $child['label'],
+                'route'        => $child['route'],
+                'childOptions' => $child['child_options']
             ]
-        )->setLabelAttribute('icon', 'fa fa-line-chart');
+        )->setLabelAttribute('icon',  $child['icon']);
     }
 }
