@@ -3,6 +3,7 @@
 namespace ManagerBundle\Controller;
 
 use ManagerBundle\Entity\ActionType;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -22,36 +23,33 @@ class ActionTypeController extends CRUDController
     /**
      * Lists all actionType entities.
      *
+     * @return Response
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         return $this->index(['type'], [
-            'new_url' => $this->generateUrl('actiontypes_new')
+            'new_url' => $this->generateUrl('actiontypes_new'),
+            'edit_route' => 'actiontypes_edit',
+            'delete_route' => 'actiontypes_delete',
         ]);
     }
 
     /**
      * Creates a new actionType entity.
      *
+     * @param Request $request
+     *
+     * @return Response
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request): Response
     {
-        $actionType = new Actiontype();
-        $form = $this->createForm('ManagerBundle\Form\ActionTypeType', $actionType);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($actionType);
-            $em->flush();
-
-            return $this->redirectToRoute('actiontypes_show', array('id' => $actionType->getId()));
-        }
-
-        return $this->render('actiontype/new.html.twig', array(
-            'actionType' => $actionType,
-            'form' => $form->createView(),
-        ));
+        return $this->edit($request, new ActionType(), [
+            'page_title' => 'Manager action type',
+            'page_subtitle' => 'create',
+            'box_type' => 'success',
+            'submit_type' => 'Create',
+            'cancel_url' => $this->generateUrl('actiontypes_index'),
+        ]);
     }
 
     /**
@@ -71,24 +69,20 @@ class ActionTypeController extends CRUDController
     /**
      * Displays a form to edit an existing actionType entity.
      *
+     * @param Request $request
+     * @param ActionType $actionType
+     *
+     * @return Response
      */
-    public function editAction(Request $request, ActionType $actionType)
+    public function editAction(Request $request, ActionType $actionType): Response
     {
-        $deleteForm = $this->createDeleteForm($actionType);
-        $editForm = $this->createForm('ManagerBundle\Form\ActionTypeType', $actionType);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('actiontypes_edit', array('id' => $actionType->getId()));
-        }
-
-        return $this->render('actiontype/edit.html.twig', array(
-            'actionType' => $actionType,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+        return $this->edit($request, $actionType, [
+            'page_title' => 'Manager action type',
+            'page_subtitle' => 'edit',
+            'box_type' => 'primary',
+            'submit_type' => 'Edit',
+            'cancel_url' => $this->generateUrl('actiontypes_index'),
+        ]);
     }
 
     /**
@@ -97,16 +91,7 @@ class ActionTypeController extends CRUDController
      */
     public function deleteAction(Request $request, ActionType $actionType)
     {
-        $form = $this->createDeleteForm($actionType);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($actionType);
-            $em->flush();
-        }
-
-        return $this->redirectToRoute('actiontypes_index');
+        return $this->redirectToRoute('actiontypes_edit', ['id' => $actionType->getId()]);
     }
 
     /**
@@ -114,9 +99,9 @@ class ActionTypeController extends CRUDController
      *
      * @param ActionType $actionType The actionType entity
      *
-     * @return \Symfony\Component\Form\Form The form
+     * @return Form The form
      */
-    private function createDeleteForm(ActionType $actionType)
+    protected function createDeleteForm($actionType): Form
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('actiontypes_delete', array('id' => $actionType->getId())))

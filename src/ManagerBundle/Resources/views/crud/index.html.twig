@@ -28,14 +28,19 @@
                                     <td style="vertical-align: middle;">{{ attribute(item, field) }}</td>
                                 {% endfor %}
                                 <td>
-                                    <a href="{{ path('operationtypes_edit', { 'id': item.id }) }}"
-                                       class="btn btn-primary btn-sm">
+                                    <a href="{{ path(edit_route, { 'id': item.id }) }}"
+                                       class="btn btn-primary btn-sm pull-left">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a>
-                                    <button class="open-delete-dialog btn btn-danger btn-sm"
-                                            data-toggle="modal" data-id="{{ item.id }}" data-title="{{ attribute(item, '__toString')}}">
-                                        <i class="fa-trash-o fa" aria-hidden="true"></i>
-                                    </button>
+                                    <form action="{{ path(delete_route, { 'id': item.id }) }}" method="post"
+                                          class="pull-left" style="margin-left: 3px">
+                                        <input type="hidden" name="_method" value="DELETE" />
+                                        {{ form_widget(delete_forms[item.id]) }}
+                                        <button type="submit" class="open-delete-dialog btn btn-danger btn-sm"
+                                                data-toggle="modal" data-id="{{ item.id }}" data-title="{{ attribute(item, '__toString')}}">
+                                            <i class="fa-trash-o fa" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         {% endfor %}
@@ -45,7 +50,6 @@
             </div>
         </div>
     </div>
-    {#{{ form_start(delete_form) }}#}
     <!-- Modal delete dialog start -->
     <div class="modal fade" id="open-delete-dialog" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -64,7 +68,6 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-    {#{{ form_end(form) }}#}
 {% endblock %}
 
 {% block avanzu_javascripts_inline %}

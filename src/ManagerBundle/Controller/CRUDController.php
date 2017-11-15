@@ -21,14 +21,23 @@ abstract class CRUDController extends Controller
      */
     protected function index(array $fields, array $options): Response
     {
+        $delete_forms = [];
+        
         $entities = $this->getEntityRepository()->findAll();
+
+        /* @var Entity $entity */
+        foreach ($entities as $entity) {
+            $delete_forms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
+        }
 
         return $this->render('ManagerBundle:crud:index.html.twig', [
             'entities' => $entities,
             'fields' => $fields,
             'entity_type' => implode(' ', preg_split('/(?=[A-Z])/', $this->getEntityClass())),
             'new_url' => $options['new_url'],
-            'delete_form' => $this->createDeleteForm()->createView(),
+            'edit_route' => $options['edit_route'],
+            'delete_route' => $options['delete_route'],
+            'delete_forms' => $delete_forms,
         ]);
     }
 
@@ -43,6 +52,8 @@ abstract class CRUDController extends Controller
     }
 
     abstract protected function getEntityClass(): string;
+
+    abstract protected function createDeleteForm($entity): Form;
 
     /**
      * Creates a new operationType entity.
@@ -93,27 +104,5 @@ abstract class CRUDController extends Controller
         }
 
         return $this->redirectToRoute(sprintf('%ss_index', strtolower($this->getEntityClass())));
-    }
-
-    /**
-     * Creates a form to delete a entity.
-     *
-     * @param Entity $entity
-     *
-     * @return Form The form
-     */
-    private function createDeleteForm(Entity $entity = null): Form
-    {
-        return $this->createFormBuilder()
-            ->setAction(
-                $this->generateUrl(
-                    sprintf('%ss_delete', strtolower($this->getEntityClass())),
-                    [
-                        'id' => $entity ? $entity->getId() : 'id',
-                    ]
-                )
-            )
-            ->setMethod('DELETE')
-            ->getForm();
     }
 }

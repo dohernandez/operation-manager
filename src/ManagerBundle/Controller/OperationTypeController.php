@@ -3,6 +3,7 @@
 namespace ManagerBundle\Controller;
 
 use ManagerBundle\Entity\OperationType;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -26,7 +27,9 @@ class OperationTypeController extends CRUDController
     public function indexAction(): Response
     {
         return $this->index(['type'], [
-            'new_url' => $this->generateUrl('operationtypes_new')
+            'new_url' => $this->generateUrl('operationtypes_new'),
+            'edit_route' => 'operationtypes_edit',
+            'delete_route' => 'operationtypes_delete',
         ]);
     }
 
@@ -74,5 +77,21 @@ class OperationTypeController extends CRUDController
     public function deleteAction(Request $request, OperationType $operationType): Response
     {
         return $this->delete($request, $operationType);
+    }
+
+    /**
+     * Creates a form to delete a operationType entity.
+     *
+     * @param OperationType $operationType The operationType entity
+     *
+     * @return Form The form
+     */
+    protected function createDeleteForm($operationType): Form
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('operationtypes_delete', array('id' => $operationType->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
     }
 }
