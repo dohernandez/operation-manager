@@ -91,7 +91,7 @@ class ActionTypeController extends CRUDController
      */
     public function deleteAction(Request $request, ActionType $actionType)
     {
-        return $this->redirectToRoute('actiontypes_edit', ['id' => $actionType->getId()]);
+        return $this->delete($request, $actionType);
     }
 
     /**
