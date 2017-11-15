@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block avanzu_page_title %} {{ entity_type|title }}s {% endblock %}
+{% block avanzu_page_content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <a href="{{ new_url|default('#') }}" class="btn btn-success pull-right">
+                        <i class="fa-plus-circle fa" aria-hidden="true"></i> Create a new {{ entity_type|lower }}</a>
+                </div>
+                <div class="box-body">
+                    <table id="operationtypes" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th width="70" class="text-center" scope="col">#</th>
+                                {% for property_title in fields %}
+                                    <th scope="col">{{ property_title|upper }}</th>
+                                {% endfor %}
+                                <th width="100" scope="col">MANAGE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in entities %}
+                            <tr>
+                                <th style="vertical-align: middle;" scope="row" class="text-center">{{ item.id }}</th>
+                                {% for field in fields %}
+                                    <td style="vertical-align: middle;">{{ attribute(item, field) }}</td>
+                                {% endfor %}
+                                <td>
+                                    <a href="{{ path('operationtypes_edit', { 'id': item.id }) }}"
+                                       class="btn btn-primary btn-sm">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </a>
+                                    <button class="open-delete-dialog btn btn-danger btn-sm"
+                                            data-toggle="modal" data-id="{{ item.id }}" data-title="{{ attribute(item, '__toString')}}">
+                                        <i class="fa-trash-o fa" aria-hidden="true"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#{{ form_start(delete_form) }}#}
+    <!-- Modal delete dialog start -->
+    <div class="modal fade" id="open-delete-dialog" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Delete {{ entity_type|title }}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Do you want to delete the {{ entity_type|title }} "title"?.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    {#{{ form_end(form) }}#}
+{% endblock %}
+
+{% block avanzu_javascripts_inline %}
+    <script>
+        $(document).on("click", ".open-delete-dialog", function () {
+            var itemId = $(this).data('id');
+            var itemTitle = $(this).data('title');
+            $(".modal-footer #itemId").val( itemId );
+            $(".modal-body p").text($(".modal-body p").text().replace("title", itemTitle));
+            console.log('ID: ' + itemId)
+            console.log('Title: ' + itemTitle)
+            // As pointed out in comments,
+            // it is superfluous to have to manually call the modal.
+             $('#open-delete-dialog').modal('show');
+        });
+    </script>
+{% endblock %}

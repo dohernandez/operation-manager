@@ -1,7 +1,7 @@
 {% form_theme form 'ManagerBundle:layout:form-theme.html.twig' %}
 
 <!-- Horizontal Form -->
-<div class="box {% if boxtype %}box-{{ boxtype|default('info') }}{% endif %}">
+<div class="box {% if box_type %}box-{{ box_type|default('info') }}{% endif %}">
     <div class="box-header with-border">
         <h3 class="box-title">{{ block('box_title') }}</h3>
     </div>
@@ -13,9 +13,9 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-            <a href="{{ cancelurl|default('#') }}" class="btn btn-default">Cancel</a>
-            <button type="submit" class="btn btn-{{ boxtype|default('info') }} pull-right">
-                <i class="fa fa-check-square"></i> {{ submittype|default('Submit') }}
+            <a href="{{ cancel_url|default('#') }}" class="btn btn-default">Cancel</a>
+            <button type="submit" class="btn btn-{{ box_type|default('info') }} pull-right">
+                <i class="fa fa-check-square"></i> {{ submit_type|default('Submit') }}
             </button>
         </div>
         <!-- /.box-footer -->

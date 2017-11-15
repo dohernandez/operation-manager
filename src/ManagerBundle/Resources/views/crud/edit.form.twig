@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-6">
             {% embed 'ManagerBundle:Partials:form-horizontal.html.twig'%}
-                {% block box_title %}Operation type{% endblock %}
+                {% block box_title %}{{ box_title }}{% endblock %}
             {% endembed %}
 
         </div>
