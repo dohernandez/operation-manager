@@ -53,20 +53,6 @@ class ActionTypeController extends CRUDController
     }
 
     /**
-     * Finds and displays a actionType entity.
-     *
-     */
-    public function showAction(ActionType $actionType)
-    {
-        $deleteForm = $this->createDeleteForm($actionType);
-
-        return $this->render('actiontype/show.html.twig', array(
-            'actionType' => $actionType,
-            'delete_form' => $deleteForm->createView(),
-        ));
-    }
-
-    /**
      * Displays a form to edit an existing actionType entity.
      *
      * @param Request $request

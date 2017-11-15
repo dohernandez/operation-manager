@@ -16,7 +16,7 @@ class EntityType extends Entity
      *
      * @return OperationType
      */
-    public function setType($type)
+    public function setType(string $type)
     {
         $this->type = $type;
 

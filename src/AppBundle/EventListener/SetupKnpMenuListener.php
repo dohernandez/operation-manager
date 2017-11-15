@@ -26,8 +26,9 @@ class SetupKnpMenuListener
             'icon' => 'fa fa-bars',
         ]);
 
-        // Manager item
+        // Manager
         $managerItem = $menu->getChild('ManagerMenuItem');
+        // Manager > Operation Types
         $this->addChildToParent($managerItem, [
             'menu_item' => 'OperationTypesMenuItem',
             'label' => 'Operation types',
@@ -35,12 +36,21 @@ class SetupKnpMenuListener
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-line-chart',
         ]);
+        // Manager > Action Types
         $this->addChildToParent($managerItem, [
             'menu_item' => 'ActionTypesMenuItem',
             'label' => 'Action types',
             'route' => 'actiontypes_index',
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-bell',
+        ]);
+        // Manager > Market
+        $this->addChildToParent($managerItem, [
+            'menu_item' => 'MarketMenuItem',
+            'label' => 'Markets',
+            'route' => 'markets_index',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-industry',
         ]);
     }
 

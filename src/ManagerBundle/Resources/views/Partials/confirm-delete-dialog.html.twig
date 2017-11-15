@@ -1,0 +1,53 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Delete {{ entity_type|title }}</h4>
+        </div>
+        <div class="modal-body">
+            <p>Do you want to delete the {{ entity_type|title }} "title"?.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" id="confirm-submit">Delete</button>
+        </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+
+{% block avanzu_javascripts_inline %}
+    <script>
+        $(document).on("click", ".entity-delete", function () {
+            var $form = $(this);
+
+            var itemId = $form.data('id');
+            var itemTitle = $form.data('title');
+
+            $(".modal-footer #itemId").val( itemId );
+            $(".modal-body p").text($(".modal-body p").text().replace("title", itemTitle));
+
+            console.log('Confirm delete "' + itemTitle + '" with ID: ' + itemId);
+
+
+            $('#confirm-dialog i').hide();
+            // As pointed out in comments,
+            // it is superfluous to have to manually call the modal.
+            var modal = $('#confirm-dialog');
+            modal.modal('show');
+
+            // On delete confirm
+            modal.modal({ backdrop: 'static', keyboard: false })
+                .on('click', '#confirm-submit', function(){
+                    console.log('yes');
+                    $('#entity_' + itemId).submit();
+
+                    // Block the panel
+                    modal.modal({backdrop: 'static', keyboard: false});
+                    $('#confirm-dialog .modal-dialog').hide();
+                    modal.css('text-align','center');
+
+                    var $processing = $('#confirm-dialog i');
+                    $processing.show();
+                });
+        });
+    </script>
+{% endblock %}

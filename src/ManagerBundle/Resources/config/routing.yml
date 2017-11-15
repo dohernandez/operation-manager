@@ -12,3 +12,7 @@ manager_operationtypes:
 manager_actiontypes:
     resource: "@ManagerBundle/Resources/config/routing/actiontype.yml"
     prefix:   /actiontypes
+
+manager_markets:
+    resource: "@ManagerBundle/Resources/config/routing/market.yml"
+    prefix:   /markets
