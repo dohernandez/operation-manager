@@ -1,5 +1,16 @@
 {% extends 'base.html.twig' %}
 
+{% block avanzu_head %}
+    {{ parent() }}
+
+    <style>
+        #confirm-dialog > i {
+            position:relative;
+            top: calc(50% - 10px); /* 50% - 3/4 of icon height */
+        }
+    </style>
+{% endblock %}
+
 {% block avanzu_page_title %} {{ entity_type|title }}s {% endblock %}
 {% block avanzu_page_content %}
     <div class="row">
@@ -32,11 +43,11 @@
                                        class="btn btn-primary btn-sm pull-left">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a>
-                                    <form action="{{ path(delete_route, { 'id': item.id }) }}" method="post"
+                                    <form id="entity_{{ item.id }}" action="{{ path(delete_route, { 'id': item.id }) }}" method="post"
                                           class="pull-left" style="margin-left: 3px">
                                         <input type="hidden" name="_method" value="DELETE" />
                                         {{ form_widget(delete_forms[item.id]) }}
-                                        <button type="submit" class="open-delete-dialog btn btn-danger btn-sm"
+                                        <button type="button" data-backdrop="static" data-keyboard="false" class="entity-delete btn btn-danger btn-sm" data-target="#confirm-dialog"
                                                 data-toggle="modal" data-id="{{ item.id }}" data-title="{{ attribute(item, '__toString')}}">
                                             <i class="fa-trash-o fa" aria-hidden="true"></i>
                                         </button>
@@ -51,7 +62,7 @@
         </div>
     </div>
     <!-- Modal delete dialog start -->
-    <div class="modal fade" id="open-delete-dialog" tabindex="-1" role="dialog">
+    <div class="modal fade" id="confirm-dialog" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -63,25 +74,49 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-danger" id="confirm-submit">Delete</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
+        <i class="fa fa-share-square-o fa-4x" aria-hidden="true"></i>
     </div><!-- /.modal -->
+    <!-- Modal to block window after submit -->
 {% endblock %}
 
 {% block avanzu_javascripts_inline %}
     <script>
-        $(document).on("click", ".open-delete-dialog", function () {
-            var itemId = $(this).data('id');
-            var itemTitle = $(this).data('title');
+        $(document).on("click", ".entity-delete", function () {
+            var $form = $(this);
+
+            var itemId = $form.data('id');
+            var itemTitle = $form.data('title');
+
             $(".modal-footer #itemId").val( itemId );
             $(".modal-body p").text($(".modal-body p").text().replace("title", itemTitle));
-            console.log('ID: ' + itemId)
-            console.log('Title: ' + itemTitle)
+
+            console.log('Confirm delete "' + itemTitle + '" with ID: ' + itemId);
+
+
+            $('#confirm-dialog i').hide();
             // As pointed out in comments,
             // it is superfluous to have to manually call the modal.
-             $('#open-delete-dialog').modal('show');
+            var modal = $('#confirm-dialog');
+            modal.modal('show');
+
+            // On delete confirm
+            modal.modal({ backdrop: 'static', keyboard: false })
+                .on('click', '#confirm-submit', function(){
+                    console.log('yes');
+                    $('#entity_' + itemId).submit();
+
+                    // Block the panel
+                    modal.modal({backdrop: 'static', keyboard: false});
+                    $('#confirm-dialog .modal-dialog').hide();
+                    modal.css('text-align','center');
+
+                    var $processing = $('#confirm-dialog i');
+                    $processing.show();
+                });
         });
     </script>
 {% endblock %}
