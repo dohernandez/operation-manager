@@ -1,0 +1,21 @@
+markets_index:
+    path:     /
+    defaults: { _controller: "ManagerBundle:Market:index" }
+    methods:  GET
+    options:
+        avanzu_admin_route: markets
+
+markets_new:
+    path:     /new
+    defaults: { _controller: "ManagerBundle:Market:new" }
+    methods:  [GET, POST]
+
+markets_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ManagerBundle:Market:edit" }
+    methods:  [GET, POST]
+
+markets_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ManagerBundle:Market:delete" }
+    methods:  DELETE

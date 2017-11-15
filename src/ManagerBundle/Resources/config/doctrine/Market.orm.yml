@@ -1,0 +1,20 @@
+ManagerBundle\Entity\Market:
+    type: entity
+    table: null
+    repositoryClass: ManagerBundle\Repository\MarketRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        symbol:
+            type: string
+            length: 255
+            unique: true
+        name:
+            type: string
+            length: 255
+            unique: true
+    lifecycleCallbacks: {  }
