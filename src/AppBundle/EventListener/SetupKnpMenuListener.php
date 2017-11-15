@@ -3,6 +3,7 @@
 namespace AppBundle\EventListener;
 
 use Avanzu\AdminThemeBundle\Event\KnpMenuEvent;
+use Knp\Menu\MenuItem;
 
 class SetupKnpMenuListener
 {
@@ -25,6 +26,7 @@ class SetupKnpMenuListener
             'icon' => 'fa fa-bars',
         ]);
 
+        // Manager item
         $managerItem = $menu->getChild('ManagerMenuItem');
         $this->addChildToParent($managerItem, [
             'menu_item' => 'OperationTypesMenuItem',
@@ -45,7 +47,7 @@ class SetupKnpMenuListener
     /**
      * @param array $child
      */
-    protected function addChildToParent($parent, array $child): void
+    protected function addChildToParent(MenuItem $parent, array $child): void
     {
         $parent->addChild($child['menu_item'], [
                 'label'        => $child['label'],

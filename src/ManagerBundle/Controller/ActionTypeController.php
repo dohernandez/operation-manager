@@ -3,28 +3,31 @@
 namespace ManagerBundle\Controller;
 
 use ManagerBundle\Entity\ActionType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Actiontype controller.
  *
  */
-class ActionTypeController extends Controller
+class ActionTypeController extends CRUDController
 {
+    use EntityController;
+
+    /**
+     * @var string
+     */
+    protected $entityClass = 'ActionType';
+
     /**
      * Lists all actionType entities.
      *
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $actionTypes = $em->getRepository('ManagerBundle:ActionType')->findAll();
-
-        return $this->render('actiontype/index.html.twig', array(
-            'actionTypes' => $actionTypes,
-        ));
+        return $this->index(['type'], [
+            'new_url' => $this->generateUrl('actiontypes_new')
+        ]);
     }
 
     /**

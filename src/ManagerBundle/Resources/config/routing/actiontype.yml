@@ -5,11 +5,6 @@ actiontypes_index:
     options:
         avanzu_admin_route: actiontypes
 
-actiontypes_show:
-    path:     /{id}/show
-    defaults: { _controller: "ManagerBundle:ActionType:show" }
-    methods:  GET
-
 actiontypes_new:
     path:     /new
     defaults: { _controller: "ManagerBundle:ActionType:new" }
