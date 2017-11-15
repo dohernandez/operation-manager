@@ -23,12 +23,14 @@ class StockController extends CRUDController
     /**
      * Lists all stock entities.
      *
+     * @return Response
      */
     public function indexAction(): Response
     {
         return $this->index(
             [
-                [ 'key' => 'symbol', 'col_with' => '150' ],
+                [ 'key' => 'symbol', 'col_with' => '80' ],
+                [ 'key' => 'market', 'col_with' => '200'],
                 [ 'key' => 'company', 'col_with' => '200' ],
                 [ 'key' => 'description'],
             ],
@@ -46,7 +48,7 @@ class StockController extends CRUDController
      */
     public function newAction(Request $request): Response
     {
-        return $this->edit($request, new ActionType(), [
+        return $this->edit($request, new Stock(), [
             'page_title' => 'Manager stock',
             'page_subtitle' => 'create',
             'box_type' => 'success',
@@ -59,9 +61,9 @@ class StockController extends CRUDController
      * Displays a form to edit an existing stock entity.
      *
      */
-    public function editAction(Request $request, ActionType $actionType): Response
+    public function editAction(Request $request, Stock $stock): Response
     {
-        return $this->edit($request, $actionType, [
+        return $this->edit($request, $stock, [
             'page_title' => 'Manager stock',
             'page_subtitle' => 'edit',
             'box_type' => 'primary',
@@ -74,9 +76,9 @@ class StockController extends CRUDController
      * Deletes a stock entity.
      *
      */
-    public function deleteAction(Request $request, ActionType $actionType)
+    public function deleteAction(Request $request, Stock $stock)
     {
-        return $this->delete($request, $actionType);
+        return $this->delete($request, $stock);
     }
 
     /**

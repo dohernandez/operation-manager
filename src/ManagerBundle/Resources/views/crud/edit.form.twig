@@ -1,6 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block avanzu_head %} {% include 'AvanzuAdminThemeBundle:Partials:_header-form-extra.html.twig' %}{% endblock %}
+{% block avanzu_head %}
+    {% include 'AvanzuAdminThemeBundle:Partials:_header-form-extra.html.twig' %}
+    <style>
+        sup {
+            top: -.9em;
+            font-size: 50%;
+        }
+    </style>
+{% endblock %}
 
 {% block avanzu_page_title %} {{ page_title }} {% endblock %}
 {% block avanzu_page_subtitle %} {{ page_subtitle }} {% endblock %}
@@ -27,12 +35,14 @@
 {% block avanzu_javascripts_inline %}
     <script>
         $(document).on("click", "#submit-btn", function () {
-            var modal = $('#modal-background');
+            if ($(this).isValid()) {
+                var modal = $('#modal-background');
 
-            modal.modal('show');
-            modal.css('text-align','center');
+                modal.modal('show');
+                modal.css('text-align','center');
 
-            $('#modal-background i').show();
+                $('#modal-background i').show();
+            }
         });
     </script>
 {% endblock %}

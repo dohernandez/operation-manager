@@ -2,6 +2,8 @@
 
 namespace ManagerBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Market
  */
@@ -16,6 +18,16 @@ class Market extends Entity
      * @var string
      */
     private $name;
+
+    /**
+     * @var ArrayCollection[Stocks]
+     */
+    private $stocks;
+    
+    public function __construct()
+    {
+        $this->stocks = new ArrayCollection();
+    }
 
     /**
      * Set symbol
@@ -57,14 +69,28 @@ class Market extends Entity
         $this->name = $name;
     }
 
+    /**
+     * @return ArrayCollection
+     */
+    public function getStocks(): ArrayCollection
+    {
+        return $this->stocks;
+    }
+
+    /**
+     * @param ArrayCollection $stocks
+     */
+    public function setStocks(ArrayCollection $stocks)
+    {
+        $this->stocks = $stocks;
+    }
 
     /**
      * @return string
      */
     public function __toString()
     {
-        return $this->getSymbol();
+        return sprintf('%s (%s)', $this->getName(), $this->getSymbol());
     }
-
 }
 

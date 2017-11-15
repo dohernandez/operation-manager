@@ -18,3 +18,7 @@ ManagerBundle\Entity\Market:
             length: 255
             unique: true
     lifecycleCallbacks: {  }
+    oneToMany:
+        stocks:
+            targetEntity: ManagerBundle\Entity\Stock
+            mappedBy: market

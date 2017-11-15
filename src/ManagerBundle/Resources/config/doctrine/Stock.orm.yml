@@ -21,3 +21,10 @@ ManagerBundle\Entity\Stock:
             type: text
             nullable: true
     lifecycleCallbacks: {  }
+    manyToOne:
+        market:
+            targetEntity: ManagerBundle\Entity\Market
+            inversedBy: stocks
+            joinColumn:
+                name: market_id
+                referencedColumnName: id

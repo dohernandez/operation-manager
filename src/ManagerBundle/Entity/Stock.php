@@ -24,6 +24,11 @@ class Stock extends Entity
     private $description;
 
     /**
+     * @var Market
+     */
+    private $market;
+
+    /**
      * Set symbol
      *
      * @param string $symbol
@@ -93,6 +98,30 @@ class Stock extends Entity
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @return Market
+     */
+    public function getMarket()
+    {
+        return $this->market;
+    }
+
+    /**
+     * @param Market $market
+     */
+    public function setMarket(Market $market)
+    {
+        $this->market = $market;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf('%s (%s)', $this->getCompany(), $this->getSymbol());
     }
 }
 
