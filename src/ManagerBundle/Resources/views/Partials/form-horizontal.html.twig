@@ -14,7 +14,8 @@
         <!-- /.box-body -->
         <div class="box-footer">
             <a href="{{ cancel_url|default('#') }}" class="btn btn-default">Cancel</a>
-            <button type="submit" class="btn btn-{{ box_type|default('info') }} pull-right">
+            <button id="submit-btn" type="submit" class="btn btn-{{ box_type|default('info') }} pull-right"
+                    data-backdrop="static" data-keyboard="false">
                 <i class="fa fa-check-square"></i> {{ submit_type|default('Submit') }}
             </button>
         </div>

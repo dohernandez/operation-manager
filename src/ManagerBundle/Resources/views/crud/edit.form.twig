@@ -23,3 +23,16 @@
     {% endembed %}
 
 {% endblock %}
+
+{% block avanzu_javascripts_inline %}
+    <script>
+        $(document).on("click", "#submit-btn", function () {
+            var modal = $('#modal-background');
+
+            modal.modal('show');
+            modal.css('text-align','center');
+
+            $('#modal-background i').show();
+        });
+    </script>
+{% endblock %}

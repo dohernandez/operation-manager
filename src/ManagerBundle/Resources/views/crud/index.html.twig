@@ -36,7 +36,7 @@
                                           class="pull-left" style="margin-left: 3px">
                                         <input type="hidden" name="_method" value="DELETE" />
                                         {{ form_widget(delete_forms[item.id]) }}
-                                        <button type="button" data-backdrop="static" data-keyboard="false" class="entity-delete btn btn-danger btn-sm" data-target="#confirm-dialog"
+                                        <button type="button" data-backdrop="static" data-keyboard="false" class="entity-delete btn btn-danger btn-sm" data-target="#modal-background"
                                                 data-toggle="modal" data-id="{{ item.id }}" data-title="{{ attribute(item, '__toString')}}">
                                             <i class="fa-trash-o fa" aria-hidden="true"></i>
                                         </button>
@@ -54,5 +54,43 @@
     'dialog' : 'confirm-delete-dialog'
     } %}
     {% endembed %}
+{% endblock %}
+
+{% block avanzu_javascripts_inline %}
+    <script>
+        $(document).on("click", ".entity-delete", function () {
+            var $form = $(this);
+
+            var itemId = $form.data('id');
+            var itemTitle = $form.data('title');
+
+            $(".modal-footer #itemId").val( itemId );
+            $(".modal-body p").text($(".modal-body p").text().replace("title", itemTitle));
+
+            console.log('Confirm delete "' + itemTitle + '" with ID: ' + itemId);
+
+
+            $('#modal-background i').hide();
+            // As pointed out in comments,
+            // it is superfluous to have to manually call the modal.
+            var modal = $('#modal-background');
+            modal.modal('show');
+
+            // On delete confirm
+            modal.modal({ backdrop: 'static', keyboard: false })
+                .on('click', '#confirm-submit', function(){
+                    console.log('yes');
+                    $('#entity_' + itemId).submit();
+
+                    // Block the panel
+                    modal.modal({backdrop: 'static', keyboard: false});
+                    $('#modal-background .modal-dialog').hide();
+                    modal.css('text-align','center');
+
+                    var $processing = $('#modal-background i');
+                    $processing.show();
+                });
+        });
+    </script>
 {% endblock %}
 
