@@ -52,6 +52,14 @@ class SetupKnpMenuListener
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-industry',
         ]);
+        // Manager > Market
+        $this->addChildToParent($managerItem, [
+            'menu_item' => 'StockMenuItem',
+            'label' => 'Stocks',
+            'route' => 'stocks_index',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-bar-chart',
+        ]);
     }
 
     /**

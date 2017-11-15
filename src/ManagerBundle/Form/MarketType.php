@@ -14,8 +14,8 @@ class MarketType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('symbol', TextType::class);
-        $builder->add('name', TextType::class);
+        $builder->add('symbol', TextType::class)
+            ->add('name', TextType::class);
     }
     
     /**

@@ -53,13 +53,18 @@ Run the command with the option write.
 $ sf3 doctrine:generate:crud
 
 ...
+By default, the generator creates two actions: list and show.
+You can also ask it to generate "write" actions: new, update, and delete.
+
 Do you want to generate the "write" actions [no]? yes
 ```
 
 The command will generate the code
 * Generating the CRUD code
 * Generating the Form code
-* Updating the routing. In case this fails, you will be asked to do it manualy.
+* Updating the routing. 
+
+**Note**: In case this fails, you will be asked to do it manually.
 
 #### 5. Edit the entity controller.
 
