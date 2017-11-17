@@ -7,16 +7,15 @@
     </div>
     <!-- /.box-header -->
     <!-- form start -->
-    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+    {{ form_start(form, {'attr': {'id': 'entity-form', 'class': 'form-horizontal'}}) }}
         <div class="box-body">
             {{ form_widget(form) }}
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
             <a href="{{ cancel_url|default('#') }}" class="btn btn-default">Cancel</a>
-            <button id="submit-btn" type="submit" class="btn btn-{{ box_type|default('info') }} pull-right"
-                    data-backdrop="static" data-keyboard="false">
-                <i class="fa fa-check-square"></i> {{ submit_type|default('Submit') }}
+            <button id="submit-btn" type="submit" class="btn btn-{{ box_type|default('info') }} pull-right">
+                <i class="fa fa-check-square" aria-hidden="true"></i> {{ submit_type|default('Submit') }}
             </button>
         </div>
         <!-- /.box-footer -->

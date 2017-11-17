@@ -34,15 +34,20 @@
 
 {% block avanzu_javascripts_inline %}
     <script>
-        $(document).on("click", "#submit-btn", function () {
-            if ($(this).isValid()) {
+        $(document).ready(function () {
+            $('#entity-form').submit(function(e) {
                 var modal = $('#modal-background');
 
-                modal.modal('show');
                 modal.css('text-align','center');
-
                 $('#modal-background i').show();
-            }
+
+                modal.modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+
+                modal.modal('show');
+            });
         });
     </script>
 {% endblock %}
