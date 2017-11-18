@@ -89,7 +89,7 @@ class Country extends Entity
      */
     public function __toString()
     {
-        return $this->getName();
+        return $this->getNiceName();
     }
 }
 

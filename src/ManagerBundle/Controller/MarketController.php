@@ -33,7 +33,11 @@ class MarketController extends CRUDController
     {
         return $this->index(
             [
+                [ 'name' => 'alias', 'col_with' => '80' ],
                 [ 'name' => 'name' ],
+                [ 'name' => 'symbol', 'col_with' => '80' ],
+                [ 'name' => 'region', 'col_with' => '100' ],
+                [ 'name' => 'country', 'col_with' => '200' ],
             ]
         );
     }
@@ -52,7 +56,7 @@ class MarketController extends CRUDController
             'page_subtitle' => 'create',
             'box_type' => 'success',
             'submit_type' => 'Create',
-        ]);
+        ], 'ManagerBundle:market:edit.form.twig');
     }
 
     /**
@@ -70,7 +74,7 @@ class MarketController extends CRUDController
             'page_subtitle' => 'edit',
             'box_type' => 'primary',
             'submit_type' => 'Edit',
-        ]);
+        ], 'ManagerBundle:market:edit.form.twig');
     }
 
     /**

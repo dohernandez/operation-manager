@@ -15,10 +15,11 @@ abstract class CRUDController extends Controller
      * Lists all entities.
      *
      * @param array $fields {name: <value>, col_with: <value>}
+     * @param string $view
      *
      * @return Response
      */
-    protected function index(array $fields): Response
+    protected function index(array $fields, $view = 'ManagerBundle:crud:index.html.twig'): Response
     {
         $delete_forms = [];
         
@@ -29,7 +30,7 @@ abstract class CRUDController extends Controller
             $delete_forms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
         }
 
-        return $this->render('ManagerBundle:crud:index.html.twig', [
+        return $this->render($view, [
             'entities' => $entities,
             'fields' => $fields,
             'entity_type' => implode(' ', preg_split('/(?=[A-Z])/', $this->getEntityClass())),
@@ -72,10 +73,11 @@ abstract class CRUDController extends Controller
      * @param Request $request
      * @param Entity $entity
      * @param $options {page_title: info|<value>, page_subtitle: info|<value>, box_type: info|<value>, submit_type: info|<value>}
+     * @param string $view
      *
      * @return Response
      */
-    public function edit(Request $request, Entity $entity, $options): Response
+    public function edit(Request $request, Entity $entity, $options, $view = 'ManagerBundle:crud:edit.form.twig'): Response
     {
         $form = $this->createForm(sprintf('ManagerBundle\Form\%sType', $this->getEntityClass()), $entity);
         $form->handleRequest($request);
@@ -87,7 +89,7 @@ abstract class CRUDController extends Controller
             return $this->redirectToRoute(sprintf('%ss_index', strtolower($this->getEntityClass())));
         }
 
-        return $this->render('ManagerBundle:crud:edit.form.twig', [
+        return $this->render($view, [
             'form' => $form->createView(),
             'page_title' => $options['page_title'],
             'page_subtitle' => $options['page_subtitle'] ?: 'info',

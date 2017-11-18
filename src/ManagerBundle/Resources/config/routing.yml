@@ -9,10 +9,6 @@ manager_markets:
     resource: "@ManagerBundle/Resources/config/routing/market.yml"
     prefix:   /markets
 
-manager_stockindexes:
-    resource: "@ManagerBundle/Resources/config/routing/stockindex.yml"
-    prefix:   /stockindexes
-
 manager_stocks:
     resource: "@ManagerBundle/Resources/config/routing/stock.yml"
     prefix:   /stocks

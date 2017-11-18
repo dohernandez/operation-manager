@@ -16,6 +16,9 @@ ManagerBundle\Entity\Market:
         name:
             type: string
             length: 255
+        alias:
+            type: string
+            length: 255
     lifecycleCallbacks: {  }
     oneToMany:
         stocks:

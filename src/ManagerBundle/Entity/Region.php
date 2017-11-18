@@ -2,6 +2,8 @@
 
 namespace ManagerBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Region
  */
@@ -27,7 +29,7 @@ class Region extends Entity
     /**
      * @return ArrayCollection[Country]
      */
-    public function getCountries(): ArrayCollection
+    public function getCountries()
     {
         return $this->countries;
     }
@@ -70,6 +72,11 @@ class Region extends Entity
     public function __toString()
     {
         return $this->getName();
+    }
+
+    public function getAvailableCountries()
+    {
+        
     }
 }
 

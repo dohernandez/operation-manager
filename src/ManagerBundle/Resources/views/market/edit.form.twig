@@ -1,0 +1,47 @@
+{% extends 'ManagerBundle:crud:edit.form.twig' %}
+
+{% block avanzu_javascripts_inline %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function () {
+            var $region = $('#managerbundle_market_region');
+            // When region gets selected ...
+            $region.change(function() {
+                $('#managerbundle_market_country option')
+                    .filter(function() {
+                        console.log(this.value || $.trim(this.value).length > 0);
+                        return this.value && this.value != 'Choose country';
+                    })
+                    .remove();
+
+                $('managerbundle_market_country option')
+                    .first()
+                    .prop('selected', true);
+
+                // ... retrieve the corresponding form.
+                var $form = $(this).closest('form');
+                // Simulate form data, but only include the selected region value.
+                var data = {};
+                data[$region.attr('name')] = $region.val();
+                // Submit data via AJAX to the form's action path.
+                $.ajax({
+                    url : $form.attr('action'),
+                    type: $form.attr('method'),
+                    data : data,
+                    success: function(html) {
+                        // Replace current country field ...
+                        $('#managerbundle_market_country').replaceWith(
+                            // ... with the returned one from the AJAX response.
+                            $(html).find('#managerbundle_market_country')
+                        );
+                        // Position field now displays the appropriate countrys.
+                    }
+                });
+            });
+        });
+
+        $('#managerbundle_market_name').change(function () {
+            $('#managerbundle_market_alias').prop('placeholder', $(this).val())
+        });
+    </script>
+{% endblock %}
