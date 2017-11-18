@@ -1,0 +1,30 @@
+ManagerBundle\Entity\StockIndex:
+    type: entity
+    table: null
+    repositoryClass: ManagerBundle\Repository\StockIndexRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        symbol:
+            type: string
+            length: 255
+            unique: true
+    lifecycleCallbacks: {  }
+    manyToOne:
+        market:
+            targetEntity: ManagerBundle\Entity\Market
+            inversedBy: stockIndexes
+            joinColumn:
+                name: market_id
+                referencedColumnName: id
+    oneToMany:
+        stocks:
+            targetEntity: ManagerBundle\Entity\Stock
+            mappedBy: stockIndex
