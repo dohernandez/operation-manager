@@ -5,14 +5,6 @@ manager_index:
     options:
         avanzu_admin_route: manager
 
-manager_operationtypes:
-    resource: "@ManagerBundle/Resources/config/routing/operationtype.yml"
-    prefix:   /operationtypes
-
-manager_actiontypes:
-    resource: "@ManagerBundle/Resources/config/routing/actiontype.yml"
-    prefix:   /actiontypes
-
 manager_markets:
     resource: "@ManagerBundle/Resources/config/routing/market.yml"
     prefix:   /markets

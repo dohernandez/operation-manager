@@ -29,21 +29,21 @@ class SetupKnpMenuListener
         // Manager
         $managerItem = $menu->getChild('ManagerMenuItem');
         // Manager > Operation Types
-        $this->addChildToParent($managerItem, [
-            'menu_item' => 'OperationTypesMenuItem',
-            'label' => 'Operation types',
-            'route' => 'operationtypes_index',
-            'child_options' => $event->getChildOptions(),
-            'icon' => 'fa fa-line-chart',
-        ]);
+//        $this->addChildToParent($managerItem, [
+//            'menu_item' => 'OperationTypesMenuItem',
+//            'label' => 'Operation types',
+//            'route' => 'operationtypes_index',
+//            'child_options' => $event->getChildOptions(),
+//            'icon' => 'fa fa-line-chart',
+//        ]);
         // Manager > Action Types
-        $this->addChildToParent($managerItem, [
-            'menu_item' => 'ActionTypesMenuItem',
-            'label' => 'Action types',
-            'route' => 'actiontypes_index',
-            'child_options' => $event->getChildOptions(),
-            'icon' => 'fa fa-bell',
-        ]);
+//        $this->addChildToParent($managerItem, [
+//            'menu_item' => 'ActionTypesMenuItem',
+//            'label' => 'Action types',
+//            'route' => 'actiontypes_index',
+//            'child_options' => $event->getChildOptions(),
+//            'icon' => 'fa fa-bell',
+//        ]);
         // Manager > Index
         $this->addChildToParent($managerItem, [
             'menu_item' => 'MarketMenuItem',
