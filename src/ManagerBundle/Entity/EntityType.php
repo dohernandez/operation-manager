@@ -2,7 +2,7 @@
 
 namespace ManagerBundle\Entity;
 
-class EntityType extends Entity
+trait EntityType
 {
     /**
      * @var string
@@ -14,7 +14,7 @@ class EntityType extends Entity
      *
      * @param string $type
      *
-     * @return OperationType
+     * @return Entity
      */
     public function setType(string $type)
     {
@@ -31,13 +31,5 @@ class EntityType extends Entity
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString()
-    {
-        return $this->getType();
     }
 }

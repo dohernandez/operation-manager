@@ -96,7 +96,7 @@ class MarketController extends CRUDController
     protected function createDeleteForm($market): Form
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('markets_delete', array('id' => $market->getId())))
+            ->setAction($this->generateUrl($this->getEntityCRUDRoute('delete'), array('id' => $market->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

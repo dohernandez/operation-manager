@@ -2,10 +2,9 @@
 
 namespace ManagerBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
 use ManagerBundle\Entity\Entity;
 
-class CRUDRepository extends EntityRepository
+class CRUDRepository extends Repository
 {
     /**
      * @param Entity $entity

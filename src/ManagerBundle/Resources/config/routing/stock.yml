@@ -10,6 +10,11 @@ stocks_new:
     defaults: { _controller: "ManagerBundle:Stock:new" }
     methods:  [GET, POST]
 
+stocks_cancel:
+    path:     /
+    defaults: { _controller: "ManagerBundle:Stock:index" }
+    methods:  [GET, POST]
+
 stocks_edit:
     path:     /{id}/edit
     defaults: { _controller: "ManagerBundle:Stock:edit" }

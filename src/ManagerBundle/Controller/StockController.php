@@ -89,7 +89,7 @@ class StockController extends CRUDController
     protected function createDeleteForm($stock): Form
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('stocks_delete', array('id' => $stock->getId())))
+            ->setAction($this->generateUrl($this->getEntityCRUDRoute('delete'), array('id' => $stock->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

@@ -9,57 +9,85 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Market extends Entity
 {
-    /**
-     * @var string
-     */
-    private $name;
+    use EntityName;
+    use EntitySymbol;
 
     /**
-     * @var ArrayCollection[StockIndex]
+     * @var Country
      */
-    private $stockIndexes;
+    private $country;
 
+    /**
+     * @var Region
+     */
+    private $region;
+
+    /**
+     * @var ArrayCollection[Stocks]
+     */
+    private $stocks;
+    
     public function __construct()
     {
-        $this->stockIndexes = new ArrayCollection();
+        $this->stocks = new ArrayCollection();
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getCountry()
     {
-        return $this->name;
+        return $this->country;
     }
 
     /**
-     * @param string $name
+     * @param Country $country
      *
-     * @return $this
+     * @return Market
      */
-    public function setName(string $name)
+    public function setCountry(Country $country)
     {
-        $this->name = $name;
+        $this->country = $country;
 
         return $this;
     }
 
     /**
-     * @return ArrayCollection
+     * @return Region
      */
-    public function getStockIndexes(): ArrayCollection
+    public function getRegion()
     {
-        return $this->stockIndexes;
+        return $this->region;
     }
 
     /**
-     * @param ArrayCollection $stockIndexes
+     * @param Region $region
      *
-     * @return $this
+     * @return Market
      */
-    public function setStocksIndexes(ArrayCollection $stockIndexes)
+    public function setRegion(Region $region)
     {
-        $this->stockIndexes = $stockIndexes;
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection[Stocks]
+     */
+    public function getStocks(): ArrayCollection
+    {
+        return $this->stocks;
+    }
+
+    /**
+     * @param ArrayCollection[Stocks] $stocks
+     *
+     * @return Market
+     */
+    public function setStocks(ArrayCollection $stocks)
+    {
+        $this->stocks = $stocks;
 
         return $this;
     }
@@ -69,7 +97,7 @@ class Market extends Entity
      */
     public function __toString()
     {
-        return $this->getName();
+        return sprintf('%s (%s)', $this->getName(), $this->getSymbol());
     }
 }
 

@@ -7,11 +7,7 @@ namespace ManagerBundle\Entity;
  */
 class Stock extends Entity
 {
-
-    /**
-     * @var string
-     */
-    private $symbol;
+    use EntitySymbol;
 
     /**
      * @var string
@@ -24,33 +20,9 @@ class Stock extends Entity
     private $description;
 
     /**
-     * @var StockIndex
+     * @var Market
      */
-    private $stockIndex;
-
-    /**
-     * Set symbol
-     *
-     * @param string $symbol
-     *
-     * @return Stock
-     */
-    public function setSymbol($symbol)
-    {
-        $this->symbol = $symbol;
-
-        return $this;
-    }
-
-    /**
-     * Get symbol
-     *
-     * @return string
-     */
-    public function getSymbol()
-    {
-        return $this->symbol;
-    }
+    private $market;
 
     /**
      * Set company
@@ -101,21 +73,21 @@ class Stock extends Entity
     }
 
     /**
-     * @return StockIndex
+     * @return Market
      */
-    public function getStockIndex()
+    public function getMarket()
     {
-        return $this->stockIndex;
+        return $this->market;
     }
 
     /**
-     * @param StockIndex $stockIndex
+     * @param Market $market
      *
-     * @return $this
+     * @return Stock
      */
-    public function setStockIndex(StockIndex $stockIndex)
+    public function setMarket(Market $market)
     {
-        $this->stockIndex = $stockIndex;
+        $this->market = $market;
 
         return $this;
     }
@@ -125,7 +97,7 @@ class Stock extends Entity
      */
     public function __toString()
     {
-        return sprintf('%s (%s)', $this->getCompany(), $this->getSymbol());
+        return $this->getSymbol();
     }
 }
 

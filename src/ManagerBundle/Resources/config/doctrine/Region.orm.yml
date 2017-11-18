@@ -1,0 +1,23 @@
+ManagerBundle\Entity\Region:
+    type: entity
+    table: null
+    repositoryClass: ManagerBundle\Repository\RegionRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            unique: true
+    lifecycleCallbacks: {  }
+    oneToMany:
+        countries:
+            targetEntity: ManagerBundle\Entity\Country
+            mappedBy: region
+        markets:
+            targetEntity: ManagerBundle\Entity\Market
+            mappedBy: region

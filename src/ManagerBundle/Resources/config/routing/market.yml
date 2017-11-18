@@ -5,14 +5,14 @@ markets_index:
     options:
         avanzu_admin_route: markets
 
-markets_cancel:
-    path:     /
-    defaults: { _controller: "ManagerBundle:Market:index" }
-    methods:  [GET, POST]
-
 markets_new:
     path:     /new
     defaults: { _controller: "ManagerBundle:Market:new" }
+    methods:  [GET, POST]
+
+markets_cancel:
+    path:     /
+    defaults: { _controller: "ManagerBundle:Market:index" }
     methods:  [GET, POST]
 
 markets_edit:
