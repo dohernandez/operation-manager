@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ActionTypeController extends CRUDController
 {
-    use EntityController;
+    use CRUDEntityController;
 
     /**
      * @var string

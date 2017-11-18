@@ -22,9 +22,9 @@ ManagerBundle\Entity\Stock:
             nullable: true
     lifecycleCallbacks: {  }
     manyToOne:
-        market:
-            targetEntity: ManagerBundle\Entity\Market
+        stockIndex:
+            targetEntity: ManagerBundle\Entity\StockIndex
             inversedBy: stocks
             joinColumn:
-                name: market_id
+                name: stock_index_id
                 referencedColumnName: id

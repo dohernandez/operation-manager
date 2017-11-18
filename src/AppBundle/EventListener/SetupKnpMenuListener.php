@@ -44,7 +44,7 @@ class SetupKnpMenuListener
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-bell',
         ]);
-        // Manager > Market
+        // Manager > Index
         $this->addChildToParent($managerItem, [
             'menu_item' => 'MarketMenuItem',
             'label' => 'Markets',
@@ -52,7 +52,7 @@ class SetupKnpMenuListener
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-industry',
         ]);
-        // Manager > Market
+        // Manager > Index
         $this->addChildToParent($managerItem, [
             'menu_item' => 'StockMenuItem',
             'label' => 'Stocks',

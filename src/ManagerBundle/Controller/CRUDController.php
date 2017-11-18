@@ -14,12 +14,11 @@ abstract class CRUDController extends Controller
     /**
      * Lists all entities.
      *
-     * @param array $fields
-     * @param array $options
+     * @param array $fields {name: <value>, col_with: <value>}
      *
      * @return Response
      */
-    protected function index(array $fields, array $options): Response
+    protected function index(array $fields): Response
     {
         $delete_forms = [];
         
@@ -34,9 +33,9 @@ abstract class CRUDController extends Controller
             'entities' => $entities,
             'fields' => $fields,
             'entity_type' => implode(' ', preg_split('/(?=[A-Z])/', $this->getEntityClass())),
-            'new_url' => $options['new_url'],
-            'edit_route' => $options['edit_route'],
-            'delete_route' => $options['delete_route'],
+            'new_url' => $this->getEntityCRUDUrl('new'),
+            'edit_route' => $this->getEntityCRUDRoute('edit'),
+            'delete_route' => $this->getEntityCRUDRoute('delete'),
             'delete_forms' => $delete_forms,
         ]);
     }
@@ -53,6 +52,18 @@ abstract class CRUDController extends Controller
 
     abstract protected function getEntityClass(): string;
 
+    protected function getEntityCRUDUrl(string $action): string
+    {
+        return $this->generateUrl($this->getEntityCRUDRoute($action));
+    }
+
+    protected function getEntityCRUDRoute(string $action): string
+    {
+        return sprintf('%s_%s', strtolower($this->getEntityPrefixRoute()), $action);
+    }
+
+    abstract protected function getEntityPrefixRoute(): string;
+
     abstract protected function createDeleteForm($entity): Form;
 
     /**
@@ -60,7 +71,7 @@ abstract class CRUDController extends Controller
      *
      * @param Request $request
      * @param Entity $entity
-     * @param $options
+     * @param $options {page_title: info|<value>, page_subtitle: info|<value>, box_type: info|<value>, submit_type: info|<value>}
      *
      * @return Response
      */
@@ -82,7 +93,7 @@ abstract class CRUDController extends Controller
             'page_subtitle' => $options['page_subtitle'] ?: 'info',
             'box_type' => $options['box_type'] ?: 'info',
             'submit_type' => $options['submit_type'] ?: 'Info',
-            'cancel_url' => $options['cancel_url'],
+            'cancel_url' => $this->getEntityCRUDUrl('cancel'),
         ]);
     }
 
@@ -103,6 +114,6 @@ abstract class CRUDController extends Controller
             $this->getEntityRepository()->remove($entity);
         }
 
-        return $this->redirectToRoute(sprintf('%ss_index', strtolower($this->getEntityClass())));
+        return $this->redirectToRoute($this->getEntityCRUDRoute('delete'));
     }
 }

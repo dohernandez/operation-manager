@@ -12,45 +12,16 @@ class Market extends Entity
     /**
      * @var string
      */
-    private $symbol;
-
-    /**
-     * @var string
-     */
     private $name;
 
     /**
-     * @var ArrayCollection[Stocks]
+     * @var ArrayCollection[StockIndex]
      */
-    private $stocks;
-    
+    private $stockIndexes;
+
     public function __construct()
     {
-        $this->stocks = new ArrayCollection();
-    }
-
-    /**
-     * Set symbol
-     *
-     * @param string $symbol
-     *
-     * @return Market
-     */
-    public function setSymbol(string $symbol)
-    {
-        $this->symbol = $symbol;
-
-        return $this;
-    }
-
-    /**
-     * Get symbol
-     *
-     * @return string
-     */
-    public function getSymbol()
-    {
-        return $this->symbol;
+        $this->stockIndexes = new ArrayCollection();
     }
 
     /**
@@ -63,26 +34,34 @@ class Market extends Entity
 
     /**
      * @param string $name
+     *
+     * @return $this
      */
     public function setName(string $name)
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
      * @return ArrayCollection
      */
-    public function getStocks(): ArrayCollection
+    public function getStockIndexes(): ArrayCollection
     {
-        return $this->stocks;
+        return $this->stockIndexes;
     }
 
     /**
-     * @param ArrayCollection $stocks
+     * @param ArrayCollection $stockIndexes
+     *
+     * @return $this
      */
-    public function setStocks(ArrayCollection $stocks)
+    public function setStocksIndexes(ArrayCollection $stockIndexes)
     {
-        $this->stocks = $stocks;
+        $this->stockIndexes = $stockIndexes;
+
+        return $this;
     }
 
     /**
@@ -90,7 +69,7 @@ class Market extends Entity
      */
     public function __toString()
     {
-        return sprintf('%s (%s)', $this->getName(), $this->getSymbol());
+        return $this->getName();
     }
 }
 

@@ -24,9 +24,9 @@ class Stock extends Entity
     private $description;
 
     /**
-     * @var Market
+     * @var StockIndex
      */
-    private $market;
+    private $stockIndex;
 
     /**
      * Set symbol
@@ -101,19 +101,23 @@ class Stock extends Entity
     }
 
     /**
-     * @return Market
+     * @return StockIndex
      */
-    public function getMarket()
+    public function getStockIndex()
     {
-        return $this->market;
+        return $this->stockIndex;
     }
 
     /**
-     * @param Market $market
+     * @param StockIndex $stockIndex
+     *
+     * @return $this
      */
-    public function setMarket(Market $market)
+    public function setStockIndex(StockIndex $stockIndex)
     {
-        $this->market = $market;
+        $this->stockIndex = $stockIndex;
+
+        return $this;
     }
 
     /**

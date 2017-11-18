@@ -13,12 +13,17 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class StockController extends CRUDController
 {
-    use EntityController;
+    use CRUDEntityController;
 
     /**
      * @var string
      */
     protected $entityClass = 'Stock';
+
+    /**
+     * @var string
+     */
+    protected $prefix_route = 'stocks';
 
     /**
      * Lists all stock entities.
@@ -33,11 +38,6 @@ class StockController extends CRUDController
                 [ 'key' => 'market', 'col_with' => '200'],
                 [ 'key' => 'company', 'col_with' => '200' ],
                 [ 'key' => 'description'],
-            ],
-            [
-                'new_url' => $this->generateUrl('stocks_new'),
-                'edit_route' => 'stocks_edit',
-                'delete_route' => 'stocks_delete',
             ]
         );
     }
@@ -53,7 +53,6 @@ class StockController extends CRUDController
             'page_subtitle' => 'create',
             'box_type' => 'success',
             'submit_type' => 'Create',
-            'cancel_url' => $this->generateUrl('stocks_index'),
         ]);
     }
 
@@ -68,7 +67,6 @@ class StockController extends CRUDController
             'page_subtitle' => 'edit',
             'box_type' => 'primary',
             'submit_type' => 'Edit',
-            'cancel_url' => $this->generateUrl('stocks_index'),
         ]);
     }
 

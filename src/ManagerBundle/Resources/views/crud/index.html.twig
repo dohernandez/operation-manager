@@ -15,7 +15,7 @@
                             <tr>
                                 <th width="70" class="text-center" scope="col">#</th>
                                 {% for field in fields %}
-                                    <th {% if field.col_with is defined %} width="{{ field.col_with }}" {% endif %} scope="col">{{ field.key|upper }}</th>
+                                    <th {% if field.col_with is defined %} width="{{ field.col_with }}" {% endif %} scope="col">{{ field.name|upper }}</th>
                                 {% endfor %}
                                 <th width="100" scope="col">MANAGE</th>
                             </tr>
@@ -25,7 +25,7 @@
                             <tr>
                                 <th style="vertical-align: middle;" scope="row" class="text-center">{{ item.id }}</th>
                                 {% for field in fields %}
-                                    <td style="vertical-align: middle;">{{ attribute(item, field.key) }}</td>
+                                    <td style="vertical-align: middle;">{{ attribute(item, field.name) }}</td>
                                 {% endfor %}
                                 <td>
                                     <a href="{{ path(edit_route, { 'id': item.id }) }}"

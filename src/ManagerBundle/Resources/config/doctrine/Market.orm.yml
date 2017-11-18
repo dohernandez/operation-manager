@@ -9,16 +9,11 @@ ManagerBundle\Entity\Market:
             generator:
                 strategy: AUTO
     fields:
-        symbol:
-            type: string
-            length: 255
-            unique: true
         name:
             type: string
             length: 255
-            unique: true
     lifecycleCallbacks: {  }
     oneToMany:
-        stocks:
-            targetEntity: ManagerBundle\Entity\Stock
+        stockIndexes:
+            targetEntity: ManagerBundle\Entity\StockIndex
             mappedBy: market

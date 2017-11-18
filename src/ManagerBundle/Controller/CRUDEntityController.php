@@ -2,7 +2,7 @@
 
 namespace ManagerBundle\Controller;
 
-trait EntityController
+trait CRUDEntityController
 {
     /**
      * @return string
@@ -10,5 +10,12 @@ trait EntityController
     public function getEntityClass(): string
     {
         return $this->entityClass;
+    }
+    /**
+     * @return string
+     */
+    public function getEntityPrefixRoute(): string
+    {
+        return $this->prefix_route;
     }
 }

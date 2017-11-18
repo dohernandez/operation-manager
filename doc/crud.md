@@ -68,7 +68,7 @@ The command will generate the code
 
 #### 5. Edit the entity controller.
 
-You can take as an example any of the other CRUD controllers, but basically you will need to extend the Controller from `CRUDController` class, use the the `EntityController` trait, and update the actions.
+You can take as an example any of the other CRUD controllers, but basically you will need to extend the Controller from `CRUDController` class, use the the `CRUDEntityController` trait, and update the actions.
 
 ```php
 
@@ -78,22 +78,24 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ActionTypeController extends CRUDController
 {
-    use EntityController;
+    use CRUDEntityController;
 
     /**
      * @var string
      */
     protected $entityClass = 'ActionType';
     
+
+    /**
+     * @var string
+     */
+    protected $prefix_route = 'actiontypes';
+    
     ...
     
     public function indexAction(): Response
     {
-        return $this->index(['symbol'], [
-            'new_url' => $this->generateUrl('actiontypes_new'),
-            'edit_route' => 'actiontypes_edit',
-            'delete_route' => 'actiontypes_delete',
-        ]);
+        return $this->index(['symbol']);
     }
     
     public function newAction(Request $request): Response
@@ -103,7 +105,6 @@ class ActionTypeController extends CRUDController
             'page_subtitle' => 'create',
             'box_type' => 'success',
             'submit_type' => 'Create',
-            'cancel_url' => $this->generateUrl('actiontypes_index'),
         ]);
     }
     
@@ -114,7 +115,6 @@ class ActionTypeController extends CRUDController
             'page_subtitle' => 'edit',
             'box_type' => 'primary',
             'submit_type' => 'Edit',
-            'cancel_url' => $this->generateUrl('actiontypes_index'),
         ]);
     }
     

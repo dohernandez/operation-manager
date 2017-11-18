@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class OperationTypeController extends CRUDController
 {
-    use EntityController;
+    use CRUDEntityController;
 
     /**
      * @var string
@@ -21,15 +21,19 @@ class OperationTypeController extends CRUDController
     protected $entityClass = 'OperationType';
 
     /**
+     * @var string
+     */
+    protected $prefix_route = 'operationtypes';
+
+
+    /**
      * Lists all operationType entities.
      *
      */
     public function indexAction(): Response
     {
-        return $this->index([[ 'key' => 'type' ]], [
-            'new_url' => $this->generateUrl('operationtypes_new'),
-            'edit_route' => 'operationtypes_edit',
-            'delete_route' => 'operationtypes_delete',
+        return $this->index([
+            [ 'key' => 'type' ]
         ]);
     }
 
@@ -47,13 +51,16 @@ class OperationTypeController extends CRUDController
             'page_subtitle' => 'create',
             'box_type' => 'success',
             'submit_type' => 'Create',
-            'cancel_url' => $this->generateUrl('operationtypes_index'),
         ]);
     }
 
     /**
      * Displays a form to edit an existing operationType entity.
      *
+     * @param Request $request
+     * @param OperationType $operationType
+     *
+     * @return Response
      */
     public function editAction(Request $request, OperationType $operationType): Response
     {
@@ -62,7 +69,6 @@ class OperationTypeController extends CRUDController
             'page_subtitle' => 'edit',
             'box_type' => 'primary',
             'submit_type' => 'Edit',
-            'cancel_url' => $this->generateUrl('operationtypes_index'),
         ]);
     }
 
