@@ -8,6 +8,7 @@ namespace ManagerBundle\Entity;
 class Stock extends Entity
 {
     use EntitySymbol;
+    use EntityAlias;
 
     /**
      * @var string
@@ -97,7 +98,7 @@ class Stock extends Entity
      */
     public function __toString()
     {
-        return $this->getSymbol();
+        return sprintf('%s (%s)', $this->getCompany(), $this->getSymbol());
     }
 }
 

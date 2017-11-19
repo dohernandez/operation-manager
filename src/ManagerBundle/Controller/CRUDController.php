@@ -15,11 +15,12 @@ abstract class CRUDController extends Controller
      * Lists all entities.
      *
      * @param array $fields {name: <value>, col_with: <value>}
+     * @param array $options {}
      * @param string $view
      *
      * @return Response
      */
-    protected function index(array $fields, $view = 'ManagerBundle:crud:index.html.twig'): Response
+    protected function index(array $fields, array $options = [], $view = 'ManagerBundle:crud:index.html.twig'): Response
     {
         $delete_forms = [];
         
@@ -38,7 +39,7 @@ abstract class CRUDController extends Controller
             'edit_route' => $this->getEntityCRUDRoute('edit'),
             'delete_route' => $this->getEntityCRUDRoute('delete'),
             'delete_forms' => $delete_forms,
-        ]);
+        ] + $options);
     }
 
     /**

@@ -5,6 +5,11 @@ stocks_index:
     options:
         avanzu_admin_route: stocks
 
+stocks_show:
+    path:     /{id}/show
+    defaults: { _controller: "ManagerBundle:Stock:show" }
+    methods:  GET
+
 stocks_new:
     path:     /new
     defaults: { _controller: "ManagerBundle:Stock:new" }

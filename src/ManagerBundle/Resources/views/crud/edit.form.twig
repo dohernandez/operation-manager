@@ -27,7 +27,10 @@
         </div>
     </div>
 
-    {% embed 'ManagerBundle:Partials:modal.html.twig' %}
+    {% embed 'ManagerBundle:Partials:modal.html.twig' with {
+    'modal_id' : 'modal-background',
+    'request' : 'true'
+    } %}
     {% endembed %}
 
 {% endblock %}

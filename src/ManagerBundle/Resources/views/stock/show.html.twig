@@ -1,0 +1,12 @@
+{% extends 'ManagerBundle:layout:dialog.html.twig' %}
+
+{% block modal_title %}
+    <h3>{{ attribute(stock, '__toString') }}</h3>
+    <h5>Market: {{ attribute(stock, 'market') }}
+        <span class="mailbox-read-time pull-right">({{ attribute(stock, 'alias') }})</span>
+    </h5>
+{% endblock %}
+
+{% block modal_body %}
+    {{ attribute(stock, 'description') }}
+{% endblock %}

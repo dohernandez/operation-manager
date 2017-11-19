@@ -11,11 +11,7 @@ class Market extends Entity
 {
     use EntityName;
     use EntitySymbol;
-
-    /**
-     * @var string
-     */
-    private $alias;
+    use EntityAlias;
 
     /**
      * @var Country
@@ -35,26 +31,6 @@ class Market extends Entity
     public function __construct()
     {
         $this->stocks = new ArrayCollection();
-    }
-
-    /**
-     * @return string
-     */
-    public function getAlias()
-    {
-        return $this->alias;
-    }
-
-    /**
-     * @param string $alias
-     *
-     * @return Market
-     */
-    public function setAlias(string $alias)
-    {
-        $this->alias = $alias;
-
-        return $this;
     }
 
     /**

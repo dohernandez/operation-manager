@@ -34,12 +34,30 @@ class StockController extends CRUDController
     {
         return $this->index(
             [
-                [ 'key' => 'symbol', 'col_with' => '80' ],
-                [ 'key' => 'market', 'col_with' => '200'],
-                [ 'key' => 'company', 'col_with' => '200' ],
-                [ 'key' => 'description'],
+                [ 'name' => 'symbol', 'col_with' => '70' ],
+                [ 'name' => 'alias', 'col_with' => '100' ],
+                [ 'name' => 'market', 'col_with' => '170'],
+                [ 'name' => 'company', 'col_with' => '160' ],
+                [ 'name' => 'description', 'truncate' => '60'],
+            ],
+            [
+                'show_route' => $this->getEntityCRUDRoute('show')
             ]
         );
+    }
+
+    /**
+     * Finds and displays a entity.
+     *
+     * @param Stock $stock
+     *
+     * @return Response
+     */
+    public function showAction(Stock $stock)
+    {
+        return $this->render('ManagerBundle:stock:show.html.twig', array(
+            'stock' => $stock,
+        ));
     }
 
     /**

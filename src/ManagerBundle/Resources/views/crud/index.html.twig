@@ -13,11 +13,11 @@
                     <table id="operationtypes" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th width="70" class="text-center" scope="col">#</th>
+                                <th width="60" class="text-center" scope="col">#</th>
                                 {% for field in fields %}
                                     <th {% if field.col_with is defined %} width="{{ field.col_with }}" {% endif %} scope="col">{{ field.name|upper }}</th>
                                 {% endfor %}
-                                <th width="100" scope="col">MANAGE</th>
+                                <th width="{% if show_route is defined %}122{% else %}100{% endif %}" scope="col">MANAGE</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -25,10 +25,26 @@
                             <tr>
                                 <th style="vertical-align: middle;" scope="row" class="text-center">{{ item.id }}</th>
                                 {% for field in fields %}
-                                    <td style="vertical-align: middle;">{{ attribute(item, field.name) }}</td>
+                                    <td style="vertical-align: middle;">
+                                        {% if field.truncate is defined %}
+                                            {% if attribute(item, field.name)|length > field.truncate %}
+                                                {{ attribute(item, field.name)|slice(0, field.truncate) ~ '...' }}
+                                            {% else %}
+                                                {{ attribute(item, field.name) }}
+                                            {% endif %}
+                                        {% else %}
+                                            {{ attribute(item, field.name) }}
+                                        {% endif %}
+                                    </td>
                                 {% endfor %}
                                 <td>
-                                    <a href="{{ path(edit_route, { 'id': item.id }) }}"
+                                    {% if show_route is defined %}
+                                    <button type="button"  data-href="{{ path(show_route, { 'id': item.id }) }}" class="entity-view btn btn-info btn-sm pull-left"
+                                       data-toggle="modal" data-target="#modal-show">
+                                        <i class="fa-eye fa" aria-hidden="true"></i>
+                                    </button>
+                                    {% endif %}
+                                    <a href="{{ path(edit_route, { 'id': item.id }) }}"  style="margin-left: 3px"
                                        class="btn btn-primary btn-sm pull-left">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
                                     </a>
@@ -36,8 +52,8 @@
                                           class="pull-left" style="margin-left: 3px">
                                         <input type="hidden" name="_method" value="DELETE" />
                                         {{ form_widget(delete_forms[item.id]) }}
-                                        <button type="button" data-backdrop="static" data-keyboard="false" class="entity-delete btn btn-danger btn-sm" data-target="#modal-background"
-                                                data-toggle="modal" data-id="{{ item.id }}" data-title="{{ attribute(item, '__toString')}}">
+                                        <button type="button" data-backdrop="static" data-keyboard="false" class="entity-delete btn btn-danger btn-sm" data-target="#modal-delete"
+                                                data-toggle="modal" data-id="{{ item.id }}" data-title="{{ attribute(item, '__toString') }}">
                                             <i class="fa-trash-o fa" aria-hidden="true"></i>
                                         </button>
                                     </form>
@@ -51,9 +67,20 @@
         </div>
     </div>
     {% embed 'ManagerBundle:Partials:modal.html.twig' with {
-    'dialog' : 'confirm-delete-dialog'
+    'dialog' : 'confirm-delete-dialog',
+    'request' : 'true',
+    'modal_id' : 'modal-delete'
     } %}
     {% endembed %}
+
+    {% if show_route is defined %}
+    {% embed 'ManagerBundle:Partials:modal.html.twig' with {
+    'dialog' : 'loading-dialog',
+    'modal_id' : 'modal-show'
+    } %}
+    {% endembed %}
+    {% endif %}
+
 {% endblock %}
 
 {% block avanzu_javascripts_inline %}
@@ -70,10 +97,10 @@
             console.log('Confirm delete "' + itemTitle + '" with ID: ' + itemId);
 
 
-            $('#modal-background i').hide();
+            $('#modal-delete i').hide();
             // As pointed out in comments,
             // it is superfluous to have to manually call the modal.
-            var modal = $('#modal-background');
+            var modal = $('#modal-delete');
             modal.modal('show');
 
             // On delete confirm
@@ -84,13 +111,27 @@
 
                     // Block the panel
                     modal.modal({backdrop: 'static', keyboard: false});
-                    $('#modal-background .modal-dialog').hide();
+                    $('#modal-delete .modal-dialog').hide();
                     modal.css('text-align','center');
 
-                    var $processing = $('#modal-background i');
+                    var $processing = $('#modal-delete i');
                     $processing.show();
                 });
         });
+
+        {% if show_route is defined %}
+        $(document).ready(function(){
+            $("#modal-show").on("show.bs.modal", function(e) {
+                $("#modal-show .modal-content")
+                    .html('{% spaceless %}{% include 'ManagerBundle:layout:spinner.html.twig' %}{% endspaceless %}');
+                var href = $(e.relatedTarget).data('href');
+                $.get(href, function(data) {
+                    $("#modal-show .modal-content").html(data);
+                });
+
+            });
+        });
+        {% endif %}
     </script>
 {% endblock %}
 

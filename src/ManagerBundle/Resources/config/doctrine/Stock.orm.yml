@@ -20,6 +20,9 @@ ManagerBundle\Entity\Stock:
         description:
             type: text
             nullable: true
+        alias:
+            type: string
+            length: 255
     lifecycleCallbacks: {  }
     manyToOne:
         market:

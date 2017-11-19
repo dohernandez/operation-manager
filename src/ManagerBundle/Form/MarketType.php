@@ -80,7 +80,6 @@ class MarketType extends AbstractType
         $builder->addEventListener(
             FormEvents::PRE_SUBMIT,
             function (FormEvent $event) {
-                /** @var Market $market */
                 $data = $event->getData();
 
                 if (empty($data['alias'])) {
