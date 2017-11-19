@@ -1,0 +1,16 @@
+ManagerBundle\Entity\Transfer:
+    type: entity
+    table: null
+    repositoryClass: ManagerBundle\Repository\TransferRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        date:
+            type: datetime_immutable
+        amount:
+            type: float
+    lifecycleCallbacks: {  }
