@@ -8,12 +8,40 @@ namespace ManagerBundle\Entity;
 class Broker extends Entity
 {
     use EntityName;
-    use EntityType;
+
+    /**
+     * @var BrokerType
+     */
+    protected $type;
 
     /**
      * @var Account
      */
     private $account;
+
+    /**
+     * Set type
+     *
+     * @param BrokerType $type
+     *
+     * @return BrokerType
+     */
+    public function setType(BrokerType $type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return BrokerType
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
 
     /**
      * @return Account

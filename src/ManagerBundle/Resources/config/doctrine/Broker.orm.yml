@@ -20,3 +20,10 @@ ManagerBundle\Entity\Broker:
           joinColumn:
             name: account_id
             referencedColumnName: id
+    manyToOne:
+        type:
+            targetEntity: ManagerBundle\Entity\BrokerType
+            inversedBy: brokers
+            joinColumn:
+                name: broker_type_id
+                referencedColumnName: id

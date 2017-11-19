@@ -14,3 +14,7 @@ ManagerBundle\Entity\BrokerType:
             length: 255
             unique: true
     lifecycleCallbacks: {  }
+    oneToMany:
+        brokers:
+            targetEntity: ManagerBundle\Entity\Broker
+            mappedBy: type

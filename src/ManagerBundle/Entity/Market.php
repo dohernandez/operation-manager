@@ -24,7 +24,7 @@ class Market extends Entity
     private $region;
 
     /**
-     * @var ArrayCollection[Stocks]
+     * @var ArrayCollection[Stock]
      */
     private $stocks;
     
@@ -74,15 +74,15 @@ class Market extends Entity
     }
 
     /**
-     * @return ArrayCollection[Stocks]
+     * @return ArrayCollection[Stock]
      */
-    public function getStocks(): ArrayCollection
+    public function getStocks()
     {
         return $this->stocks;
     }
 
     /**
-     * @param ArrayCollection[Stocks] $stocks
+     * @param ArrayCollection[Stock] $stocks
      *
      * @return Market
      */

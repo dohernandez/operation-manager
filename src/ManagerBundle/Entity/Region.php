@@ -24,6 +24,7 @@ class Region extends Entity
     public function __construct()
     {
         $this->countries = new ArrayCollection();
+        $this->markets = new ArrayCollection();
     }
 
     /**
