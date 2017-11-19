@@ -9,31 +9,7 @@ class Account extends Entity
 {
     use EntityName;
     use EntityIBAN;
-
-    /**
-     * @var Broker
-     */
-    private $broker;
-
-    /**
-     * @return Broker
-     */
-    public function getBroker()
-    {
-        return $this->broker;
-    }
-
-    /**
-     * @param Broker $broker
-     *
-     * @return Broker
-     */
-    public function setBroker(Broker $broker)
-    {
-        $this->broker = $broker;
-
-        return $this;
-    }
+    use EntityType;
 
     public function __toString()
     {

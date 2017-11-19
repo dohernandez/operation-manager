@@ -10,4 +10,10 @@ namespace ManagerBundle\Repository;
  */
 class AccountRepository extends CRUDRepository
 {
+    public function findAllWithTypeAccount()
+    {
+        return $this->findBy([
+            'type' => 'account'
+        ]);
+    }
 }

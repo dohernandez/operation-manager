@@ -31,11 +31,14 @@ class AccountController extends CRUDController
      */
     public function indexAction(): Response
     {
+        $accounts = $this->getEntityRepository()->findAllWithTypeAccount();
+
         return $this->index(
             [
                 [ 'name' => 'name', 'col_with' => '200' ],
                 [ 'name' => 'iban' ],
-            ]
+            ],
+            $accounts
         );
     }
 

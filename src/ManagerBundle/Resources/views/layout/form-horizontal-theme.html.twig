@@ -1,11 +1,13 @@
 {% extends 'AvanzuAdminThemeBundle:layout:form-theme.html.twig' %}
 
+{# Label #}
 {% block form_label %}
     <div class="col-sm-3">
         {{ parent() }}
     </div>
 {% endblock form_label %}
 
+{# Input #}
 {% block form_widget_simple %}
     <div class="col-sm-9">
         {{ parent() }}
@@ -27,3 +29,16 @@
         {{ parent() }}
     </div>
 {%- endblock choice_widget -%}
+
+{# Errors #}
+{% block form_errors -%}
+    {% if errors|length > 0 -%}
+        {% if form.parent %}<span class="help-block">{% else %}<div class="alert alert-danger">{% endif %}
+        <ul class="list-unstyled">
+        {%- for error in errors -%}
+            <li><span class="glyphicon glyphicon-exclamation-sign"></span> {{ error.message }}</li>
+        {%- endfor -%}
+    </ul>
+        {% if form.parent %}</span>{% else %}</div>{% endif %}
+    {%- endif %}
+{%- endblock form_errors %}

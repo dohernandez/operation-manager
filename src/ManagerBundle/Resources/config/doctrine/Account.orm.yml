@@ -17,11 +17,7 @@ ManagerBundle\Entity\Account:
             type: string
             length: 255
             unique: true
+        type:
+            type: string
+            length: 255
     lifecycleCallbacks: {  }
-    oneToOne:
-        broker:
-          targetEntity: ManagerBundle\Entity\Broker
-          inversedBy: account
-          joinColumn:
-            name: broker_id
-            referencedColumnName: id

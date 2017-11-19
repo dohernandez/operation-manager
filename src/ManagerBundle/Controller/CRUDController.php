@@ -20,11 +20,11 @@ abstract class CRUDController extends Controller
      *
      * @return Response
      */
-    protected function index(array $fields, array $options = [], $view = 'ManagerBundle:crud:index.html.twig'): Response
+    protected function index(array $fields, array $entities = [], array $options = [], $view = 'ManagerBundle:crud:index.html.twig'): Response
     {
         $delete_forms = [];
         
-        $entities = $this->getEntityRepository()->findAll();
+        $entities = !empty($entities) ? $entities : $this->getEntityRepository()->findAll();
 
         /* @var Entity $entity */
         foreach ($entities as $entity) {

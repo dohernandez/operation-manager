@@ -32,6 +32,9 @@ class StockController extends CRUDController
      */
     public function indexAction(): Response
     {
+        // If stocks is empty, parent will trigger stock repository find all
+        $stocks = [];
+
         return $this->index(
             [
                 [ 'name' => 'symbol', 'col_with' => '70' ],
@@ -40,6 +43,7 @@ class StockController extends CRUDController
                 [ 'name' => 'company', 'col_with' => '160' ],
                 [ 'name' => 'description', 'truncate' => '60'],
             ],
+            $stocks,
             [
                 'show_route' => $this->getEntityCRUDRoute('show')
             ]

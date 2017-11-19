@@ -7,6 +7,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BrokerType extends AbstractType
@@ -26,6 +28,16 @@ class BrokerType extends AbstractType
                 'placeholder' => 'Choose type',
             ])
             ->add('account', AccountType::class);
+
+        $builder->addEventListener(
+            FormEvents::PRE_SUBMIT,
+            function (FormEvent $event) {
+                $data = $event->getData();
+
+                $data['account']['type'] = 'broker';
+                $event->setData($data);
+            }
+        );
     }
     
     /**
