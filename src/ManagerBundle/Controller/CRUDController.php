@@ -3,6 +3,8 @@
 namespace ManagerBundle\Controller;
 
 use ManagerBundle\Entity\Entity;
+use ManagerBundle\Event\CRUDEvent;
+use ManagerBundle\Event\CRUDEvents;
 use ManagerBundle\Repository\CRUDRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
@@ -85,7 +87,7 @@ abstract class CRUDController extends Controller
         // $entity has been updated with the form inputs at this point when the form is submitted.
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getEntityRepository()->save($entity);
+            $this->performanceSave($entity);
 
             return $this->redirectToRoute(sprintf('%ss_index', strtolower($this->getEntityClass())));
         }
@@ -100,6 +102,26 @@ abstract class CRUDController extends Controller
             'page_title' => $options['page_title'],
             'cancel_url' => $this->getEntityCRUDUrl('cancel'),
         ] + $options);
+    }
+
+    private function performanceSave(Entity $entity)
+    {
+        $event = new CRUDEvent($entity);
+
+        $this->dispatch(CRUDEvents::PRE_SAVED, $event);
+
+        $this->getEntityRepository()->save($event->getEntity());
+
+        $this->dispatch(CRUDEvents::POST_SAVED, $event);
+
+    }
+
+    private function dispatch(string $eventName, CRUDEvent $event)
+    {
+        if ($this->container->has('event_dispatcher')) {
+            $dispatcher = $this->get('event_dispatcher');
+            $dispatcher->dispatch($eventName, $event);
+        }
     }
 
     /**
