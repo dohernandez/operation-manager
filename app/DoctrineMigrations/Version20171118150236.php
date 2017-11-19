@@ -28,6 +28,6 @@ class Version20171118150236 extends AbstractMigration
 
     public function down(Schema $schema)
     {
-        $this->addSql("DROP TABLE region");
+        $this->addSql("TRUNCATE TABLE region");
     }
 }

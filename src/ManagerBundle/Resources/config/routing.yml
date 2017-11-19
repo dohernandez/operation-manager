@@ -12,3 +12,11 @@ manager_markets:
 manager_stocks:
     resource: "@ManagerBundle/Resources/config/routing/stock.yml"
     prefix:   /stocks
+
+manager_brokers:
+    resource: "@ManagerBundle/Resources/config/routing/broker.yml"
+    prefix:   /brokers
+
+manager_accounts:
+    resource: "@ManagerBundle/Resources/config/routing/account.yml"
+    prefix:   /accounts

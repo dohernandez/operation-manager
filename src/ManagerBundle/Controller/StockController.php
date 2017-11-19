@@ -67,7 +67,7 @@ class StockController extends CRUDController
     public function newAction(Request $request): Response
     {
         return $this->edit($request, new Stock(), [
-            'page_title' => 'Manager stock',
+            'page_title' => 'Manage stock',
             'page_subtitle' => 'create',
             'box_type' => 'success',
             'submit_type' => 'Create',
@@ -81,7 +81,7 @@ class StockController extends CRUDController
     public function editAction(Request $request, Stock $stock): Response
     {
         return $this->edit($request, $stock, [
-            'page_title' => 'Manager stock',
+            'page_title' => 'Manage stock',
             'page_subtitle' => 'edit',
             'box_type' => 'primary',
             'submit_type' => 'Edit',

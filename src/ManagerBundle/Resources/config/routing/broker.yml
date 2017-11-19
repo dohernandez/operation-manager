@@ -1,0 +1,26 @@
+brokers_index:
+    path:     /
+    defaults: { _controller: "ManagerBundle:Broker:index" }
+    methods:  GET
+    options:
+        avanzu_admin_route: brokers
+
+brokers_new:
+    path:     /new
+    defaults: { _controller: "ManagerBundle:Broker:new" }
+    methods:  [GET, POST]
+
+brokers_cancel:
+    path:     /
+    defaults: { _controller: "ManagerBundle:Broker:index" }
+    methods:  [GET, POST]
+
+brokers_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ManagerBundle:Broker:edit" }
+    methods:  [GET, POST]
+
+brokers_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ManagerBundle:Broker:delete" }
+    methods:  DELETE

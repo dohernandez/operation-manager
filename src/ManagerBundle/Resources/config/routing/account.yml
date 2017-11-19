@@ -1,0 +1,26 @@
+accounts_index:
+    path:     /
+    defaults: { _controller: "ManagerBundle:Account:index" }
+    methods:  GET
+    options:
+        avanzu_admin_route: accounts
+
+accounts_new:
+    path:     /new
+    defaults: { _controller: "ManagerBundle:Account:new" }
+    methods:  [GET, POST]
+
+accounts_cancel:
+    path:     /
+    defaults: { _controller: "ManagerBundle:Account:index" }
+    methods:  [GET, POST]
+
+accounts_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ManagerBundle:Account:edit" }
+    methods:  [GET, POST]
+
+accounts_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ManagerBundle:Account:delete" }
+    methods:  DELETE

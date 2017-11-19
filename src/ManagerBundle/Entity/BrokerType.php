@@ -3,16 +3,18 @@
 namespace ManagerBundle\Entity;
 
 /**
- * Broker
+ * BrokerType
  */
-class Broker extends Entity
+class BrokerType extends Entity
 {
-    use EntityName;
     use EntityType;
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return $this->getName();
+        return $this->getType();
     }
 }
 

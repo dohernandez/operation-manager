@@ -29,13 +29,6 @@ class SetupKnpMenuListener
         // Manager
         $managerItem = $menu->getChild('ManagerMenuItem');
         // Manager > Operation Types
-//        $this->addChildToParent($managerItem, [
-//            'menu_item' => 'OperationTypesMenuItem',
-//            'label' => 'Operation types',
-//            'route' => 'operationtypes_index',
-//            'child_options' => $event->getChildOptions(),
-//            'icon' => 'fa fa-line-chart',
-//        ]);
         // Manager > Action Types
 //        $this->addChildToParent($managerItem, [
 //            'menu_item' => 'ActionTypesMenuItem',
@@ -59,6 +52,22 @@ class SetupKnpMenuListener
             'route' => 'stocks_index',
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-bar-chart',
+        ]);
+        // Manager > Account
+        $this->addChildToParent($managerItem, [
+            'menu_item' => 'AccountMenuItem',
+            'label' => 'Accounts',
+            'route' => 'accounts_index',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-credit-card',
+        ]);
+        // Manager > Broker
+        $this->addChildToParent($managerItem, [
+            'menu_item' => 'BrokerMenuItem',
+            'label' => 'Brokers',
+            'route' => 'brokers_index',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-desktop',
         ]);
     }
 

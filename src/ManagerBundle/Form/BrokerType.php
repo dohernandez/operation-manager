@@ -2,12 +2,14 @@
 
 namespace ManagerBundle\Form;
 
-use ManagerBundle\Entity\Region;
+use ManagerBundle\Entity\Broker;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RegionType extends AbstractType
+class BrokerType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -18,7 +20,11 @@ class RegionType extends AbstractType
             'attr' => [
                 'placeholder' => 'Enter name',
             ],
-        ]);
+        ])
+            ->add('type', EntityType::class, [
+                'class'   => \ManagerBundle\Entity\BrokerType::class,
+                'placeholder' => 'Choose type',
+            ]);
     }
     
     /**
@@ -27,7 +33,7 @@ class RegionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Region::class
+            'data_class' => Broker::class
         ));
     }
 
@@ -36,8 +42,6 @@ class RegionType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'managerbundle_region';
+        return 'managerbundle_broker';
     }
-
-
 }

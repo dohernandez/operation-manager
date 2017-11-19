@@ -1,0 +1,20 @@
+ManagerBundle\Entity\Account:
+    type: entity
+    table: null
+    repositoryClass: ManagerBundle\Repository\AccountRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            unique: true
+        iban:
+            type: string
+            length: 255
+            unique: true
+    lifecycleCallbacks: {  }

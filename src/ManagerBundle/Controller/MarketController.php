@@ -52,7 +52,7 @@ class MarketController extends CRUDController
     public function newAction(Request $request): Response
     {
         return $this->edit($request, new Market(), [
-            'page_title' => 'Manager market',
+            'page_title' => 'Manage market',
             'page_subtitle' => 'create',
             'box_type' => 'success',
             'submit_type' => 'Create',
@@ -70,7 +70,7 @@ class MarketController extends CRUDController
     public function editAction(Request $request, Market $market): Response
     {
         return $this->edit($request, $market, [
-            'page_title' => 'Manager market',
+            'page_title' => 'Manage market',
             'page_subtitle' => 'edit',
             'box_type' => 'primary',
             'submit_type' => 'Edit',
