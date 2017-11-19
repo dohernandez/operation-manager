@@ -24,7 +24,8 @@ class BrokerType extends AbstractType
             ->add('type', EntityType::class, [
                 'class'   => \ManagerBundle\Entity\BrokerType::class,
                 'placeholder' => 'Choose type',
-            ]);
+            ])
+            ->add('account', AccountType::class);
     }
     
     /**

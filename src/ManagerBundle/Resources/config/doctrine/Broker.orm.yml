@@ -14,3 +14,9 @@ ManagerBundle\Entity\Broker:
             length: 255
             unique: true
     lifecycleCallbacks: {  }
+    oneToOne:
+        account:
+          targetEntity: ManagerBundle\Entity\Account
+          joinColumn:
+            name: account_id
+            referencedColumnName: id

@@ -78,7 +78,7 @@ abstract class CRUDController extends Controller
      *
      * @return Response
      */
-    public function edit(Request $request, Entity $entity, $options, $view = 'ManagerBundle:crud:edit.form.twig'): Response
+    public function edit(Request $request, Entity $entity, $options, $view = 'ManagerBundle:crud:edit.form.html.twig'): Response
     {
         $form = $this->createForm(sprintf('ManagerBundle\Form\%sType', $this->getEntityClass()), $entity);
         $form->handleRequest($request);
@@ -90,14 +90,16 @@ abstract class CRUDController extends Controller
             return $this->redirectToRoute(sprintf('%ss_index', strtolower($this->getEntityClass())));
         }
 
+
+        $options['page_subtitle'] = $options['page_subtitle'] ?: 'info';
+        $options['page_subtitle'] = $options['box_type'] ?: 'info';
+        $options['page_subtitle'] = $options['submit_type'] ?: 'Info';
+
         return $this->render($view, [
             'form' => $form->createView(),
             'page_title' => $options['page_title'],
-            'page_subtitle' => $options['page_subtitle'] ?: 'info',
-            'box_type' => $options['box_type'] ?: 'info',
-            'submit_type' => $options['submit_type'] ?: 'Info',
             'cancel_url' => $this->getEntityCRUDUrl('cancel'),
-        ]);
+        ] + $options);
     }
 
     /**

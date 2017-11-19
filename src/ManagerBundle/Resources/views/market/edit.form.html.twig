@@ -1,4 +1,4 @@
-{% extends 'ManagerBundle:crud:edit.form.twig' %}
+{% extends 'ManagerBundle:crud:edit.form.html.twig' %}
 
 {% block avanzu_javascripts_inline %}
     {{ parent() }}
@@ -38,10 +38,10 @@
                     }
                 });
             });
-        });
 
-        $('#managerbundle_market_name').change(function () {
-            $('#managerbundle_market_alias').prop('placeholder', $(this).val())
+            $('#managerbundle_market_name').change(function () {
+                $('#managerbundle_market_alias').prop('placeholder', $(this).val())
+            });
         });
     </script>
 {% endblock %}

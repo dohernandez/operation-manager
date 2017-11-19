@@ -8,34 +8,36 @@ namespace ManagerBundle\Entity;
 class Account extends Entity
 {
     use EntityName;
+    use EntityIBAN;
 
     /**
-     * @var string
+     * @var Broker
      */
-    private $iban;
+    private $broker;
 
     /**
-     * Set iban
-     *
-     * @param string $iban
-     *
-     * @return Account
+     * @return Broker
      */
-    public function setIban($iban)
+    public function getBroker()
     {
-        $this->iban = $iban;
+        return $this->broker;
+    }
+
+    /**
+     * @param Broker $broker
+     *
+     * @return Broker
+     */
+    public function setBroker(Broker $broker)
+    {
+        $this->broker = $broker;
 
         return $this;
     }
 
-    /**
-     * Get iban
-     *
-     * @return string
-     */
-    public function getIban()
+    public function __toString()
     {
-        return $this->iban;
+        return sprintf('%s (%s)', $this->getName(), $this->getIban());
     }
 }
 
