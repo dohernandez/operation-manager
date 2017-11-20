@@ -16,8 +16,24 @@ abstract class CRUDController extends Controller
     /**
      * Lists all entities.
      *
-     * @param array $fields {name: <value>, col_with: <value>}
-     * @param array $options {}
+     * @param array $fields
+     *      {
+     *          'render': <value>, (text| ManagerBundle:Macros:render.html.twig)
+     *          'name': <value>, # required
+     *          'label': <value>,
+     *          'col_with': <value>,
+     *          'truncate': '<value>',
+     *          'date_format': '<value>',
+     *          'currency': '<value>',
+     *      }
+     *
+     *      1. When 'render' defined how to render the field. Default value text
+     *      2. When 'truncate' exists, the value of the field will be slice until the truncate value
+     *      3. When 'date_format' exists, the value of the field will be formatted as a date.
+     *      4. When 'currency' exists, the value of the field will be formatted as a currency.
+     *
+     * @param array $entities
+     * @param array $options
      * @param string $view
      *
      * @return Response
@@ -89,7 +105,7 @@ abstract class CRUDController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->performanceSave($entity);
 
-            return $this->redirectToRoute(sprintf('%ss_index', strtolower($this->getEntityClass())));
+            return $this->redirectToRoute($this->getEntityCRUDRoute('index'));
         }
 
 
@@ -141,6 +157,6 @@ abstract class CRUDController extends Controller
             $this->getEntityRepository()->remove($entity);
         }
 
-        return $this->redirectToRoute($this->getEntityCRUDRoute('delete'));
+        return $this->redirectToRoute($this->getEntityCRUDRoute('index'));
     }
 }

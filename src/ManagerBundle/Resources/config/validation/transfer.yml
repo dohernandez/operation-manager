@@ -1,0 +1,5 @@
+ManagerBundle\Entity\Transfer:
+    properties:
+        date:
+            - NotBlank: ~
+            - Type: \DateTime

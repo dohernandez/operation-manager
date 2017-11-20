@@ -1,4 +1,4 @@
-{% extends 'AvanzuAdminThemeBundle:layout:form-theme.html.twig' %}
+{% extends 'ManagerBundle:layout:form-theme.html.twig' %}
 
 {# Label #}
 {% block form_label %}
@@ -30,15 +30,19 @@
     </div>
 {%- endblock choice_widget -%}
 
-{# Errors #}
-{% block form_errors -%}
-    {% if errors|length > 0 -%}
-        {% if form.parent %}<span class="help-block">{% else %}<div class="alert alert-danger">{% endif %}
-        <ul class="list-unstyled">
-        {%- for error in errors -%}
-            <li><span class="glyphicon glyphicon-exclamation-sign"></span> {{ error.message }}</li>
-        {%- endfor -%}
-    </ul>
-        {% if form.parent %}</span>{% else %}</div>{% endif %}
-    {%- endif %}
-{%- endblock form_errors %}
+{%- block date_widget -%}
+    <div class="col-sm-9">
+        {{ parent() }}
+        {#{%- if widget == 'single_text' -%}#}
+            {#{{ block('form_widget_simple') }}#}
+        {#{%- else -%}#}
+            {#<div {{ block('widget_container_attributes') }}>#}
+                {#{{- date_pattern|replace({#}
+                    {#'{{ year }}':  form_widget(form.year),#}
+                    {#'{{ month }}': form_widget(form.month),#}
+                    {#'{{ day }}':   form_widget(form.day),#}
+                {#})|raw -}}#}
+            {#</div>#}
+        {#{%- endif -%}#}
+    </div>
+{%- endblock date_widget -%}

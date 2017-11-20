@@ -29,14 +29,14 @@ class SetupKnpMenuListener
         // Manager
         $managerItem = $menu->getChild('ManagerMenuItem');
         // Manager > Operation Types
-        // Manager > Action Types
-//        $this->addChildToParent($managerItem, [
-//            'menu_item' => 'ActionTypesMenuItem',
-//            'label' => 'Action types',
-//            'route' => 'actiontypes_index',
-//            'child_options' => $event->getChildOptions(),
-//            'icon' => 'fa fa-bell',
-//        ]);
+        // Manager > Transfer
+        $this->addChildToParent($managerItem, [
+            'menu_item' => 'TransferMenuItem',
+            'label' => 'Transfers',
+            'route' => 'transfers_index',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-exchange',
+        ]);
         // Manager > Index
         $this->addChildToParent($managerItem, [
             'menu_item' => 'MarketMenuItem',

@@ -41,7 +41,7 @@ class StockController extends CRUDController
                 [ 'name' => 'alias', 'col_with' => '100' ],
                 [ 'name' => 'market', 'col_with' => '170'],
                 [ 'name' => 'company', 'col_with' => '160' ],
-                [ 'name' => 'description', 'truncate' => '60'],
+                [ 'name' => 'description', 'render' => 'slice', 'truncate' => '60'],
             ],
             $stocks,
             [
@@ -67,6 +67,9 @@ class StockController extends CRUDController
     /**
      * Creates a new stock entity.
      *
+     * @param Request $request
+     *
+     * @return Response
      */
     public function newAction(Request $request): Response
     {
@@ -81,6 +84,10 @@ class StockController extends CRUDController
     /**
      * Displays a form to edit an existing stock entity.
      *
+     * @param Request $request
+     * @param Stock $stock
+     *
+     * @return Response
      */
     public function editAction(Request $request, Stock $stock): Response
     {
@@ -95,6 +102,10 @@ class StockController extends CRUDController
     /**
      * Deletes a stock entity.
      *
+     * @param Request $request
+     * @param Stock $stock
+     *
+     * @return Response
      */
     public function deleteAction(Request $request, Stock $stock)
     {

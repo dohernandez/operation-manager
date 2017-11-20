@@ -1,0 +1,31 @@
+transfers_index:
+    path:     /
+    defaults: { _controller: "ManagerBundle:Transfer:index" }
+    methods:  GET
+    options:
+        avanzu_admin_route: transfers
+
+transfers_show:
+    path:     /{id}/show
+    defaults: { _controller: "ManagerBundle:Transfer:show" }
+    methods:  GET
+
+transfers_new:
+    path:     /new
+    defaults: { _controller: "ManagerBundle:Transfer:new" }
+    methods:  [GET, POST]
+
+transfers_cancel:
+    path:     /
+    defaults: { _controller: "ManagerBundle:Transfer:index" }
+    methods:  [GET, POST]
+
+transfers_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ManagerBundle:Transfer:edit" }
+    methods:  [GET, POST]
+
+transfers_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ManagerBundle:Transfer:delete" }
+    methods:  DELETE

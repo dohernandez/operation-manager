@@ -2,15 +2,17 @@
 
 namespace ManagerBundle\Entity;
 
+use DateTime;
+
 /**
  * Transfer
  */
 class Transfer extends Entity
 {
     /**
-     * @var datetime_immutable
+     * @var DateTime
      */
-    private $date;
+    private $transferredAt;
 
     /**
      * @var float
@@ -18,27 +20,37 @@ class Transfer extends Entity
     private $amount;
 
     /**
-     * Set date
+     * @var Account
+     */
+    private $beneficiary;
+
+    /**
+     * @var Account
+     */
+    private $reference;
+
+    /**
+     * Set transferredAt
      *
-     * @param datetime_immutable $date
+     * @param DateTime $transferredAt
      *
      * @return Transfer
      */
-    public function setDate($date)
+    public function setTransferredAt(DateTime $transferredAt)
     {
-        $this->date = $date;
+        $this->transferredAt = $transferredAt;
 
         return $this;
     }
 
     /**
-     * Get date
+     * Get transferredAt
      *
-     * @return datetime_immutable
+     * @return DateTime
      */
-    public function getDate()
+    public function getTransferredAt()
     {
-        return $this->date;
+        return $this->transferredAt;
     }
 
     /**
@@ -63,6 +75,46 @@ class Transfer extends Entity
     public function getAmount()
     {
         return $this->amount;
+    }
+
+    /**
+     * @return Account
+     */
+    public function getBeneficiary()
+    {
+        return $this->beneficiary;
+    }
+
+    /**
+     * @param Account $beneficiary
+     *
+     * @return Transfer
+     */
+    public function setBeneficiary(Account $beneficiary)
+    {
+        $this->beneficiary = $beneficiary;
+
+        return $this;
+    }
+
+    /**
+     * @return Account
+     */
+    public function getReference()
+    {
+        return $this->reference;
+    }
+
+    /**
+     * @param Account $reference
+     *
+     * @return Transfer
+     */
+    public function setReference(Account $reference)
+    {
+        $this->reference = $reference;
+
+        return $this;
     }
 }
 

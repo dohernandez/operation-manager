@@ -1,0 +1,4 @@
+AppBundle\Entity\Author:
+    properties:
+        name:
+            - NotBlank: ~

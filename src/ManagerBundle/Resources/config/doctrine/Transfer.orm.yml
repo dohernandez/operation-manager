@@ -9,8 +9,19 @@ ManagerBundle\Entity\Transfer:
             generator:
                 strategy: AUTO
     fields:
-        date:
-            type: datetime_immutable
+        transferredAt:
+            type: date
         amount:
             type: float
     lifecycleCallbacks: {  }
+    manyToOne:
+        beneficiary:
+          targetEntity: ManagerBundle\Entity\Account
+          joinColumn:
+            name: beneficiary_id
+            referencedColumnName: id
+        reference:
+          targetEntity: ManagerBundle\Entity\Account
+          joinColumn:
+            name: reference_id
+            referencedColumnName: id

@@ -1,0 +1,24 @@
+{% extends 'ManagerBundle:crud:edit.form.html.twig' %}
+
+{% block avanzu_head %}
+    {{ parent() }}
+    {% include 'ManagerBundle:Partials:_header-form-datepicker.html.twig' %}
+{% endblock %}
+
+{% block avanzu_javascripts_inline %}
+    {{ parent() }}
+    {% include 'ManagerBundle:Partials:_scripts-form-datepicker.html.twig' %}
+    <script>
+        $(document).ready(function () {
+            $('[data-datepickerenable="on"]').datepicker({
+                showOn: 'button',
+                buttonImageOnly: true,
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'dd/mm/yyyy',
+                yearRange: "-0:+1",
+                autoclose: true
+            });
+        });
+    </script>
+{% endblock %}

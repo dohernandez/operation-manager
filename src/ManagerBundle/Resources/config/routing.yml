@@ -5,6 +5,10 @@ manager_index:
     options:
         avanzu_admin_route: manager
 
+manager_transfers:
+    resource: "@ManagerBundle/Resources/config/routing/transfer.yml"
+    prefix:   /transfers
+
 manager_markets:
     resource: "@ManagerBundle/Resources/config/routing/market.yml"
     prefix:   /markets
