@@ -8,11 +8,7 @@ namespace ManagerBundle\Entity;
 class Country extends Entity
 {
     use EntityName;
-
-    /**
-     * @var string
-     */
-    private $iso;
+    use EntityIso;
 
     /**
      * @var string
@@ -23,26 +19,6 @@ class Country extends Entity
      * @var Region
      */
     private $region;
-
-    /**
-     * @return string
-     */
-    public function getIso()
-    {
-        return $this->iso;
-    }
-
-    /**
-     * @param string $iso
-     *
-     * @return Country
-     */
-    public function setIso(string $iso)
-    {
-        $this->iso = $iso;
-
-        return $this;
-    }
 
     /**
      * @return string
