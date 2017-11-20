@@ -13,6 +13,9 @@ ManagerBundle\Entity\Transfer:
             type: date
         amount:
             type: float
+        currency:
+            type: string
+            length: 3
     lifecycleCallbacks: {  }
     manyToOne:
         beneficiary:

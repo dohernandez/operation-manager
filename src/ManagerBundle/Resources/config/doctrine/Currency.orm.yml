@@ -3,18 +3,11 @@ ManagerBundle\Entity\Currency:
     table: null
     repositoryClass: ManagerBundle\Repository\CurrencyRepository
     id:
-        id:
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-    fields:
         iso:
             type: string
             length: 3
-            unique: true
+    fields:
         name:
             type: string
             length: 255
-            unique: true
     lifecycleCallbacks: {  }

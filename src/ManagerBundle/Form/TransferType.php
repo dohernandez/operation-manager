@@ -3,6 +3,7 @@
 namespace ManagerBundle\Form;
 
 use ManagerBundle\Entity\Account;
+use ManagerBundle\Entity\Currency;
 use ManagerBundle\Entity\Transfer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -38,6 +39,11 @@ class TransferType extends AbstractType
             ->add('beneficiary', EntityType::class, [
                 'class'   => Account::class,
                 'placeholder' => 'Choose beneficiary',
+            ])
+            ->add('currency', EntityType::class, [
+                'class'   => Currency::class,
+                'placeholder' => 'Choose currency',
+                'choice_name' => 'iso',
             ])
             ->add('amount', TextType::class, [
                 'attr' => [

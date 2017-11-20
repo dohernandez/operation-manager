@@ -2,13 +2,13 @@
 
 namespace ManagerBundle\Entity;
 
-class Currency extends Entity
+class Currency
 {
     use PropertyName;
     use PropertyISO;
 
     public function __toString()
     {
-        return $this->getName();
+        return $this->getIso();
     }
 }
