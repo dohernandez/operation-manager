@@ -2,6 +2,9 @@
 
 namespace ManagerBundle\Repository;
 
+use ManagerBundle\Entity\Account;
+use ManagerBundle\Entity\Broker;
+
 /**
  * BrokerRepository
  *
@@ -10,4 +13,15 @@ namespace ManagerBundle\Repository;
  */
 class BrokerRepository extends CRUDRepository
 {
+    /**
+     * @param Account $account
+     *
+     * @return Broker
+     */
+    public function findByAccount(Account $account)
+    {
+        return $this->findOneBy([
+            'account' => $account
+        ]);
+    }
 }

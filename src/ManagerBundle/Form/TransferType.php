@@ -7,7 +7,10 @@ use ManagerBundle\Entity\Transfer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -40,7 +43,23 @@ class TransferType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Enter amount',
                 ],
+            ])
+            // This hidden input will be used only to update the broker in the BrokerListener::onSavedTransfer
+            ->add('old_amount', HiddenType::class, [
+                'mapped' => false
             ]);
+
+        // Set the old_amount value with the current amount
+        $builder->addEventListener(
+            FormEvents::POST_SET_DATA,
+            function (FormEvent $event) {
+                // It's important here to fetch $event->getForm()->getData(), as
+                // $event->getData() will get you the client data (that is, the ID)
+                $form = $event->getForm();
+
+                $form->get('old_amount')->setData($form->get('amount')->getData());
+            }
+        );
     }
     
     /**

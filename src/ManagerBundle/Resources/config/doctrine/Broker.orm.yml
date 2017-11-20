@@ -13,6 +13,10 @@ ManagerBundle\Entity\Broker:
             type: string
             length: 255
             unique: true
+        investment:
+            type: float
+        capital:
+            type: float
     lifecycleCallbacks: {  }
     oneToOne:
         account:

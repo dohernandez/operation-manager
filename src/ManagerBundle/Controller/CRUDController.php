@@ -103,7 +103,17 @@ abstract class CRUDController extends Controller
         // $entity has been updated with the form inputs at this point when the form is submitted.
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->performanceSave($entity);
+            $this->dispatch(
+                sprintf('%s.%s', CRUDEvents::PRE_SAVED, $this->getEntityClass()),
+                new CRUDEvent($entity, $form)
+            );
+
+            $this->getEntityRepository()->save($entity);
+
+            $this->dispatch(
+                sprintf('%s.%s', CRUDEvents::POST_SAVED, $this->getEntityClass()),
+                new CRUDEvent($entity, $form)
+            );
 
             return $this->redirectToRoute($this->getEntityCRUDRoute('index'));
         }
@@ -118,18 +128,6 @@ abstract class CRUDController extends Controller
             'page_title' => $options['page_title'],
             'cancel_url' => $this->getEntityCRUDUrl('cancel'),
         ] + $options);
-    }
-
-    private function performanceSave(Entity $entity)
-    {
-        $event = new CRUDEvent($entity);
-
-        $this->dispatch(CRUDEvents::PRE_SAVED, $event);
-
-        $this->getEntityRepository()->save($event->getEntity());
-
-        $this->dispatch(CRUDEvents::POST_SAVED, $event);
-
     }
 
     private function dispatch(string $eventName, CRUDEvent $event)
@@ -155,6 +153,11 @@ abstract class CRUDController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getEntityRepository()->remove($entity);
+
+            $this->dispatch(
+                sprintf('%s.%s', CRUDEvents::POST_DELETED, $this->getEntityClass()),
+                new CRUDEvent($entity)
+            );
         }
 
         return $this->redirectToRoute($this->getEntityCRUDRoute('index'));

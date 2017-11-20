@@ -34,6 +34,9 @@ class BrokerController extends CRUDController
         return $this->index(
             [
                 [ 'name' => 'name' ],
+                [ 'name' => 'type', 'col_with' => '200' ],
+                [ 'name' => 'capital', 'col_with' => '100', 'render' => 'currency' ],
+                [ 'name' => 'investment', 'col_with' => '100', 'render' => 'currency' ],
             ]
         );
     }
