@@ -1,0 +1,26 @@
+cryptocurrencies_index:
+    path:     /
+    defaults: { _controller: "ManagerBundle:Cryptocurrency:index" }
+    methods:  GET
+    options:
+        avanzu_admin_route: cryptocurrencies
+
+cryptocurrencies_new:
+    path:     /new
+    defaults: { _controller: "ManagerBundle:Cryptocurrency:new" }
+    methods:  [GET, POST]
+
+cryptocurrencies_cancel:
+    path:     /
+    defaults: { _controller: "ManagerBundle:Cryptocurrency:index" }
+    methods:  [GET, POST]
+
+cryptocurrencies_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ManagerBundle:Cryptocurrency:edit" }
+    methods:  [GET, POST]
+
+cryptocurrencies_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ManagerBundle:Cryptocurrency:delete" }
+    methods:  DELETE

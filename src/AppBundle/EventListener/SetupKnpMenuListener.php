@@ -53,6 +53,14 @@ class SetupKnpMenuListener
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-bar-chart',
         ]);
+        // Manager > Index
+        $this->addChildToParent($managerItem, [
+            'menu_item' => 'CryptocurrencyMenuItem',
+            'label' => 'Cryptocurrencies',
+            'route' => 'cryptocurrencies_index',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-bar-chart',
+        ]);
         // Manager > Account
         $this->addChildToParent($managerItem, [
             'menu_item' => 'AccountMenuItem',

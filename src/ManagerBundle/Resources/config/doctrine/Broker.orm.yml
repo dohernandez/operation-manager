@@ -21,7 +21,7 @@ ManagerBundle\Entity\Broker:
     oneToOne:
         account:
           targetEntity: ManagerBundle\Entity\Account
-          cascade: ["persist", "merge"]
+          cascade: [ persist, merge, detach ]
           joinColumn:
             name: account_id
             referencedColumnName: id

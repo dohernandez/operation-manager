@@ -1,0 +1,25 @@
+ManagerBundle\Entity\Cryptocurrency:
+    type: entity
+    table: null
+    repositoryClass: ManagerBundle\Repository\CryptocurrencyRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            unique: true
+        alias:
+            type: string
+            length: 255
+        symbol:
+            type: string
+            length: 255
+        description:
+            type: text
+            nullable: true
+    lifecycleCallbacks: {  }

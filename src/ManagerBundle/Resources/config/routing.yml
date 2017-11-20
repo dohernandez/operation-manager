@@ -24,3 +24,7 @@ manager_brokers:
 manager_accounts:
     resource: "@ManagerBundle/Resources/config/routing/account.yml"
     prefix:   /accounts
+
+manager_cryptocurrencies:
+    resource: "@ManagerBundle/Resources/config/routing/cryptocurrency.yml"
+    prefix:   /cryptocurrencies
