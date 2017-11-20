@@ -17,11 +17,13 @@ ManagerBundle\Entity\Transfer:
     manyToOne:
         beneficiary:
           targetEntity: ManagerBundle\Entity\Account
+          inversedBy: entrances
           joinColumn:
             name: beneficiary_id
             referencedColumnName: id
         reference:
           targetEntity: ManagerBundle\Entity\Account
+          inversedBy: exits
           joinColumn:
             name: reference_id
             referencedColumnName: id

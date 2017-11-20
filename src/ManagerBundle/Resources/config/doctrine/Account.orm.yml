@@ -21,3 +21,10 @@ ManagerBundle\Entity\Account:
             type: string
             length: 255
     lifecycleCallbacks: {  }
+    oneToMany:
+        entrances:
+            targetEntity: ManagerBundle\Entity\Transfer
+            mappedBy: beneficiary
+        exits:
+            targetEntity: ManagerBundle\Entity\Transfer
+            mappedBy: reference
