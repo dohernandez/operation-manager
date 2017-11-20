@@ -9,16 +9,12 @@ class Stock extends Entity
 {
     use EntitySymbol;
     use EntityAlias;
+    use EntityDescription;
 
     /**
      * @var string
      */
     private $company;
-
-    /**
-     * @var string
-     */
-    private $description;
 
     /**
      * @var Market
@@ -47,30 +43,6 @@ class Stock extends Entity
     public function getCompany()
     {
         return $this->company;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Stock
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 
     /**
