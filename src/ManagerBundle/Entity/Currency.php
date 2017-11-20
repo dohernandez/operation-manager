@@ -4,8 +4,8 @@ namespace ManagerBundle\Entity;
 
 class Currency extends Entity
 {
-    use EntityName;
-    use EntityIso;
+    use PropertyName;
+    use PropertyISO;
 
     public function __toString()
     {

@@ -7,7 +7,7 @@ namespace ManagerBundle\Entity;
  */
 class OperationType extends Entity
 {
-    use EntityType;
+    use PropertyType;
 
     /**
      * @return string

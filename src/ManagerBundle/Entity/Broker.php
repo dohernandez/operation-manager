@@ -7,7 +7,7 @@ namespace ManagerBundle\Entity;
  */
 class Broker extends Entity
 {
-    use EntityName;
+    use PropertyName;
 
     /**
      * @var BrokerType

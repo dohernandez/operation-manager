@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class BrokerType extends Entity
 {
-    use EntityType;
+    use PropertyType;
 
     /**
      * @var ArrayCollection[Broker]

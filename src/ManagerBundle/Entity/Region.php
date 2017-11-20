@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Region extends Entity
 {
-    use EntityName;
+    use PropertyName;
 
     /**
      * @var ArrayCollection[Country]

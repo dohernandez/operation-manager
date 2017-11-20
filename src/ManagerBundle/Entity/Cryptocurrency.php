@@ -4,10 +4,10 @@ namespace ManagerBundle\Entity;
 
 class Cryptocurrency extends Entity
 {
-    use EntityName;
-    use EntitySymbol;
-    use EntityAlias;
-    use EntityDescription;
+    use PropertyName;
+    use PropertySymbol;
+    use PropertyAlias;
+    use PropertyDescription;
 
     /**
      * @return string

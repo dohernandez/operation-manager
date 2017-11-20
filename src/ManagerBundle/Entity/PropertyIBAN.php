@@ -2,7 +2,7 @@
 
 namespace ManagerBundle\Entity;
 
-trait EntityIBAN
+trait PropertyIBAN
 {
     /**
      * @var string

@@ -1,0 +1,12 @@
+ManagerBundle\Entity\Money:
+    type: embeddable
+    id:
+        currency:
+            associationKey: true
+    fields:
+        amount:
+            type: float
+    lifecycleCallbacks: {  }
+    oneToOne:
+        currency:
+            targetEntity: ManagerBundle\Entity\Currency

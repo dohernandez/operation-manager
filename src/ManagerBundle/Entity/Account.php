@@ -9,9 +9,9 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Account extends Entity
 {
-    use EntityName;
-    use EntityIBAN;
-    use EntityType;
+    use PropertyName;
+    use PropertyIBAN;
+    use PropertyType;
 
     /**
      * @var ArrayCollection[Transfer]

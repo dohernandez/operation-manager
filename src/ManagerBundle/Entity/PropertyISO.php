@@ -2,7 +2,7 @@
 
 namespace ManagerBundle\Entity;
 
-trait EntityIso
+trait PropertyISO
 {
     /**
      * @var string

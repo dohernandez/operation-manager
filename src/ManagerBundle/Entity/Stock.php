@@ -7,9 +7,9 @@ namespace ManagerBundle\Entity;
  */
 class Stock extends Entity
 {
-    use EntitySymbol;
-    use EntityAlias;
-    use EntityDescription;
+    use PropertySymbol;
+    use PropertyAlias;
+    use PropertyDescription;
 
     /**
      * @var string

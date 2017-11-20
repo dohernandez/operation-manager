@@ -2,7 +2,7 @@
 
 namespace ManagerBundle\Entity;
 
-trait EntityName
+trait PropertyName
 {
     /**
      * @var string
