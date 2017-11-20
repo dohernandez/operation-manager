@@ -18,3 +18,4 @@ ManagerBundle\Entity\BrokerType:
         brokers:
             targetEntity: ManagerBundle\Entity\Broker
             mappedBy: type
+            fetch: EXTRA_LAZY

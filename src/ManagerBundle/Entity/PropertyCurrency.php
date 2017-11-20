@@ -5,31 +5,31 @@ namespace ManagerBundle\Entity;
 trait PropertyCurrency
 {
     /**
-     * @var string
+     * @var Currency
      */
-    protected $alias;
+    protected $currency;
 
     /**
-     * Set alias
+     * Set currency
      *
-     * @param string $alias
+     * @param Currency $currency
      *
      * @return Entity
      */
-    public function setAlias(string $alias)
+    public function setAlias(Currency $currency)
     {
-        $this->alias = $alias;
+        $this->currency = $currency;
 
         return $this;
     }
 
     /**
-     * Get alias
+     * Get currency
      *
-     * @return string
+     * @return Currency
      */
     public function getAlias()
     {
-        return $this->alias;
+        return $this->currency;
     }
 }

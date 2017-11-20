@@ -9,6 +9,8 @@ use DateTime;
  */
 class Transfer extends Entity
 {
+    use PropertyCurrency;
+
     /**
      * @var DateTime
      */

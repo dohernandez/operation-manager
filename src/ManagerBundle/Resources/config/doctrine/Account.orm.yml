@@ -25,6 +25,8 @@ ManagerBundle\Entity\Account:
         entrances:
             targetEntity: ManagerBundle\Entity\Transfer
             mappedBy: beneficiary
+            fetch: EXTRA_LAZY
         exits:
             targetEntity: ManagerBundle\Entity\Transfer
             mappedBy: reference
+            fetch: EXTRA_LAZY

@@ -18,6 +18,8 @@ ManagerBundle\Entity\Region:
         countries:
             targetEntity: ManagerBundle\Entity\Country
             mappedBy: region
+            fetch: EXTRA_LAZY
         markets:
             targetEntity: ManagerBundle\Entity\Market
             mappedBy: region
+            fetch: EXTRA_LAZY
