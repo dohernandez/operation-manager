@@ -1,0 +1,16 @@
+ManagerBundle\Entity\ComissionType:
+    type: entity
+    table: null
+    repositoryClass: ManagerBundle\Repository\ComissionTypeRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        type:
+            type: string
+            length: 255
+            unique: true
+    lifecycleCallbacks: {  }
