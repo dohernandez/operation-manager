@@ -1,5 +1,3 @@
-{% import 'ManagerBundle:Macros:render.html.twig' as render %}
-
 {% extends 'base.html.twig' %}
 
 {% block avanzu_page_title %} {{ entity_type|title }}s {% endblock %}
@@ -12,53 +10,8 @@
                         <i class="fa-plus-circle fa" aria-hidden="true"></i> Create new {{ entity_type|lower }}</a>
                 </div>
                 <div class="box-body">
-                    <table id="operationtypes" class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th width="60" class="text-center" scope="col">#</th>
-                                {% for field in fields %}
-                                    <th {% if field.col_with is defined %} width="{{ field.col_with }}" {% endif %} scope="col">
-                                        {% if field.label is not defined %}{{ field.name|upper }}{% else %}{{ field.label|upper }}{% endif %}
-                                    </th>
-                                {% endfor %}
-                                <th width="{% if show_route is defined %}122{% else %}100{% endif %}" scope="col">MANAGE</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {% for item in entities %}
-                            <tr>
-                                <th style="vertical-align: middle;" scope="row" class="text-center">{{ item.id }}</th>
-                                {% for field in fields %}
-                                    <td style="vertical-align: middle;">
-                                        {{ render.field(attribute(item, field.name), field) }}
-                                    </td>
-                                {% endfor %}
-                                <td>
-                                    {% if show_route is defined %}
-                                    <button type="button"  data-href="{{ path(show_route, { 'id': item.id }) }}" class="entity-view btn btn-info btn-sm pull-left"
-                                       data-toggle="modal" data-target="#modal-show">
-                                        <i class="fa-eye fa" aria-hidden="true"></i>
-                                    </button>
-                                    {% endif %}
-                                    <a href="{{ path(edit_route, { 'id': item.id }) }}"  style="margin-left: 3px"
-                                       class="btn btn-primary btn-sm pull-left">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                    </a>
-                                    <form id="entity_{{ item.id }}" action="{{ path(delete_route, { 'id': item.id }) }}" method="post"
-                                          class="pull-left" style="margin-left: 3px">
-                                        <input type="hidden" name="_method" value="DELETE" />
-                                        {{ form_widget(delete_forms[item.id]) }}
-                                        <button type="button" data-backdrop="static" data-keyboard="false" class="entity-delete btn btn-danger btn-sm" data-target="#modal-delete"
-                                                {#data-toggle="modal" data-id="{{ item.id }}" data-title="{{ render.render(item) }}">#}
-                                                data-toggle="modal" data-id="{{ item.id }}" data-title="{{ attribute(item, '__toString') }}">
-                                            <i class="fa-trash-o fa" aria-hidden="true"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+                    {% embed 'ManagerBundle:Partials:simple-table.html.twig' %}
+                    {% endembed %}
                 </div>
             </div>
         </div>

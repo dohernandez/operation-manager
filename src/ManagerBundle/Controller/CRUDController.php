@@ -52,7 +52,7 @@ abstract class CRUDController extends Controller
         return $this->render($view, [
             'entities' => $entities,
             'fields' => $fields,
-            'entity_type' => implode(' ', preg_split('/(?=[A-Z])/', $this->getEntityClass())),
+            'entity_type' => trim(implode(' ', preg_split('/(?=[A-Z])/', $this->getEntityClass()))),
             'new_url' => $this->getEntityCRUDUrl('new'),
             'edit_route' => $this->getEntityCRUDRoute('edit'),
             'delete_route' => $this->getEntityCRUDRoute('delete'),
