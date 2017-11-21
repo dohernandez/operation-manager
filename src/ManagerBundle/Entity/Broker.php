@@ -29,6 +29,12 @@ class Broker extends Entity
      */
     private $capital;
 
+    public function __construct()
+    {
+        $this->investment = 0;
+        $this->capital = 0;
+    }
+
     /**
      * Set type
      *

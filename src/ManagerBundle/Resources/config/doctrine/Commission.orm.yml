@@ -1,0 +1,11 @@
+ManagerBundle\Entity\Commission:
+    type: embeddable
+    fields:
+        name:
+            type: string
+            length: 255
+        percentage:
+            type: boolean
+        value:
+            type: float
+    lifecycleCallbacks: {  }
