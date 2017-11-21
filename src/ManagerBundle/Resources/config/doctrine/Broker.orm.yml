@@ -32,3 +32,9 @@ ManagerBundle\Entity\Broker:
             joinColumn:
                 name: broker_type_id
                 referencedColumnName: id
+    oneToMany:
+        commissionTypes:
+            targetEntity: ManagerBundle\Entity\CommissionType
+            mappedBy: broker
+            cascade: [ persist, merge, detach ]
+            fetch: EXTRA_LAZY

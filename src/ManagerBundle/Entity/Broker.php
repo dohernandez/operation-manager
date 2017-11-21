@@ -2,6 +2,8 @@
 
 namespace ManagerBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Broker
  */
@@ -29,10 +31,16 @@ class Broker extends Entity
      */
     private $capital;
 
+    /**
+     * @var ArrayCollection[CommissionType]
+     */
+    private $commissionTypes;
+
     public function __construct()
     {
         $this->investment = 0;
         $this->capital = 0;
+        $this->commissionTypes = new ArrayCollection();
     }
 
     /**
@@ -163,6 +171,26 @@ class Broker extends Entity
     public function decreaseCapital(float $capital)
     {
         $this->capital -= $capital;
+
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection[CommissionType]
+     */
+    public function getCommissionTypes()
+    {
+        return $this->commissionTypes;
+    }
+
+    /**
+     * @param ArrayCollection[CommissionType] $commissionTypes
+     *
+     * @return Broker
+     */
+    public function setCommissionTypes(ArrayCollection $commissionTypes)
+    {
+        $this->commissionTypes = $commissionTypes;
 
         return $this;
     }
