@@ -1,7 +1,7 @@
-ManagerBundle\Entity\ComissionType:
+ManagerBundle\Entity\CommissionType:
     type: entity
     table: null
-    repositoryClass: ManagerBundle\Repository\ComissionTypeRepository
+    repositoryClass: ManagerBundle\Repository\CommissionTypeRepository
     id:
         id:
             type: integer
