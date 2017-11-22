@@ -5,6 +5,7 @@ namespace ManagerBundle\Form;
 use ManagerBundle\Entity\Broker;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -27,7 +28,12 @@ class BrokerType extends AbstractType
                 'class'   => \ManagerBundle\Entity\BrokerType::class,
                 'placeholder' => 'Choose type',
             ])
-            ->add('account', AccountType::class);
+            ->add('account', AccountType::class)
+            ->add('commissiontypes', CollectionType::class, [
+                'entry_type' => BrokerCommissionsType::class,
+                'entry_options' => array('label' => false),
+                'label' => false,
+            ]);
 
         $builder->addEventListener(
             FormEvents::PRE_SUBMIT,

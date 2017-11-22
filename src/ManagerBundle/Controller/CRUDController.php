@@ -38,7 +38,7 @@ abstract class CRUDController extends Controller
      *
      * @return Response
      */
-    protected function index(array $fields, array $entities = [], array $options = [], $view = 'ManagerBundle:List:index.html.twig'): Response
+    protected function index(array $fields, array $entities = [], array $options = [], $view = 'ManagerBundle:Layout:index.html.twig'): Response
     {
         $delete_forms = [];
         
@@ -96,7 +96,7 @@ abstract class CRUDController extends Controller
      *
      * @return Response
      */
-    public function edit(Request $request, Entity $entity, $options, $view = 'ManagerBundle:Form:edit.form.html.twig'): Response
+    public function edit(Request $request, Entity $entity, $options, $view = 'ManagerBundle:Layout:edit.form.html.twig'): Response
     {
         $form = $this->createForm(sprintf('ManagerBundle\Form\%sType', $this->getEntityClass()), $entity);
         $form->handleRequest($request);

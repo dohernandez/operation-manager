@@ -1,0 +1,29 @@
+{% extends 'ManagerBundle:Form:form-horizontal-theme.html.twig' %}
+
+{%- block _managerbundle_broker_account_row -%}
+    <div class="form-group ">
+        <div class="col-sm-12">
+            <h4 class="box-title m-t-40">Account</h4>
+            {{ form_widget(form) }}
+        </div>
+    </div>
+{%- endblock -%}
+
+
+{%- block collection_widget -%}
+    {{ form_widget(form) }}
+{%- endblock collection_widget -%}
+
+
+{%- block _managerbundle_broker_commissiontypes_row -%}
+    <div class="form-group ">
+        <div class="col-sm-12">
+            <h4 class="box-title m-t-40">Commission types</h4>
+            {% embed 'ManagerBundle:Table:form-add-remove-table.html.twig' with {
+            'dialog' : 'loading-dialog',
+            'modal_id' : 'modal-show'
+            } %}
+            {% endembed %}
+        </div>
+    </div>
+{%- endblock -%}
