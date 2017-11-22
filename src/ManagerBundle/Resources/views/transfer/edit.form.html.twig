@@ -1,13 +1,13 @@
-{% extends 'ManagerBundle:crud:edit.form.html.twig' %}
+{% extends 'ManagerBundle:Form:edit.form.html.twig' %}
 
 {% block avanzu_head %}
     {{ parent() }}
-    {% include 'ManagerBundle:Partials:_header-form-datepicker.html.twig' %}
+    {% include 'ManagerBundle:Form:_header-datepicker-form.html.twig' %}
 {% endblock %}
 
 {% block avanzu_javascripts_inline %}
     {{ parent() }}
-    {% include 'ManagerBundle:Partials:_scripts-form-datepicker.html.twig' %}
+    {% include 'ManagerBundle:Form:_scripts-datepicker-form.html.twig' %}
     <script>
         $(document).ready(function () {
             $('[data-datepickerenable="on"]').datepicker({

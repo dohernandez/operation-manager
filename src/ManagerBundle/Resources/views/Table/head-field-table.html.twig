@@ -1,0 +1,5 @@
+{% for field in fields %}
+    <th {% if field.col_with is defined %} width="{{ field.col_with }}" {% endif %} scope="col">
+        {% if field.label is not defined %}{{ field.name|upper }}{% else %}{{ field.label|upper }}{% endif %}
+    </th>
+{% endfor %}

@@ -10,13 +10,13 @@
                         <i class="fa-plus-circle fa" aria-hidden="true"></i> Create new {{ entity_type|lower }}</a>
                 </div>
                 <div class="box-body">
-                    {% embed 'ManagerBundle:Partials:simple-table.html.twig' %}
+                    {% embed 'ManagerBundle:Table:simple-manage-table.html.twig' %}
                     {% endembed %}
                 </div>
             </div>
         </div>
     </div>
-    {% embed 'ManagerBundle:Partials:modal.html.twig' with {
+    {% embed 'ManagerBundle:Modal:modal.html.twig' with {
     'dialog' : 'confirm-delete-dialog',
     'request' : 'true',
     'modal_id' : 'modal-delete'
@@ -24,7 +24,7 @@
     {% endembed %}
 
     {% if show_route is defined %}
-    {% embed 'ManagerBundle:Partials:modal.html.twig' with {
+    {% embed 'ManagerBundle:Modal:modal.html.twig' with {
     'dialog' : 'loading-dialog',
     'modal_id' : 'modal-show'
     } %}
@@ -73,7 +73,7 @@
         $(document).ready(function(){
             $("#modal-show").on("show.bs.modal", function(e) {
                 $("#modal-show .modal-content")
-                    .html('{% spaceless %}{% include 'ManagerBundle:Partials:spinner.html.twig' %}{% endspaceless %}');
+                    .html('{% spaceless %}{% include 'ManagerBundle:Modal:spinner.html.twig' %}{% endspaceless %}');
                 var href = $(e.relatedTarget).data('href');
                 $.get(href, function(data) {
                     $("#modal-show .modal-content").html(data);

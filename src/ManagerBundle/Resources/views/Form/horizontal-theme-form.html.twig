@@ -1,15 +1,17 @@
-{% extends 'ManagerBundle:layout:form-theme.html.twig' %}
+{% extends 'ManagerBundle:Form:theme-form.html.twig' %}
 
 {# Label #}
 {% block form_label %}
-    <div class="col-sm-3">
-        {{ parent() }}
-    </div>
+    {% if label is not same as(false) -%}
+        <div class="col-sm-3">
+            {{ parent() }}
+        </div>
+    {%- endif -%}
 {% endblock form_label %}
 
 {# Input #}
 {% block form_widget_simple %}
-    <div class="col-sm-9">
+    <div class="{% if label is not same as(false) %}col-sm-9{% else -%}col-sm-12{%- endif %}">
         {{ parent() }}
 
         {% if help is defined %}

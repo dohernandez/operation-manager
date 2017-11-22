@@ -17,7 +17,7 @@
 
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            {% embed 'ManagerBundle:Partials:form-horizontal.html.twig'%}
+            {% embed 'ManagerBundle:Form:horizontal-form.html.twig'%}
                 {% block box_title %}{{ box_title }}{% endblock %}
             {% endembed %}
         </div>
@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    {% embed 'ManagerBundle:Partials:modal.html.twig' with {
+    {% embed 'ManagerBundle:Modal:modal.html.twig' with {
     'modal_id' : 'modal-background',
     'request' : 'true'
     } %}

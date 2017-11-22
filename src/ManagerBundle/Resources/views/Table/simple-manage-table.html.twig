@@ -4,11 +4,7 @@
     <thead>
     <tr>
         <th width="60" class="text-center" scope="col">#</th>
-        {% for field in fields %}
-            <th {% if field.col_with is defined %} width="{{ field.col_with }}" {% endif %} scope="col">
-                {% if field.label is not defined %}{{ field.name|upper }}{% else %}{{ field.label|upper }}{% endif %}
-            </th>
-        {% endfor %}
+        {% include 'ManagerBundle:Table:head-field-table.html.twig' %}
         <th width="{% if show_route is defined %}122{% else %}100{% endif %}" scope="col">MANAGE</th>
     </tr>
     </thead>
@@ -37,7 +33,6 @@
                     <input type="hidden" name="_method" value="DELETE" />
                     {{ form_widget(delete_forms[item.id]) }}
                     <button type="button" data-backdrop="static" data-keyboard="false" class="entity-delete btn btn-danger btn-sm" data-target="#modal-delete"
-                            {#data-toggle="modal" data-id="{{ item.id }}" data-title="{{ render.render(item) }}">#}
                             data-toggle="modal" data-id="{{ item.id }}" data-title="{{ attribute(item, '__toString') }}">
                         <i class="fa-trash-o fa" aria-hidden="true"></i>
                     </button>
