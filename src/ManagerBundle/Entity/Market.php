@@ -32,6 +32,7 @@ class Market extends Entity
     public function __construct()
     {
         $this->stocks = new ArrayCollection();
+        $this->commissions = new ArrayCollection();
     }
 
     /**

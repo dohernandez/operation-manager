@@ -13,6 +13,7 @@ ManagerBundle\Entity\Commission:
     discriminatorMap:
         commission: ManagerBundle\Entity\Commission
         stock_commission: ManagerBundle\Entity\StockCommission
+        market_commission: ManagerBundle\Entity\MarketCommission
     fields:
         name:
             type: string

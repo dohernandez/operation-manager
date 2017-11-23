@@ -56,6 +56,8 @@ class MarketController extends CRUDController
             'page_subtitle' => 'create',
             'box_type' => 'success',
             'submit_type' => 'Create',
+            'form_theme' => 'ManagerBundle:market:theme-form.html.twig',
+            'box_class' => 'col-md-10 col-md-offset-1',
         ], 'ManagerBundle:market:edit.form.html.twig');
     }
 
@@ -74,6 +76,8 @@ class MarketController extends CRUDController
             'page_subtitle' => 'edit',
             'box_type' => 'primary',
             'submit_type' => 'Edit',
+            'form_theme' => 'ManagerBundle:market:theme-form.html.twig',
+            'box_class' => 'col-md-10 col-md-offset-1',
         ], 'ManagerBundle:market:edit.form.html.twig');
     }
 

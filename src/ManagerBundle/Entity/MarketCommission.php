@@ -2,6 +2,6 @@
 
 namespace ManagerBundle\Entity;
 
-class StockCommission extends Commission
+class MarketCommission extends Commission
 {
 }

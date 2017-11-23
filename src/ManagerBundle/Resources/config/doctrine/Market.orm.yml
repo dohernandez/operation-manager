@@ -38,3 +38,17 @@ ManagerBundle\Entity\Market:
             joinColumn:
                 name: country_id
                 referencedColumnName: id
+    manyToMany:
+        commissions:
+            targetEntity: ManagerBundle\Entity\MarketCommission
+            cascade: [ persist, merge, detach ]
+            fetch: EXTRA_LAZY
+            joinTable:
+                name: market_commission
+                joinColumns:
+                  discr_id: # reference (Market)
+                    referencedColumnName: id
+                inverseJoinColumns:
+                  commission_id:
+                    referencedColumnName: id
+                    unique: true
