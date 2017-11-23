@@ -40,7 +40,7 @@ ManagerBundle\Entity\Broker:
             joinTable:
                 name: broker_commission
                 joinColumns:
-                  discr_id: # reference (Broker, Market, Stock)
+                  discr_id: # reference (Broker)
                     referencedColumnName: id
                 inverseJoinColumns:
                   commission_id:

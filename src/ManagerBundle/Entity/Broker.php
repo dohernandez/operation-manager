@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Broker extends Entity
 {
     use PropertyName;
+    use PropertyCommissions;
 
     /**
      * @var BrokerType
@@ -30,11 +31,6 @@ class Broker extends Entity
      * @var float
      */
     private $capital;
-
-    /**
-     * @var ArrayCollection[Commission]
-     */
-    private $commissions;
 
     public function __construct()
     {
@@ -171,54 +167,6 @@ class Broker extends Entity
     public function decreaseCapital(float $capital)
     {
         $this->capital -= $capital;
-
-        return $this;
-    }
-
-    /**
-     * @return ArrayCollection[Commission]
-     */
-    public function getCommissions()
-    {
-        return $this->commissions;
-    }
-
-    /**
-     * @param ArrayCollection[Commission] $commissions
-     *
-     * @return Broker
-     */
-    public function setCommissions(ArrayCollection $commissions)
-    {
-        $this->commissions = $commissions;
-
-        return $this;
-    }
-
-    /**
-     * @param Commission $commissionType
-     *
-     * @return Broker
-     */
-    public function addCommission(Commission $commissionType)
-    {
-        if (!$this->commissions->contains($commissionType)) {
-            $commissionType->setBroker($this);
-
-            $this->commissions->add($commissionType);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Commission $commissionType
-     *
-     * @return Broker
-     */
-    public function removeCommission(Commission $commissionType)
-    {
-        $this->commissions->removeElement($commissionType);
 
         return $this;
     }

@@ -2,6 +2,8 @@
 
 namespace ManagerBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Stock
  */
@@ -10,6 +12,7 @@ class Stock extends Entity
     use PropertySymbol;
     use PropertyAlias;
     use PropertyDescription;
+    use PropertyCommissions;
 
     /**
      * @var string
@@ -20,6 +23,11 @@ class Stock extends Entity
      * @var Market
      */
     private $market;
+
+    public function __construct()
+    {
+        $this->commissions = new ArrayCollection();
+    }
 
     /**
      * Set company
