@@ -1,0 +1,46 @@
+<script>
+    // keep track of how many email fields have been rendered
+    var count = '{{ form.commissions|length }}';
+
+    $(document).ready(function() {
+        var commissions = $('#managerbundle_{{ entity }}_commissions');
+        var addCommissions = $('#add-commissions');
+        var table = $('#managerbundle_{{ entity }}_commissions table');
+
+        addCommissions.click(function(e) {
+            e.preventDefault();
+
+            // grab the prototype template
+            var newWidget = commissions.attr('data-prototype');
+            // replace the "__name__" used in the id and name of the prototype
+            // with a number that's unique to your emails
+            // end name attribute looks like name="contact[emails][2]"
+            newWidget = newWidget.replace(/__name__/g, count);
+            count++;
+
+            var commission = $(newWidget).appendTo(table);
+            commission.children('.entry-buttons').each(function () {
+                addCommissionFormDeleteLink($(this));
+            });
+        });
+
+        // add a delete link to all of the existing tag form div elements
+        commissions.find('tr .entry-buttons').each(function() {
+            addCommissionFormDeleteLink($(this));
+        });
+    });
+
+    function addCommissionFormDeleteLink($widget) {
+        var $removeFormA = $('<button type="button" class="btn btn-sm btn-icon btn-pure"><i class="fa fa-minus-square" aria-hidden="true"></i></button>');
+
+        console.log($removeFormA.appendTo($widget));
+
+        $removeFormA.on('click', function(e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // remove the div for the tag form
+            $widget.parent().remove();
+        });
+    }
+</script>

@@ -3,83 +3,21 @@
 {% block avanzu_head %}
     {{ parent() }}
     <style>
-        .managerbundle-broker-account-box-body, .managerbundle-broker-commissions-box-body {
+        .managerbundle-broker-account-box-body {
             padding: 10px 20px;
         }
 
-        .managerbundle-broker-account-box-body .with-border, .managerbundle-broker-commissions-box-body .with-border {
+        .managerbundle-broker-account-box-body .with-border {
             border-bottom: 1px solid #f4f4f4;
             padding-bottom: 10px;
         }
-
-        #managerbundle_broker_account {
-            padding-top: 10px;
-        }
-
-        #managerbundle_broker_commissions {
-            padding-top: 0;
-        }
-
-        #managerbundle_broker_commissions .form-group {
-            margin-left: 4px;
-        }
-
-        #managerbundle_broker_commissions .entry-row {
-            padding: 0;
-        }
-
-        #managerbundle_broker_commissions .entry-row .entry {
-            padding-left: 0px;
-        }
     </style>
+
+    {% include 'ManagerBundle:commission:_header.form.html.twig' with {'entity': 'broker'} %}
 {% endblock %}
 
 {% block avanzu_javascripts_inline %}
     {{ parent() }}
-    <script>
-        // keep track of how many email fields have been rendered
-        var count = '{{ form.commissions|length }}';
 
-        $(document).ready(function() {
-            var commissions = $('#managerbundle_broker_commissions');
-            var addCommissions = $('#add-commissions');
-            var table = $('#managerbundle_broker_commissions table');
-
-            addCommissions.click(function(e) {
-                e.preventDefault();
-
-                // grab the prototype template
-                var newWidget = commissions.attr('data-prototype');
-                // replace the "__name__" used in the id and name of the prototype
-                // with a number that's unique to your emails
-                // end name attribute looks like name="contact[emails][2]"
-                newWidget = newWidget.replace(/__name__/g, count);
-                count++;
-
-                var commission = $(newWidget).appendTo(table);
-                commission.children('.entry-buttons').each(function () {
-                    addCommissionFormDeleteLink($(this));
-                });
-            });
-
-            // add a delete link to all of the existing tag form div elements
-            commissions.find('tr .entry-buttons').each(function() {
-                addCommissionFormDeleteLink($(this));
-            });
-        });
-
-        function addCommissionFormDeleteLink($widget) {
-            var $removeFormA = $('<button type="button" class="btn btn-sm btn-icon btn-pure"><i class="fa fa-minus-square" aria-hidden="true"></i></button>');
-
-            console.log($removeFormA.appendTo($widget));
-
-            $removeFormA.on('click', function(e) {
-                // prevent the link from creating a "#" on the URL
-                e.preventDefault();
-
-                // remove the div for the tag form
-                $widget.parent().remove();
-            });
-        }
-    </script>
+    {% include 'ManagerBundle:commission:_scripts.form.html.twig' with {'entity': 'broker'} %}
 {% endblock %}
