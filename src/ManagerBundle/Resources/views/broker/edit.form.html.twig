@@ -7,5 +7,67 @@
             border-top: 1px solid #f4f4f4;
             padding-top: 10px;
         }
+
+        #managerbundle_broker_commissiontypes {
+            padding: 30px 20px 0 20px;
+        }
+
+        #managerbundle_broker_commissiontypes .form-group {
+            margin-top: -10px;
+        }
     </style>
+{% endblock %}
+
+{% block avanzu_javascripts_inline %}
+    {{ parent() }}
+    <script>
+        // keep track of how many email fields have been rendered
+        var count = '{{ form.commissiontypes|length }}';
+
+        jQuery(document).ready(function() {
+            var commissiontypes = jQuery('#managerbundle_broker_commissiontypes');
+
+            jQuery('#add-commissiontypes').click(function(e) {
+                e.preventDefault();
+
+                // grab the prototype template
+                var newWidget = commissiontypes.attr('data-prototype');
+                // replace the "__name__" used in the id and name of the prototype
+                // with a number that's unique to your emails
+                // end name attribute looks like name="contact[emails][2]"
+                newWidget = newWidget.replace(/__name__/g, count);
+                count++;
+
+                var commissiontype = $(newWidget).appendTo(commissiontypes);
+                commissiontype.find('div[id^="managerbundle_broker_commissiontypes_"]').each(function() {
+                    addCommissionTypeFormDeleteLink($(this));
+                });
+            });
+
+            // add a delete link to all of the existing tag form div elements
+            commissiontypes.find('div div[id^="managerbundle_broker_commissiontypes_"]').each(function() {
+                addCommissionTypeFormDeleteLink($(this));
+            });
+        })
+
+        function addCommissionTypeFormDeleteLink($widget) {
+            var $removeWidget = $('<div class="col-sm-2"></div>');
+            var $removeFormA = $('<button type="button" class="btn btn-sm btn-icon btn-pure"><i class="fa fa-minus-square" aria-hidden="true"></i></button>');
+
+            var widgetGroup = $widget.children().first();
+
+            widgetGroup.children().first().addClass('col-sm-10').removeClass('col-sm-12');
+
+            $removeWidget.append($removeFormA);
+            widgetGroup.append($removeWidget);
+
+            $removeFormA.on('click', function(e) {
+                // prevent the link from creating a "#" on the URL
+                e.preventDefault();
+
+                // remove the div for the tag form
+                $widget.parent().remove();
+            });
+        }
+    </script>
 {% endblock %}

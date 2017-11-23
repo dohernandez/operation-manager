@@ -8,3 +8,9 @@ services:
         arguments: ["@=container.get('doctrine').getManager().getRepository('ManagerBundle:Broker')"]
         tags:
             - { name: kernel.event_listener, event: crud.post_saved.Transfer, method: onSavedTransfer }
+
+    manager.commissiontype.saved.broker:
+        class: ManagerBundle\EventListener\SavedBroker\CommissionTypeListener
+        arguments: ["@=container.get('doctrine').getManager().getRepository('ManagerBundle:CommissionType')"]
+        tags:
+            - { name: kernel.event_listener, event: crud.post_saved.Broker, method: onSavedBroker }

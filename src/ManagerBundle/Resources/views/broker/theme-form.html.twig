@@ -1,4 +1,4 @@
-{% extends 'ManagerBundle:Form:form-horizontal-theme.html.twig' %}
+{% extends 'ManagerBundle:Form:horizontal-theme-form.html.twig' %}
 
 {%- block _managerbundle_broker_account_row -%}
     <div class="form-group ">
@@ -9,21 +9,12 @@
     </div>
 {%- endblock -%}
 
-
-{%- block collection_widget -%}
-    {{ form_widget(form) }}
-{%- endblock collection_widget -%}
-
-
 {%- block _managerbundle_broker_commissiontypes_row -%}
     <div class="form-group ">
         <div class="col-sm-12">
             <h4 class="box-title m-t-40">Commission types</h4>
-            {% embed 'ManagerBundle:Table:form-add-remove-table.html.twig' with {
-            'dialog' : 'loading-dialog',
-            'modal_id' : 'modal-show'
-            } %}
-            {% endembed %}
+            {{ form_widget(form) }}
+            <button id="add-commissiontypes" type="button" class="btn btn-default btn-rounded pull-right">Add commission type</button>
         </div>
     </div>
 {%- endblock -%}

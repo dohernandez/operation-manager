@@ -2,6 +2,8 @@
 
 namespace ManagerBundle\Repository;
 
+use Doctrine\Common\Collections\Collection;
+
 /**
  * CommissionTypeRepository
  *
@@ -10,4 +12,17 @@ namespace ManagerBundle\Repository;
  */
 class CommissionTypeRepository extends CRUDRepository
 {
+    /**
+     * @param Collection $commissionTypes
+     */
+    public function saveBatch(Collection $commissionTypes): void
+    {
+        $em = $this->getEntityManager();
+
+        foreach ($commissionTypes as $commissionType) {
+            $em->persist($commissionType);
+        }
+
+        $em->flush();
+    }
 }

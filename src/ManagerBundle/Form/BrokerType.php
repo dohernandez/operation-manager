@@ -33,6 +33,11 @@ class BrokerType extends AbstractType
                 'entry_type' => BrokerCommissionsType::class,
                 'entry_options' => array('label' => false),
                 'label' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'error_bubbling' => false,
+                'prototype' => true,
             ]);
 
         $builder->addEventListener(

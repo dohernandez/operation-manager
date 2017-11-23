@@ -195,6 +195,34 @@ class Broker extends Entity
         return $this;
     }
 
+    /**
+     * @param CommissionType $commissionType
+     *
+     * @return Broker
+     */
+    public function addCommissionType(CommissionType $commissionType)
+    {
+        if (!$this->commissionTypes->contains($commissionType)) {
+            $commissionType->setBroker($this);
+
+            $this->commissionTypes->add($commissionType);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param CommissionType $commissionType
+     *
+     * @return Broker
+     */
+    public function removeCommissionType(CommissionType $commissionType)
+    {
+        $this->commissionTypes->removeElement($commissionType);
+
+        return $this;
+    }
+
     public function __toString()
     {
         return $this->getName();
