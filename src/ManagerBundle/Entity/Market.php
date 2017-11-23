@@ -9,10 +9,10 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Market extends Entity
 {
-    use PropertyName;
-    use PropertySymbol;
-    use PropertyAlias;
-    use PropertyCommissions;
+    use Property\Name;
+    use Property\Symbol;
+    use Property\Alias;
+    use Property\Commissions;
 
     /**
      * @var Country

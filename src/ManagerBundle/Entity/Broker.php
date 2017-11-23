@@ -9,8 +9,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Broker extends Entity
 {
-    use PropertyName;
-    use PropertyCommissions;
+    use Property\Name;
+    use Property\Commissions;
 
     /**
      * @var BrokerType

@@ -4,8 +4,8 @@ namespace ManagerBundle\Entity;
 
 class Currency
 {
-    use PropertyName;
-    use PropertyISO;
+    use Property\Name;
+    use Property\ISO;
 
     public function __toString()
     {

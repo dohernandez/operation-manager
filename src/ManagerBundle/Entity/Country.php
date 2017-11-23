@@ -7,8 +7,8 @@ namespace ManagerBundle\Entity;
  */
 class Country extends Entity
 {
-    use PropertyName;
-    use PropertyISO;
+    use Property\Name;
+    use Property\ISO;
 
     /**
      * @var string

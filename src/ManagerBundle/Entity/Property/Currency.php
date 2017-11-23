@@ -1,8 +1,8 @@
 <?php
 
-namespace ManagerBundle\Entity;
+namespace ManagerBundle\Entity\Property;
 
-trait PropertyCurrency
+trait Currency
 {
     /**
      * @var string

@@ -1,11 +1,11 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace ManagerBundle\Entity;
 
 class Commission extends Entity
 {
-    use PropertyName;
-    use PropertyType;
+    use Property\Name;
+    use Property\Type;
 
     /**
      * @var bool

@@ -1,8 +1,8 @@
 <?php
 
-namespace ManagerBundle\Entity;
+namespace ManagerBundle\Entity\Property;
 
-trait PropertySymbol
+trait Symbol
 {
     /**
      * @var string

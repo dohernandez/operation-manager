@@ -9,10 +9,10 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Stock extends Entity
 {
-    use PropertySymbol;
-    use PropertyAlias;
-    use PropertyDescription;
-    use PropertyCommissions;
+    use Property\Symbol;
+    use Property\Alias;
+    use Property\Description;
+    use Property\Commissions;
 
     /**
      * @var string
