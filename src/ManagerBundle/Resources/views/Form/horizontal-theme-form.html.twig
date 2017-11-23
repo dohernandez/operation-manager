@@ -11,40 +11,52 @@
 
 {# Input #}
 {% block form_widget_simple %}
-    <div class="{% if label is not same as(false) %}col-sm-9{% else -%}col-sm-12{%- endif %}">
+    {% if wrapper is not defined or wrapper is not same as(false) %}
+        <div class="{% if label is not same as(false) %}col-sm-9{% else -%}col-sm-12{%- endif %}">
+    {% endif %}
         {{ parent() }}
 
         {% if help is defined %}
             <p class="help-block">{{ help }}</p>
         {% endif %}
-    </div>
+
+    {% if wrapper is not defined or wrapper is not same as(false) %}
+        </div>
+    {% endif %}
 {% endblock %}
 
 {%- block textarea_widget -%}
-    <div class="col-sm-9">
+    {% if wrapper is not defined or wrapper is not same as(false) %}
+        <div class="{% if label is not same as(false) %}col-sm-9{% else -%}col-sm-12{%- endif %}">
+    {% endif %}
+
         {{ parent() }}
-    </div>
+
+    {% if wrapper is not defined or wrapper is not same as(false) %}
+        </div>
+    {% endif %}
 {%- endblock textarea_widget -%}
 
 {%- block choice_widget -%}
-    <div class="col-sm-9">
+    {% if wrapper is not defined or wrapper is not same as(false) %}
+        <div class="{% if label is not same as(false) %}col-sm-9{% else -%}col-sm-12{%- endif %}">
+    {% endif %}
+
         {{ parent() }}
-    </div>
+
+    {% if wrapper is not defined or wrapper is not same as(false) %}
+        </div>
+    {% endif %}
 {%- endblock choice_widget -%}
 
 {%- block date_widget -%}
-    <div class="col-sm-9">
-        {{ parent() }}
-        {#{%- if widget == 'single_text' -%}#}
-            {#{{ block('form_widget_simple') }}#}
-        {#{%- else -%}#}
-            {#<div {{ block('widget_container_attributes') }}>#}
-                {#{{- date_pattern|replace({#}
-                    {#'{{ year }}':  form_widget(form.year),#}
-                    {#'{{ month }}': form_widget(form.month),#}
-                    {#'{{ day }}':   form_widget(form.day),#}
-                {#})|raw -}}#}
-            {#</div>#}
-        {#{%- endif -%}#}
-    </div>
+    {% if wrapper is not defined or wrapper is not same as(false) %}
+        <div class="{% if label is not same as(false) %}col-sm-9{% else -%}col-sm-12{%- endif %}">
+    {% endif %}
+
+    {{ parent() }}
+
+    {% if wrapper is not defined or wrapper is not same as(false) %}
+        </div>
+    {% endif %}
 {%- endblock date_widget -%}

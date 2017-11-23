@@ -1,5 +1,6 @@
 parameters:
     commission_period:
+      - only_one
       - daily
       - monthy
       - yearly
@@ -14,6 +15,10 @@ services:
 #    manager.example:
 #        class: ManagerBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    ManagerBundle\Form\BrokerCommissionType:
+            arguments: ["%commission_type%", "%commission_period%"]
+            tags: [form.type]
 
     manager.broker.saved.transfer:
         class: ManagerBundle\EventListener\SavedTransfer\BrokerListener

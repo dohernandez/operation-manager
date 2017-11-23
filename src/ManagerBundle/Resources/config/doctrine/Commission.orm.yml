@@ -17,8 +17,15 @@ ManagerBundle\Entity\Commission:
         name:
             type: string
             length: 255
+        type:
+            type: string
+            length: 255
         percentage:
             type: boolean
         value:
             type: float
+            nullable: true
+        period:
+            type: string
+            length: 255
     lifecycleCallbacks: {  }

@@ -28,9 +28,11 @@ class BrokerType extends AbstractType
                 'class'   => \ManagerBundle\Entity\BrokerType::class,
                 'placeholder' => 'Choose type',
             ])
-            ->add('account', AccountType::class)
-            ->add('commissiontypes', CollectionType::class, [
-                'entry_type' => BrokerCommissionsType::class,
+            ->add('account', AccountType::class, [
+                'label' => false,
+            ])
+            ->add('commissions', CollectionType::class, [
+                'entry_type' => BrokerCommissionType::class,
                 'entry_options' => array('label' => false),
                 'label' => false,
                 'allow_add' => true,

@@ -30,7 +30,7 @@ class Commission extends Entity
     /**
      * @return bool
      */
-    public function isPercentage(): bool
+    public function isPercentage()
     {
         return $this->percentage;
     }
@@ -50,7 +50,7 @@ class Commission extends Entity
     /**
      * @return string
      */
-    public function getPeriod(): string
+    public function getPeriod()
     {
         return $this->period;
     }
@@ -70,7 +70,7 @@ class Commission extends Entity
     /**
      * @return float
      */
-    public function getValue(): float
+    public function getValue()
     {
         return $this->value;
     }

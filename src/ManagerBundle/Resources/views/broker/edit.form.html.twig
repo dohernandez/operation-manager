@@ -3,17 +3,33 @@
 {% block avanzu_head %}
     {{ parent() }}
     <style>
-        #managerbundle_broker_account, #managerbundle_broker_commissiontypes {
-            border-top: 1px solid #f4f4f4;
+        .managerbundle-broker-account-box-body, .managerbundle-broker-commissions-box-body {
+            padding: 10px 20px;
+        }
+
+        .managerbundle-broker-account-box-body .with-border, .managerbundle-broker-commissions-box-body .with-border {
+            border-bottom: 1px solid #f4f4f4;
+            padding-bottom: 10px;
+        }
+
+        #managerbundle_broker_account {
             padding-top: 10px;
         }
 
-        #managerbundle_broker_commissiontypes {
-            padding: 30px 20px 0 20px;
+        #managerbundle_broker_commissions {
+            padding-top: 0;
         }
 
-        #managerbundle_broker_commissiontypes .form-group {
-            margin-top: -10px;
+        #managerbundle_broker_commissions .form-group {
+            margin-left: 4px;
+        }
+
+        #managerbundle_broker_commissions .entry-row {
+            padding: 0;
+        }
+
+        #managerbundle_broker_commissions .entry-row .entry {
+            padding-left: 0px;
         }
     </style>
 {% endblock %}
@@ -22,44 +38,40 @@
     {{ parent() }}
     <script>
         // keep track of how many email fields have been rendered
-        var count = '{{ form.commissiontypes|length }}';
+        var count = '{{ form.commissions|length }}';
 
-        jQuery(document).ready(function() {
-            var commissiontypes = jQuery('#managerbundle_broker_commissiontypes');
+        $(document).ready(function() {
+            var commissions = $('#managerbundle_broker_commissions');
+            var addCommissions = $('#add-commissions');
+            var table = $('#managerbundle_broker_commissions table');
 
-            jQuery('#add-commissiontypes').click(function(e) {
+            addCommissions.click(function(e) {
                 e.preventDefault();
 
                 // grab the prototype template
-                var newWidget = commissiontypes.attr('data-prototype');
+                var newWidget = commissions.attr('data-prototype');
                 // replace the "__name__" used in the id and name of the prototype
                 // with a number that's unique to your emails
                 // end name attribute looks like name="contact[emails][2]"
                 newWidget = newWidget.replace(/__name__/g, count);
                 count++;
 
-                var commissiontype = $(newWidget).appendTo(commissiontypes);
-                commissiontype.find('div[id^="managerbundle_broker_commissiontypes_"]').each(function() {
-                    addCommissionTypeFormDeleteLink($(this));
+                var commission = $(newWidget).appendTo(table);
+                commission.children('.entry-buttons').each(function () {
+                    addCommissionFormDeleteLink($(this));
                 });
             });
 
             // add a delete link to all of the existing tag form div elements
-            commissiontypes.find('div div[id^="managerbundle_broker_commissiontypes_"]').each(function() {
-                addCommissionTypeFormDeleteLink($(this));
-            });
-        })
+//            commissions.find('div div[id^="managerbundle_broker_commissions_"]').each(function() {
+//                addCommissionFormDeleteLink($(this));
+//            });
+        });
 
-        function addCommissionTypeFormDeleteLink($widget) {
-            var $removeWidget = $('<div class="col-sm-2"></div>');
+        function addCommissionFormDeleteLink($widget) {
             var $removeFormA = $('<button type="button" class="btn btn-sm btn-icon btn-pure"><i class="fa fa-minus-square" aria-hidden="true"></i></button>');
 
-            var widgetGroup = $widget.children().first();
-
-            widgetGroup.children().first().addClass('col-sm-10').removeClass('col-sm-12');
-
-            $removeWidget.append($removeFormA);
-            widgetGroup.append($removeWidget);
+            console.log($removeFormA.appendTo($widget));
 
             $removeFormA.on('click', function(e) {
                 // prevent the link from creating a "#" on the URL

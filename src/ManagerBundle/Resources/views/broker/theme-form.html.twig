@@ -1,20 +1,86 @@
 {% extends 'ManagerBundle:Form:horizontal-theme-form.html.twig' %}
 
-{%- block _managerbundle_broker_account_row -%}
-    <div class="form-group ">
-        <div class="col-sm-12">
-            <h4 class="box-title m-t-40">Account</h4>
-            {{ form_widget(form) }}
-        </div>
+{%- block _managerbundle_broker_account_widget -%}
+    <div class="managerbundle-broker-account-box-body">
+        <h4 class="with-border">Account</h4>
+        {{ form_widget(form) }}
     </div>
 {%- endblock -%}
 
-{%- block _managerbundle_broker_commissiontypes_row -%}
-    <div class="form-group ">
-        <div class="col-sm-12">
-            <h4 class="box-title m-t-40">Commission types</h4>
-            {{ form_widget(form) }}
-            <button id="add-commissiontypes" type="button" class="btn btn-default btn-rounded pull-right">Add commission type</button>
-        </div>
+{%- block _managerbundle_broker_commissions_widget -%}
+    {%- if prototype is defined -%}
+        {%- set attr = attr|merge({'data-prototype': form_row(prototype) }) -%}
+    {%- endif -%}
+    <div class="managerbundle-broker-commissions-box-body" {{ block('widget_container_attributes') }}>
+        <h4 class="with-border">Commissions</h4>
+        <table class="table">
+            <thead>
+                <th>{{ 'name'|title }}</th>
+                <th width="20%">{{ 'type'|title }}</th>
+                <th width="20%">{{ 'value'|title }}</th>
+                <th width="8%">{{ '%' }}</th>
+                <th width="16%">{{ 'period'|title }}</th>
+                <th width="10%"></th>
+            </thead>
+            <tbody>
+                {%- spaceless -%}
+                    {{ form_errors(form) }}
+                    {%- for child in form -%}
+                        {{ form_row(child) }}
+                    {%- endfor -%}
+                {%- endspaceless -%}
+            </tbody>
+        </table>
+        <button id="add-commissions" type="button" class="btn btn-default btn-rounded pull-right">Add commission</button>
     </div>
+{%- endblock -%}
+
+{%- block _managerbundle_broker_commissions_entry_row -%}
+    {%- set entry_class = 'entry' -%}
+    {%- set wrapper = false -%}
+    <tr {{ block('widget_container_attributes') }} class="{{ entry_class }}-row">
+        <td class="{{ entry_class }}">
+            {{ form_widget(form.name) }}
+        </td>
+        <td class="{{ entry_class }}">
+            {{ form_widget(form.type) }}
+        </td>
+        <td class="{{ entry_class }}">
+            {{ form_widget(form.value) }}
+        </td>
+        <td class="{{ entry_class }}" align="center">
+            {{ form_widget(form.percentage) }}
+        </td>
+        <td class="{{ entry_class }}">
+            {{ form_widget(form.period) }}
+        </td>
+        <td class="{{ entry_class }}-buttons" align="center">
+            {{ form_widget(form.period) }}
+        </td>
+    </tr>
+{%- endblock -%}
+
+{%- block _managerbundle_broker_commissions_entry_name_widget -%}
+    {%- set wrapper = false -%}
+    {{ block('form_widget') }}
+{%- endblock -%}
+
+{%- block _managerbundle_broker_commissions_entry_type_widget -%}
+    {%- set wrapper = false -%}
+    {{ block('choice_widget') }}
+{%- endblock -%}
+
+{%- block _managerbundle_broker_commissions_entry_value_widget -%}
+    {%- set wrapper = false -%}
+    {{ block('form_widget') }}
+{%- endblock -%}
+
+{%- block _managerbundle_broker_commissions_entry_period_widget -%}
+    {%- set wrapper = false -%}
+    {{ block('choice_widget') }}
+{%- endblock -%}
+
+{%- block _managerbundle_broker_commissions_entry_percentage_widget -%}
+    {%- set wrapper = false -%}
+    {{ block('checkbox_widget') }}
 {%- endblock -%}
