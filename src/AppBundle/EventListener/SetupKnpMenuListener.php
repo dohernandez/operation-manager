@@ -18,10 +18,33 @@ class SetupKnpMenuListener
             ]
         )->setAttribute('class', 'header');
 
+        // Operation
+        $menu = $this->addOperationMenu($menu, $event);
         // Finance
         $menu = $this->addFinanceMenu($menu, $event);
         // Investor
         $this->addInvestorMenu($menu, $event);
+    }
+
+    private function addOperationMenu(MenuItem $menu, KnpMenuEvent $event)
+    {
+        $operationItem = $this->addChildToParent($menu, [
+            'menu_item' => 'OperationMenuItem',
+            'label' => 'Operation',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-bars',
+        ]);
+
+        // Operation > Trader
+        $this->addChildToParent($operationItem, [
+            'menu_item' => 'TraderMenuItem',
+            'label' => 'Traders',
+//            'route' => 'traders_index',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-suitcase',
+        ]);
+
+        return $menu;
     }
 
     private function addFinanceMenu(MenuItem $menu, KnpMenuEvent $event)
