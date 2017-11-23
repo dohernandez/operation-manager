@@ -25,7 +25,10 @@ ManagerBundle\Entity\Commission:
         value:
             type: float
             nullable: true
-        period:
+        frequency:
+            type: string
+            length: 255
+        applied:
             type: string
             length: 255
     lifecycleCallbacks: {  }

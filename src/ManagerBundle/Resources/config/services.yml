@@ -10,6 +10,9 @@ parameters:
       - custody
       - initial_margin
       - maintenance_margin
+    commission_applied:
+      - per_stock
+      - per_amount
 
 services:
 #    manager.example:
@@ -17,7 +20,7 @@ services:
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
 
     ManagerBundle\Form\BrokerCommissionType:
-            arguments: ["%commission_type%", "%commission_period%"]
+            arguments: ["%commission_type%", "%commission_period%", "%commission_applied%"]
             tags: [form.type]
 
     manager.broker.saved.transfer:

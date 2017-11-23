@@ -17,10 +17,11 @@
             <thead>
                 <th>{{ 'name'|title }}</th>
                 <th width="20%">{{ 'type'|title }}</th>
-                <th width="20%">{{ 'value'|title }}</th>
-                <th width="8%">{{ '%' }}</th>
-                <th width="16%">{{ 'period'|title }}</th>
-                <th width="10%"></th>
+                <th width="13%">{{ 'value'|title }}</th>
+                <th width="5%">{{ '%' }}</th>
+                <th width="16%">{{ 'applied'|title }}</th>
+                <th width="18%">{{ 'frequency'|title }}</th>
+                <th width="6%"></th>
             </thead>
             <tbody>
                 {%- spaceless -%}
@@ -52,10 +53,12 @@
             {{ form_widget(form.percentage) }}
         </td>
         <td class="{{ entry_class }}">
-            {{ form_widget(form.period) }}
+            {{ form_widget(form.applied) }}
+        </td>
+        <td class="{{ entry_class }}">
+            {{ form_widget(form.frequency) }}
         </td>
         <td class="{{ entry_class }}-buttons" align="center">
-            {{ form_widget(form.period) }}
         </td>
     </tr>
 {%- endblock -%}
@@ -75,7 +78,12 @@
     {{ block('form_widget') }}
 {%- endblock -%}
 
-{%- block _managerbundle_broker_commissions_entry_period_widget -%}
+{%- block _managerbundle_broker_commissions_entry_frequency_widget -%}
+    {%- set wrapper = false -%}
+    {{ block('choice_widget') }}
+{%- endblock -%}
+
+{%- block _managerbundle_broker_commissions_entry_applied_widget -%}
     {%- set wrapper = false -%}
     {{ block('choice_widget') }}
 {%- endblock -%}

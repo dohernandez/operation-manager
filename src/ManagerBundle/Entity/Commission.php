@@ -15,7 +15,12 @@ class Commission extends Entity
     /**
      * @var string
      */
-    private $period;
+    private $frequency;
+
+    /**
+     * @var string
+     */
+    private $applied;
 
     /**
      * @var float
@@ -50,19 +55,19 @@ class Commission extends Entity
     /**
      * @return string
      */
-    public function getPeriod()
+    public function getFrequency()
     {
-        return $this->period;
+        return $this->frequency;
     }
 
     /**
-     * @param string $period
+     * @param string $frequency
      *
      * @return Commission
      */
-    public function setPeriod(string $period)
+    public function setFrequency(string $frequency)
     {
-        $this->period = $period;
+        $this->frequency = $frequency;
 
         return $this;
     }
@@ -83,6 +88,26 @@ class Commission extends Entity
     public function setValue(float $value)
     {
         $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getApplied()
+    {
+        return $this->applied;
+    }
+
+    /**
+     * @param string $applied
+     *
+     * @return Commission
+     */
+    public function setApplied(string $applied)
+    {
+        $this->applied = $applied;
 
         return $this;
     }

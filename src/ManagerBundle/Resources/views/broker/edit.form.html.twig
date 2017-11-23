@@ -63,9 +63,9 @@
             });
 
             // add a delete link to all of the existing tag form div elements
-//            commissions.find('div div[id^="managerbundle_broker_commissions_"]').each(function() {
-//                addCommissionFormDeleteLink($(this));
-//            });
+            commissions.find('tr .entry-buttons').each(function() {
+                addCommissionFormDeleteLink($(this));
+            });
         });
 
         function addCommissionFormDeleteLink($widget) {

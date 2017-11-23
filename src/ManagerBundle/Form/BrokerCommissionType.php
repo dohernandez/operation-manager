@@ -22,13 +22,20 @@ class BrokerCommissionType extends AbstractType
     private $commissionPeriods;
 
     /**
+     * @var array
+     */
+    private $commissionAppliedTypes;
+
+    /**
      * @param array $commissionTypes
      * @param array $commissionPeriods
+     * @param array $commissionAppliedTypes
      */
-    public function __construct(array $commissionTypes, array $commissionPeriods)
+    public function __construct(array $commissionTypes, array $commissionPeriods, array $commissionAppliedTypes)
     {
         $this->commissionTypes = $commissionTypes;
         $this->commissionPeriods = $commissionPeriods;
+        $this->commissionAppliedTypes = $commissionAppliedTypes;
     }
 
     /**
@@ -64,12 +71,24 @@ class BrokerCommissionType extends AbstractType
                 'label' => false,
                 'required' => false,
             ])
-            ->add('period', ChoiceType::class, [
+            ->add('frequency', ChoiceType::class, [
                 'choices' => $this->commissionPeriods,
-                'placeholder' => 'Choose period',
+                'placeholder' => 'Choose frequency',
                 'label' => false,
                 'choice_label' => function ($value, $key, $index) {
                     $title = preg_replace('/(.*)_(.*)/', "$1 $2", $value);
+                    return ucfirst($title ?: $value);
+                    // or if you want to translate some key
+                    //return 'form.choice.'.$key;
+                },
+            ])
+            ->add('applied', ChoiceType::class, [
+                'choices' => $this->commissionAppliedTypes,
+                'placeholder' => 'Choose applied',
+                'label' => false,
+                'choice_label' => function ($value, $key, $index) {
+                    $value_without_per = preg_replace('/per_(.*)/', "$1", $value);
+                    $title = preg_replace('/(.*)_(.*)/', "$1 $2", $value_without_per);
                     return ucfirst($title ?: $value);
                     // or if you want to translate some key
                     //return 'form.choice.'.$key;
