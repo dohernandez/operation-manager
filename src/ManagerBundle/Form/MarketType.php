@@ -60,19 +60,6 @@ class MarketType extends AbstractType
                 $market = $event->getData();
 
                 $formModifier($event->getForm(), $market->getRegion());
-
-                // This is defined here to add the commission table after the country, otherwise will be inserted
-                // before
-                $event->getForm()->add('commissions', CollectionType::class, [
-                    'entry_type' => CommissionType::class,
-                    'entry_options' => array('label' => false),
-                    'label' => false,
-                    'allow_add' => true,
-                    'allow_delete' => true,
-                    'by_reference' => false,
-                    'error_bubbling' => false,
-                    'prototype' => true,
-                ]);
             }
         );
 

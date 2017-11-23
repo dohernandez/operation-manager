@@ -35,13 +35,13 @@ class SetupKnpMenuListener
             'icon' => 'fa fa-bars',
         ]);
 
-        // Operation > Trader
+        // Operation > Brokers
         $this->addChildToParent($operationItem, [
-            'menu_item' => 'TraderMenuItem',
-            'label' => 'Traders',
-//            'route' => 'traders_index',
+            'menu_item' => 'OperationBrokerMenuItem',
+            'label' => 'Brokers',
+//            'route' => 'brokers_index',
             'child_options' => $event->getChildOptions(),
-            'icon' => 'fa fa-suitcase',
+            'icon' => 'fa fa-desktop',
         ]);
 
         return $menu;
@@ -58,7 +58,7 @@ class SetupKnpMenuListener
 
         // Finance > Transfer
         $this->addChildToParent($financeItem, [
-            'menu_item' => 'TransferMenuItem',
+            'menu_item' => 'FinanceTransferMenuItem',
             'label' => 'Transfers',
             'route' => 'transfers_index',
             'child_options' => $event->getChildOptions(),
@@ -66,7 +66,7 @@ class SetupKnpMenuListener
         ]);
         // Finance > Account
         $this->addChildToParent($financeItem, [
-            'menu_item' => 'AccountMenuItem',
+            'menu_item' => 'FinanceAccountMenuItem',
             'label' => 'Accounts',
             'route' => 'accounts_index',
             'child_options' => $event->getChildOptions(),
@@ -103,7 +103,7 @@ class SetupKnpMenuListener
 
         // Investor > Index
         $this->addChildToParent($managerItem, [
-            'menu_item' => 'MarketMenuItem',
+            'menu_item' => 'InvestorMarketMenuItem',
             'label' => 'Markets',
             'route' => 'markets_index',
             'child_options' => $event->getChildOptions(),
@@ -111,7 +111,7 @@ class SetupKnpMenuListener
         ]);
         // Investor > Index
         $this->addChildToParent($managerItem, [
-            'menu_item' => 'StockMenuItem',
+            'menu_item' => 'InvestorStockMenuItem',
             'label' => 'Stocks',
             'route' => 'stocks_index',
             'child_options' => $event->getChildOptions(),
@@ -119,7 +119,7 @@ class SetupKnpMenuListener
         ]);
         // Investor > Index
         $this->addChildToParent($managerItem, [
-            'menu_item' => 'CryptocurrencyMenuItem',
+            'menu_item' => 'InvestorCryptocurrencyMenuItem',
             'label' => 'Cryptocurrencies',
             'route' => 'cryptocurrencies_index',
             'child_options' => $event->getChildOptions(),
@@ -127,7 +127,7 @@ class SetupKnpMenuListener
         ]);
         // Investor > Broker
         $this->addChildToParent($managerItem, [
-            'menu_item' => 'BrokerMenuItem',
+            'menu_item' => 'InvestorBrokerMenuItem',
             'label' => 'Brokers',
             'route' => 'brokers_index',
             'child_options' => $event->getChildOptions(),

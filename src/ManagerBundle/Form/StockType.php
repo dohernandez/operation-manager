@@ -47,16 +47,6 @@ class StockType extends AbstractType
                     'rows' => '6',
                     'placeholder' => 'Enter description',
                 ],
-            ])
-            ->add('commissions', CollectionType::class, [
-                'entry_type' => CommissionType::class,
-                'entry_options' => array('label' => false),
-                'label' => false,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'error_bubbling' => false,
-                'prototype' => true,
             ]);
 
         $builder->addEventListener(

@@ -2,6 +2,8 @@
 
 namespace ManagerBundle\Entity\Property;
 
+use ManagerBundle\Entity\Commission;
+
 trait Commissions
 {
     /**
