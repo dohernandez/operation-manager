@@ -6,6 +6,7 @@ use ManagerBundle\Entity\Market;
 use ManagerBundle\Entity\Stock;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -46,6 +47,16 @@ class StockType extends AbstractType
                     'rows' => '6',
                     'placeholder' => 'Enter description',
                 ],
+            ])
+            ->add('commissions', CollectionType::class, [
+                'entry_type' => CommissionType::class,
+                'entry_options' => array('label' => false),
+                'label' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'error_bubbling' => false,
+                'prototype' => true,
             ]);
 
         $builder->addEventListener(

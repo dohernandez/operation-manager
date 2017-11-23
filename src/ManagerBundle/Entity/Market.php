@@ -12,6 +12,7 @@ class Market extends Entity
     use PropertyName;
     use PropertySymbol;
     use PropertyAlias;
+    use PropertyCommissions;
 
     /**
      * @var Country

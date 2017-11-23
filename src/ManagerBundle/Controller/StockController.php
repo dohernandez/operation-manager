@@ -78,7 +78,9 @@ class StockController extends CRUDController
             'page_subtitle' => 'create',
             'box_type' => 'success',
             'submit_type' => 'Create',
-        ]);
+            'form_theme' => 'ManagerBundle:stock:theme-form.html.twig',
+            'box_class' => 'col-md-10 col-md-offset-1',
+        ], 'ManagerBundle:stock:edit.form.html.twig');
     }
 
     /**
@@ -96,7 +98,9 @@ class StockController extends CRUDController
             'page_subtitle' => 'edit',
             'box_type' => 'primary',
             'submit_type' => 'Edit',
-        ]);
+            'form_theme' => 'ManagerBundle:stock:theme-form.html.twig',
+            'box_class' => 'col-md-10 col-md-offset-1',
+        ], 'ManagerBundle:stock:edit.form.html.twig');
     }
 
     /**

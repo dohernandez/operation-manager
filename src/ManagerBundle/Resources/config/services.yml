@@ -19,7 +19,7 @@ services:
 #        class: ManagerBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
 
-    ManagerBundle\Form\BrokerCommissionType:
+    ManagerBundle\Form\CommissionType:
             arguments: ["%commission_type%", "%commission_period%", "%commission_applied%"]
             tags: [form.type]
 

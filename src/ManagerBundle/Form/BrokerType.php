@@ -32,7 +32,7 @@ class BrokerType extends AbstractType
                 'label' => false,
             ])
             ->add('commissions', CollectionType::class, [
-                'entry_type' => BrokerCommissionType::class,
+                'entry_type' => CommissionType::class,
                 'entry_options' => array('label' => false),
                 'label' => false,
                 'allow_add' => true,
