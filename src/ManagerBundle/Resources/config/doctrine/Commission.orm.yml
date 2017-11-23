@@ -1,5 +1,18 @@
 ManagerBundle\Entity\Commission:
-    type: embeddable
+    type: entity
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    inheritanceType: SINGLE_TABLE
+    discriminatorColumn:
+        name: discr
+        type: string
+    discriminatorMap:
+        commission: ManagerBundle\Entity\Commission
+        stock_commission: ManagerBundle\Entity\StockCommission
     fields:
         name:
             type: string

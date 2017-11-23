@@ -32,9 +32,17 @@ ManagerBundle\Entity\Broker:
             joinColumn:
                 name: broker_type_id
                 referencedColumnName: id
-    oneToMany:
-        commissionTypes:
-            targetEntity: ManagerBundle\Entity\CommissionType
-            mappedBy: broker
+    manyToMany:
+        commissions:
+            targetEntity: ManagerBundle\Entity\Commission
             cascade: [ persist, merge, detach ]
             fetch: EXTRA_LAZY
+            joinTable:
+                name: broker_commission
+                joinColumns:
+                  discr_id: # reference (Broker, Market, Stock)
+                    referencedColumnName: id
+                inverseJoinColumns:
+                  commission_id:
+                    referencedColumnName: id
+                    unique: true

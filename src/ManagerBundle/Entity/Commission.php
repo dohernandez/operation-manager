@@ -2,14 +2,20 @@
 
 namespace ManagerBundle\Entity;
 
-class Commission
+class Commission extends Entity
 {
     use PropertyName;
+    use PropertyType;
 
     /**
      * @var bool
      */
     private $percentage;
+
+    /**
+     * @var string
+     */
+    private $period;
 
     /**
      * @var float
@@ -37,6 +43,26 @@ class Commission
     public function setPercentage(bool $percentage)
     {
         $this->percentage = $percentage;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPeriod(): string
+    {
+        return $this->period;
+    }
+
+    /**
+     * @param string $period
+     *
+     * @return Commission
+     */
+    public function setPeriod(string $period)
+    {
+        $this->period = $period;
 
         return $this;
     }

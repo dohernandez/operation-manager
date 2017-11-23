@@ -1,3 +1,15 @@
+parameters:
+    commission_period:
+      - daily
+      - monthy
+      - yearly
+    commission_type:
+      - buy
+      - sell
+      - custody
+      - initial_margin
+      - maintenance_margin
+
 services:
 #    manager.example:
 #        class: ManagerBundle\Example
@@ -8,9 +20,3 @@ services:
         arguments: ["@=container.get('doctrine').getManager().getRepository('ManagerBundle:Broker')"]
         tags:
             - { name: kernel.event_listener, event: crud.post_saved.Transfer, method: onSavedTransfer }
-
-    manager.commissiontype.saved.broker:
-        class: ManagerBundle\EventListener\SavedBroker\CommissionTypeListener
-        arguments: ["@=container.get('doctrine').getManager().getRepository('ManagerBundle:CommissionType')"]
-        tags:
-            - { name: kernel.event_listener, event: crud.post_saved.Broker, method: onSavedBroker }

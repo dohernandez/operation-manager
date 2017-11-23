@@ -32,15 +32,15 @@ class Broker extends Entity
     private $capital;
 
     /**
-     * @var ArrayCollection[CommissionType]
+     * @var ArrayCollection[Commission]
      */
-    private $commissionTypes;
+    private $commissions;
 
     public function __construct()
     {
         $this->investment = 0;
         $this->capital = 0;
-        $this->commissionTypes = new ArrayCollection();
+        $this->commissions = new ArrayCollection();
     }
 
     /**
@@ -176,49 +176,49 @@ class Broker extends Entity
     }
 
     /**
-     * @return ArrayCollection[CommissionType]
+     * @return ArrayCollection[Commission]
      */
-    public function getCommissionTypes()
+    public function getCommissions()
     {
-        return $this->commissionTypes;
+        return $this->commissions;
     }
 
     /**
-     * @param ArrayCollection[CommissionType] $commissionTypes
+     * @param ArrayCollection[Commission] $commissions
      *
      * @return Broker
      */
-    public function setCommissionTypes(ArrayCollection $commissionTypes)
+    public function setCommissions(ArrayCollection $commissions)
     {
-        $this->commissionTypes = $commissionTypes;
+        $this->commissions = $commissions;
 
         return $this;
     }
 
     /**
-     * @param CommissionType $commissionType
+     * @param Commission $commissionType
      *
      * @return Broker
      */
-    public function addCommissionType(CommissionType $commissionType)
+    public function addCommission(Commission $commissionType)
     {
-        if (!$this->commissionTypes->contains($commissionType)) {
+        if (!$this->commissions->contains($commissionType)) {
             $commissionType->setBroker($this);
 
-            $this->commissionTypes->add($commissionType);
+            $this->commissions->add($commissionType);
         }
 
         return $this;
     }
 
     /**
-     * @param CommissionType $commissionType
+     * @param Commission $commissionType
      *
      * @return Broker
      */
-    public function removeCommissionType(CommissionType $commissionType)
+    public function removeCommission(Commission $commissionType)
     {
-        $this->commissionTypes->removeElement($commissionType);
+        $this->commissions->removeElement($commissionType);
 
         return $this;
     }
