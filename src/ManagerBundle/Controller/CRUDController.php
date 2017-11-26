@@ -18,7 +18,7 @@ abstract class CRUDController extends Controller
      *
      * @param array $fields
      *      {
-     *          'render': <value>, (text| ManagerBundle:Macros:render.html.twig)
+     *          'render': <value>, default(text) -> ManagerBundle:Macros:render.html.twig
      *          'name': <value>, # required
      *          'label': <value>,
      *          'col_with': <value>,
@@ -34,6 +34,17 @@ abstract class CRUDController extends Controller
      *
      * @param array $entities
      * @param array $options
+     *      [
+     *          'extra_buttons': [
+     *              {
+     *                  'route': '<value>', should depends on the id
+     *                  'action': '<value>', default(view)
+     *                  'type': '<value>', default(info)
+     *                  'icon': '<value>', default(eye)
+     *                  'modal': '<value>', default(1)
+     *              },
+     *          ]
+     *      ]
      * @param string $view
      *
      * @return Response
@@ -125,12 +136,11 @@ abstract class CRUDController extends Controller
 
         return $this->render($view, [
             'form' => $form->createView(),
-            'page_title' => $options['page_title'],
             'cancel_url' => $this->getEntityCRUDUrl('cancel'),
         ] + $options);
     }
 
-    private function dispatch(string $eventName, CRUDEvent $event)
+    protected function dispatch(string $eventName, CRUDEvent $event)
     {
         if ($this->container->has('event_dispatcher')) {
             $dispatcher = $this->get('event_dispatcher');

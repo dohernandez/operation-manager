@@ -3,22 +3,23 @@
 namespace ManagerBundle\Entity\Property;
 
 use ManagerBundle\Entity\Market;
+use Doctrine\Common\Collections\ArrayCollection;
 
 trait Markets
 {
     /**
-     * @var Market
+     * @var ArrayCollection[Market]
      */
     protected $markets;
 
     /**
      * Set markets
      *
-     * @param Market $markets
+     * @param ArrayCollection[Market] $markets
      *
      * @return Entity
      */
-    public function setMarkets(Market $markets)
+    public function setMarkets(ArrayCollection $markets)
     {
         $this->markets = $markets;
 
@@ -28,7 +29,7 @@ trait Markets
     /**
      * Get markets
      *
-     * @return Market
+     * @return ArrayCollection[Market]
      */
     public function getMarkets()
     {

@@ -3,22 +3,23 @@
 namespace ManagerBundle\Entity\Property;
 
 use ManagerBundle\Entity\Commission;
+use Doctrine\Common\Collections\ArrayCollection;
 
 trait Commissions
 {
     /**
-     * @var Commission
+     * @var ArrayCollection[Commission]
      */
     protected $commissions;
 
     /**
      * Set commissions
      *
-     * @param Commission $commissions
+     * @param ArrayCollection[Commission] $commissions
      *
      * @return Entity
      */
-    public function setCommissions(Commission $commissions)
+    public function setCommissions(ArrayCollection $commissions)
     {
         $this->commissions = $commissions;
 
@@ -28,7 +29,7 @@ trait Commissions
     /**
      * Get commissions
      *
-     * @return Commission
+     * @return ArrayCollection[Commission]
      */
     public function getCommissions()
     {

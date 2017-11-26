@@ -16,21 +16,6 @@
             </div>
         </div>
     </div>
-    {% embed 'ManagerBundle:Modal:modal.html.twig' with {
-    'dialog' : 'confirm-delete-dialog',
-    'request' : 'true',
-    'modal_id' : 'modal-delete'
-    } %}
-    {% endembed %}
-
-    {% if show_route is defined %}
-    {% embed 'ManagerBundle:Modal:modal.html.twig' with {
-    'dialog' : 'loading-dialog',
-    'modal_id' : 'modal-show'
-    } %}
-    {% endembed %}
-    {% endif %}
-
 {% endblock %}
 
 {% block avanzu_javascripts_inline %}
@@ -69,7 +54,7 @@
                 });
         });
 
-        {% if show_route is defined %}
+        {% if extra_buttons is defined %}
         $(document).ready(function(){
             $("#modal-show").on("show.bs.modal", function(e) {
                 $("#modal-show .modal-content")

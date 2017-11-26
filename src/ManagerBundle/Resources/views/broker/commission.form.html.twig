@@ -1,0 +1,21 @@
+{% extends 'ManagerBundle:Layout:edit.form.html.twig' %}
+
+
+{% block avanzu_head %}
+    {{ parent() }}
+
+    {% include 'ManagerBundle:commission:_header.form.html.twig' with {'entity': 'broker_markets'} %}
+{% endblock %}
+
+{% block avanzu_javascripts_inline %}
+    {{ parent() }}
+
+    <script>
+        // keep track of how many email fields have been rendered
+        var count = '{{ form.commissions|length }}';
+    </script>
+    {% include 'ManagerBundle:commission:_scripts.form.html.twig' with {
+        'entity': 'broker_markets',
+        '': ''
+    } %}
+{% endblock %}

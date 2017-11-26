@@ -10,12 +10,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Broker extends Entity
 {
     use Property\Name;
+    use Property\Type;
     use Property\Commissions;
-
-    /**
-     * @var BrokerType
-     */
-    protected $type;
+    use Property\Markets;
 
     /**
      * @var Account
@@ -37,30 +34,7 @@ class Broker extends Entity
         $this->investment = 0;
         $this->capital = 0;
         $this->commissions = new ArrayCollection();
-    }
-
-    /**
-     * Set type
-     *
-     * @param BrokerType $type
-     *
-     * @return Broker
-     */
-    public function setType(BrokerType $type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return BrokerType
-     */
-    public function getType()
-    {
-        return $this->type;
+        $this->markets = new ArrayCollection();
     }
 
     /**

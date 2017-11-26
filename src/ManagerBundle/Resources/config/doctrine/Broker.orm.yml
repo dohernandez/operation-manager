@@ -13,6 +13,9 @@ ManagerBundle\Entity\Broker:
             type: string
             length: 255
             unique: true
+        type:
+            type: string
+            length: 255
         investment:
             type: float
         capital:
@@ -25,13 +28,6 @@ ManagerBundle\Entity\Broker:
           joinColumn:
             name: account_id
             referencedColumnName: id
-    manyToOne:
-        type:
-            targetEntity: ManagerBundle\Entity\BrokerType
-            inversedBy: brokers
-            joinColumn:
-                name: broker_type_id
-                referencedColumnName: id
     manyToMany:
         commissions:
             targetEntity: ManagerBundle\Entity\Commission
@@ -46,3 +42,14 @@ ManagerBundle\Entity\Broker:
                   commission_id:
                     referencedColumnName: id
                     unique: true
+        markets:
+            targetEntity: ManagerBundle\Entity\Market
+            fetch: EXTRA_LAZY
+            joinTable:
+                name: broker_market
+                joinColumns:
+                  broker_id:
+                    referencedColumnName: id
+                inverseJoinColumns:
+                  market_id:
+                    referencedColumnName: id

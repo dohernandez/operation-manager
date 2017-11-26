@@ -102,7 +102,7 @@ class CommissionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'ManagerBundle\Entity\Commission'
+            'data_class' => 'ManagerBundle\Entity\Commission',
         ]);
     }
 
@@ -111,6 +111,6 @@ class CommissionType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'managerbundle_commissions';
+        return 'managerbundle_commission';
     }
 }

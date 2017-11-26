@@ -3,9 +3,10 @@
 namespace ManagerBundle\Form;
 
 use ManagerBundle\Entity\Broker;
+use ManagerBundle\Entity\Market;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -15,6 +16,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class BrokerType extends AbstractType
 {
     /**
+     * @var array
+     */
+    private $brokerTypes;
+
+    /**
+     * @param array $brokerTypes
+     */
+    public function __construct(array $brokerTypes)
+    {
+        $this->brokerTypes = $brokerTypes;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -23,24 +37,52 @@ class BrokerType extends AbstractType
             'attr' => [
                 'placeholder' => 'Enter name',
             ],
-        ])
-            ->add('type', EntityType::class, [
-                'class'   => \ManagerBundle\Entity\BrokerType::class,
-                'placeholder' => 'Choose type',
-            ])
-            ->add('account', AccountType::class, [
-                'label' => false,
-            ])
-            ->add('commissions', CollectionType::class, [
-                'entry_type' => CommissionType::class,
-                'entry_options' => array('label' => false),
-                'label' => false,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'error_bubbling' => false,
-                'prototype' => true,
-            ]);
+        ]);
+
+        $brokerTypes = $this->brokerTypes;
+
+        // the rest of the form is build into the FormEvents::PRE_SET_DATA due we want to disable the choice type
+        // when the broker exists.
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event) use ($brokerTypes) {
+                $disabled = false;
+
+                /** @var Broker $broker */
+                $broker = $event->getData();
+                if (!empty($broker->getId())) {
+                    $disabled = true;
+                }
+
+                $form = $event->getForm();
+
+                $form->add('type', ChoiceType::class, [
+                    'choices'      => $brokerTypes,
+                    'placeholder'  => 'Choose type',
+                    'choice_label' => function ($value, $key, $index) {
+                        return ucfirst($value);
+                        // or if you want to translate some key
+                        //return 'form.choice.'.$key;
+                    },
+                    'disabled'     => $disabled,
+                ])->add('account', AccountType::class, [
+                    'label' => false,
+                ]);
+
+                if ($broker->getType() != 'cryptocurrencies') {
+                    $form->add('markets', EntityType::class, [
+                        'class'   => Market::class,
+                        'choice_label' => 'alias',
+                        'placeholder' => 'Choose a market',
+                        'multiple' => true,
+                        'group_by' => 'region',
+                        'attr' => [
+                            'class' => 'select2 select2-multiple'
+                        ]
+                    ]);
+                }
+            }
+        );
 
         $builder->addEventListener(
             FormEvents::PRE_SUBMIT,
@@ -52,7 +94,7 @@ class BrokerType extends AbstractType
             }
         );
     }
-    
+
     /**
      * {@inheritdoc}
      */

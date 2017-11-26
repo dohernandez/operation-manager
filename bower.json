@@ -1,0 +1,14 @@
+{
+  "name": "operation-manager",
+  "homepage": "https://github.com/dohernandez/operation-manager",
+  "description": "Application to manager operation in stock markets.",
+  "authors": [
+    "Darien Hernandez <dohernandez@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "bootstrap-multiselect": "^0.9.13",
+    "multiselect": "^0.9.12"
+  }
+}

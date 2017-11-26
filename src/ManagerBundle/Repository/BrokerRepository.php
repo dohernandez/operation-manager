@@ -2,6 +2,7 @@
 
 namespace ManagerBundle\Repository;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use ManagerBundle\Entity\Account;
 use ManagerBundle\Entity\Broker;
 
@@ -23,5 +24,19 @@ class BrokerRepository extends CRUDRepository
         return $this->findOneBy([
             'account' => $account
         ]);
+    }
+
+    /**
+     * @param ArrayCollection[Commission] $commissions
+     */
+    public function saveCommissions(ArrayCollection $commissions): void
+    {
+        $em = $this->getEntityManager();
+        dump($commissions);die();
+        foreach ($commissions as $commission) {
+            $em->persist($commission);
+        }
+
+        $em->flush();
     }
 }

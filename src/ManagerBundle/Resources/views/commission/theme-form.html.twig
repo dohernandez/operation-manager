@@ -4,8 +4,9 @@
     {%- if prototype is defined -%}
         {%- set attr = attr|merge({'data-prototype': form_row(prototype) }) -%}
     {%- endif -%}
-    <div class="commissions-box-body" {{ block('widget_container_attributes') }}>
-        <h4 class="with-border">Commissions</h4>
+    <div class="commissions-box-body" {{ block('widget_container_attributes') }} data-commissions="{{ form.children()|length }}">
+
+        <h4 class="with-border">{{ form_table_title|default('Commissions') }}</h4>
         <table class="table">
             <thead>
                 <th>{{ 'name'|title }}</th>
@@ -25,7 +26,7 @@
                 {%- endspaceless -%}
             </tbody>
         </table>
-        <button id="add-commissions" type="button" class="btn btn-default btn-rounded pull-right">Add commission</button>
+        <button type="button" class="add-commission btn btn-default btn-rounded pull-right">Add commissions</button>
     </div>
 {%- endblock -%}
 

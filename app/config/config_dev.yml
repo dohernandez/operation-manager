@@ -46,3 +46,4 @@ assetic:
 # Twig Configuration
 twig:
   cache: false
+  debug: true

@@ -1,0 +1,18 @@
+<div class="box {% if box_type %}box-{{ box_type|default('info') }}{% endif %}">
+    <div class="box-header with-border">
+        <h3 class="box-title">{{ block('box_title') }}</h3>
+    </div>
+    <!-- /.box-header -->
+    {% if block('_box') is defined %}
+        {{ block('_box') }}
+    {% else %}
+        <div class="box-body">
+            {{ block('box_body') }}
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            {{ block('box_footer') }}
+        </div>
+        <!-- /.box-footer -->
+    {% endif %}
+</div>

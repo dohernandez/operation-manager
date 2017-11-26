@@ -45,7 +45,11 @@ class StockController extends CRUDController
             ],
             $stocks,
             [
-                'show_route' => $this->getEntityCRUDRoute('show')
+                'extra_buttons' => [
+                    [
+                        'route'  => $this->getEntityCRUDRoute('show'),
+                    ],
+                ],
             ]
         );
     }

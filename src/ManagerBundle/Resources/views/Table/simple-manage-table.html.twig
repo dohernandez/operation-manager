@@ -1,11 +1,12 @@
 {% import 'ManagerBundle:Macros:render.html.twig' as render %}
 
+{% set modal = null %}
 <table id="{{ entity_type|lower|trim(' ') }}s" class="table table-bordered">
     <thead>
     <tr>
         <th width="60" class="text-center" scope="col">#</th>
         {% include 'ManagerBundle:Table:head-field-table.html.twig' %}
-        <th width="{% if show_route is defined %}122{% else %}100{% endif %}" scope="col">MANAGE</th>
+        <th width="{% if extra_buttons is defined %}{{ extra_buttons|length * 22 + 100 }}{% else %}100{% endif %}" scope="col">MANAGE</th>
     </tr>
     </thead>
     <tbody>
@@ -18,11 +19,23 @@
                 </td>
             {% endfor %}
             <td>
-                {% if show_route is defined %}
-                    <button type="button"  data-href="{{ path(show_route, { 'id': item.id }) }}" class="entity-view btn btn-info btn-sm pull-left"
-                            data-toggle="modal" data-target="#modal-show">
-                        <i class="fa-eye fa" aria-hidden="true"></i>
-                    </button>
+                {% if extra_buttons is defined %}
+                    {% for button in extra_buttons %}
+                        {% if not modal %}{% set modal = button.modal|default(1) %}{% endif %}
+
+                        {% if button.modal is not defined or button.modal %}
+                            <button type="button"  data-href="{{ path(button.route, { 'id': item.id }) }}"
+                                    class="entity-{{ button.action|default('view') }} btn btn-{{ button.type|default('info') }} btn-sm pull-left"
+                                    data-toggle="modal" data-target="#modal-show">
+                                <i class="fa-{{ button.icon|default('eye') }} fa" aria-hidden="true"></i>
+                            </button>
+                        {% else %}
+                            <a href="{{ path(button.route, { 'id': item.id }) }}"
+                               class="entity-{{ button.action|default('view') }} btn btn-{{ button.type|default('info') }} btn-sm pull-left">
+                                <i class="fa-{{ button.icon|default('eye') }} fa" aria-hidden="true"></i>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
                 {% endif %}
                 <a href="{{ path(edit_route, { 'id': item.id }) }}"  style="margin-left: 3px"
                    class="btn btn-primary btn-sm pull-left">
@@ -42,3 +55,18 @@
     {% endfor %}
     </tbody>
 </table>
+
+{% embed 'ManagerBundle:Modal:modal.html.twig' with {
+'dialog' : 'confirm-delete-dialog',
+'request' : 'true',
+'modal_id' : 'modal-delete'
+} %}
+{% endembed %}
+
+{% if modal %}
+    {% embed 'ManagerBundle:Modal:modal.html.twig' with {
+    'dialog' : 'loading-dialog',
+    'modal_id' : 'modal-show'
+    } %}
+    {% endembed %}
+{% endif %}

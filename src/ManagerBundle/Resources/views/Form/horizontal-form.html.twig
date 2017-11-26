@@ -1,14 +1,10 @@
 {% set _form_theme = form_theme|default('ManagerBundle:Form:horizontal-theme-form.html.twig') %}
 {% form_theme form _form_theme %}
 
-<!-- Horizontal Form -->
-<div class="box {% if box_type %}box-{{ box_type|default('info') }}{% endif %}">
-    <div class="box-header with-border">
-        <h3 class="box-title">{{ block('box_title') }}</h3>
-    </div>
-    <!-- /.box-header -->
-    <!-- form start -->
-    {{ form_start(form, {'attr': {'id': 'entity-form', 'class': 'form-horizontal'}}) }}
+{% embed 'ManagerBundle:Layout:box.html.twig'%}
+    {% block box_title %}{{ box_title }}{% endblock %}
+    {% block _box %}
+        {{ form_start(form, {'attr': {'id': 'entity-form', 'class': 'form-horizontal'}}) }}
         <div class="box-body">
             {{ form_widget(form) }}
         </div>
@@ -20,5 +16,6 @@
             </button>
         </div>
         <!-- /.box-footer -->
-    {{ form_end(form) }}
-</div>
+        {{ form_end(form) }}
+    {% endblock %}
+{% endembed %}
