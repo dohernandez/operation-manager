@@ -1,15 +1,18 @@
 parameters:
-    commission_period:
-      - only_one
-      - daily
-      - monthy
-      - yearly
+    broker_type:
+      - stocks
+      - cryptocurrencies
     commission_type:
       - buy
       - sell
       - custody
       - initial_margin
       - maintenance_margin
+    commission_period:
+      - only_one
+      - daily
+      - monthy
+      - yearly
     commission_applied:
       - per_stock
       - per_amount
@@ -18,6 +21,13 @@ services:
 #    manager.example:
 #        class: ManagerBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    ManagerBundle\Twig\ManagerExtension:
+            tags: [twig.extension]
+
+    ManagerBundle\Form\BrokerType:
+            arguments: ["%broker_type%"]
+            tags: [form.type]
 
     ManagerBundle\Form\CommissionType:
             arguments: ["%commission_type%", "%commission_period%", "%commission_applied%"]
