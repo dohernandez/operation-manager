@@ -7,8 +7,5 @@
   ],
   "license": "MIT",
   "private": true,
-  "dependencies": {
-    "bootstrap-multiselect": "^0.9.13",
-    "multiselect": "^0.9.12"
-  }
+  "dependencies": {}
 }

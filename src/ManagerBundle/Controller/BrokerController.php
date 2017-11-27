@@ -72,7 +72,8 @@ class BrokerController extends CRUDController
             'box_type' => 'success',
             'submit_type' => 'Create',
             'form_theme' => 'ManagerBundle:broker:theme-form.html.twig',
-        ], 'ManagerBundle:broker:edit.form.html.twig');
+            'box_class' => 'col-md-10 col-md-offset-1',
+        ], 'ManagerBundle:broker:new.form.html.twig');
     }
 
     /**
@@ -85,13 +86,25 @@ class BrokerController extends CRUDController
      */
     public function editAction(Request $request, Broker $broker): Response
     {
+        $cryptoBox = [];
+        $view = 'ManagerBundle:broker:edit.form.html.twig';
+
+        if ($broker->getType() == 'cryptocurrencies') {
+            $cryptoBox = [
+                'commission_parent' => 'broker'
+            ];
+
+            $view = 'ManagerBundle:broker:edit.crypto.form.html.twig';
+        }
+
         return $this->edit($request, $broker, [
             'page_title' => 'Manage broker',
             'page_subtitle' => 'edit',
             'box_type' => 'primary',
             'submit_type' => 'Edit',
             'form_theme' => 'ManagerBundle:broker:theme-form.html.twig',
-        ], 'ManagerBundle:broker:edit.form.html.twig');
+            'box_class' => 'col-md-10 col-md-offset-1',
+        ] + $cryptoBox, $view);
     }
 
     /**

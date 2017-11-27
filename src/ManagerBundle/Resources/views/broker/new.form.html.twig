@@ -5,36 +5,44 @@
 
     {% include 'ManagerBundle:broker:_header.form.html.twig' %}
 
+    <!-- bootstrap multiselect -->
     <link rel="stylesheet" href="{{ asset('theme/plugins/select2/select2.min.css') }}">
+
+    {% include 'ManagerBundle:commission:_header.form.html.twig' with {
+        'entity': 'broker'
+    } %}
 {% endblock %}
 
 {% block avanzu_javascripts_inline %}
     {{ parent() }}
+
+    {% include 'ManagerBundle:commission:_scripts.form.html.twig' with {
+        'entity': 'broker'
+    } %}
+
     <!-- bootstrap multiselect -->
     <script src="{{ asset('theme/plugins/select2/select2.min.js') }}"></script>
+
+    {% include 'ManagerBundle:broker:_scripts.form.html.twig' %}
+
     <script>
         $(document).ready(function () {
-            var $markets = $('#managerbundle_broker_markets');
-            $markets.select2();
+            var $commissions = $('#managerbundle_broker_commissions');
 
             var $type = $('#managerbundle_broker_type');
 
             if (!$type.val()) {
-                $markets.prop('required', false);
-                $markets.parent().parent().hide();
+                $commissions.parent().hide();
             }
 
             // When region gets selected ...
             $type.change(function() {
-                if (this.value == 'stocks') {
-                    $markets.prop('required', true);
-                    $markets.parent().parent().show();
+                if (this.value == 'cryptocurrencies') {
+                    $commissions.parent().show();
                 } else {
-                    // unselect all
-                    $markets.val('').trigger("change");
-
-                    $markets.prop('required', false);
-                    $markets.parent().parent().hide();
+                    // remove all commissions added
+                    $commissions.find('table tbody tr').remove()
+                    $commissions.parent().hide();
                 }
             });
         });

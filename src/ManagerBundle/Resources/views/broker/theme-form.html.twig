@@ -7,6 +7,20 @@
     </div>
 {%- endblock -%}
 
+{# Broker commissions #}
+
+{%- block _managerbundle_broker_commissions_widget -%}
+    {{ block('commissions_widget', 'ManagerBundle:commission:theme-form.html.twig') }}
+{%- endblock -%}
+
+{%- block _managerbundle_broker_commissions_entry_row -%}
+    {{ block('commissions_entry_row', 'ManagerBundle:commission:theme-form.html.twig') }}
+{%- endblock -%}
+
+
+
+{# Market commissions #}
+
 {%- block _managerbundle_broker_markets_widget -%}
     {%- if form.vars.value is instanceof("Doctrine\\ORM\\PersistentCollection") -%}
         <div class="col-sm-12">

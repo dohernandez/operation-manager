@@ -7,6 +7,7 @@ use ManagerBundle\Entity\Market;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -79,6 +80,19 @@ class BrokerType extends AbstractType
                         'attr' => [
                             'class' => 'select2 select2-multiple'
                         ]
+                    ]);
+                }
+
+                if (!$disabled || $broker->getType() == 'cryptocurrencies') {
+                    $form->add('commissions', CollectionType::class, [
+                        'entry_type'     => CommissionType::class,
+                        'entry_options'  => array('label' => false),
+                        'label'          => false,
+                        'allow_add'      => true,
+                        'allow_delete'   => true,
+                        'by_reference'   => false,
+                        'error_bubbling' => false,
+                        'prototype'      => true,
                     ]);
                 }
             }

@@ -4,6 +4,8 @@
             var $commissions = $(this).closest('div.commissions-box-body');
             var $table = $commissions.find('table');
 
+            console.log($commissions)
+
             $(this).click(function(e) {
                 e.preventDefault();
 
@@ -24,12 +26,12 @@
                     addCommissionFormDeleteLink($(this));
                 });
             });
-        });
 
-        {#// add a delete link to all of the existing tag form div elements#}
-        {#commissions.find('tr .entry-buttons').each(function() {#}
-            {#addCommissionFormDeleteLink($(this));#}
-        {#});#}
+            // add a delete link to all of the existing tag form div elements
+            $table.find('tr .entry-buttons').each(function() {
+                addCommissionFormDeleteLink($(this));
+            });
+        });
     });
 
     function addCommissionFormDeleteLink($widget) {

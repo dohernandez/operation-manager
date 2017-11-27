@@ -24,14 +24,14 @@ ManagerBundle\Entity\Broker:
     oneToOne:
         account:
           targetEntity: ManagerBundle\Entity\Account
-          cascade: [ persist, merge, detach ]
+          cascade: [ persist, merge, detach, remove ]
           joinColumn:
             name: account_id
             referencedColumnName: id
     manyToMany:
         commissions:
             targetEntity: ManagerBundle\Entity\Commission
-            cascade: [ persist, merge, detach ]
+            cascade: [ persist, merge, detach, remove ]
             fetch: EXTRA_LAZY
             joinTable:
                 name: broker_commission
