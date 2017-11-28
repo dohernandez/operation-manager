@@ -41,7 +41,7 @@ ManagerBundle\Entity\Market:
     manyToMany:
         commissions:
             targetEntity: ManagerBundle\Entity\MarketCommission
-            cascade: [ persist, merge, detach ]
+            cascade: [ persist, merge, detach, remove ]
             fetch: EXTRA_LAZY
             joinTable:
                 name: market_commission

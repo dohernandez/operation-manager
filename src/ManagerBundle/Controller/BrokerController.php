@@ -146,13 +146,16 @@ class BrokerController extends CRUDController
      */
     public function commissionsAction(Request $request, Broker $broker): Response
     {
-        $form = $this->createForm('ManagerBundle\Form\BrokerMarketCommissionType', $broker);
+        $form = $this->createForm('ManagerBundle\Form\BrokerMarketCommissionsType', $broker);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            foreach ($broker->getMarkets() as $market) {
-                $this->getEntityRepository()->saveCommissions($market->getCommissions());
-            }
+//            $this->getDoctrine()->getManager()->clear();
+//            foreach ($broker->getMarkets() as $market) {
+//
+//            }
+//            dump($broker);die();
+            $this->getEntityRepository()->save($broker);
 
             return $this->redirectToRoute($this->getEntityCRUDRoute('index'));
         }

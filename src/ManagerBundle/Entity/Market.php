@@ -96,6 +96,26 @@ class Market extends Entity
     }
 
     /**
+     * @param MarketCommission $commission
+     *
+     * @return Market
+     */
+    public function addMarketCommission(MarketCommission $commission)
+    {
+        return $this->addCommission($commission);
+    }
+
+    /**
+     * @param MarketCommission $commission
+     *
+     * @return Market
+     */
+    public function removeMarketCommission(MarketCommission $commission)
+    {
+        return $this->removeCommission($commission);
+    }
+
+    /**
      * @return string
      */
     public function __toString()
