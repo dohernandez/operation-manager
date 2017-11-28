@@ -1,0 +1,38 @@
+ManagerBundle\Entity\Trade:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        type:
+            type: string
+            length: 255
+        tradedAt:
+            type: date
+        price:
+            type: float
+        order:
+            type: float
+        glide:
+            type: float
+        commissions:
+            type: float
+        expenses:
+            type: float
+    lifecycleCallbacks: {  }
+    manyToOne:
+        stock:
+            targetEntity: ManagerBundle\Entity\Stock
+            joinColumn:
+                name: stock_id
+                referencedColumnName: id
+        operation:
+            targetEntity: ManagerBundle\Entity\Operation
+            inversedBy: trades
+            joinColumn:
+                name: operation_id
+                referencedColumnName: id

@@ -9,16 +9,12 @@ class Country extends Entity
 {
     use Property\Name;
     use Property\ISO;
+    use Property\Region;
 
     /**
      * @var string
      */
     private $niceName;
-
-    /**
-     * @var Region
-     */
-    private $region;
 
     /**
      * @return string
@@ -38,26 +34,6 @@ class Country extends Entity
         $this->niceName = $niceName;
 
         return $this;
-    }
-
-    /**
-     * @param Region $region
-     *
-     * @return Country
-     */
-    public function setRegion(Region $region)
-    {
-        $this->region = $region;
-
-        return $this;
-    }
-
-    /**
-     * @return Region
-     */
-    public function getRegion()
-    {
-        return $this->region;
     }
 
     /**

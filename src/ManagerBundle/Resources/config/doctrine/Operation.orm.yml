@@ -1,0 +1,49 @@
+ManagerBundle\Entity\Operation:
+    type: entity
+    table: null
+    repositoryClass: ManagerBundle\Repository\OperationRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        type:
+            type: string
+            length: 255
+        goal:
+            type: float
+        stop:
+            type: float
+        start:
+            type: float
+        breakeven:
+            type: float
+        earnings:
+            type: float
+        commissions:
+            type: float
+        benefits:
+            type: float
+        taxes:
+            type: float
+        benefitsAfterTaxes:
+            type: float
+        openedAt:
+            type: date
+        closedAt:
+            type: date
+    lifecycleCallbacks: {  }
+    oneToMany:
+        trades:
+            targetEntity: ManagerBundle\Entity\Trade
+            mappedBy: operation
+            cascade: [ persist, merge, detach, remove ]
+            fetch: EXTRA_LAZY
+    manyToOne:
+        stock:
+            targetEntity: ManagerBundle\Entity\Stock
+            joinColumn:
+                name: stock_id
+                referencedColumnName: id

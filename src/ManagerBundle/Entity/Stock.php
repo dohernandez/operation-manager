@@ -13,16 +13,12 @@ class Stock extends Entity
     use Property\Alias;
     use Property\Description;
     use Property\Commissions;
+    use Property\Market;
 
     /**
      * @var string
      */
     private $company;
-
-    /**
-     * @var Market
-     */
-    private $market;
 
     public function __construct()
     {
@@ -51,26 +47,6 @@ class Stock extends Entity
     public function getCompany()
     {
         return $this->company;
-    }
-
-    /**
-     * @return Market
-     */
-    public function getMarket()
-    {
-        return $this->market;
-    }
-
-    /**
-     * @param Market $market
-     *
-     * @return Stock
-     */
-    public function setMarket(Market $market)
-    {
-        $this->market = $market;
-
-        return $this;
     }
 
     /**

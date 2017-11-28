@@ -12,7 +12,6 @@ class Broker extends Entity
     use Property\Name;
     use Property\Type;
     use Property\Commissions;
-    use Property\Markets;
 
     /**
      * @var Account
@@ -28,6 +27,11 @@ class Broker extends Entity
      * @var float
      */
     private $capital;
+
+    /**
+     * @var ArrayCollection[Market]
+     */
+    protected $markets;
 
     public function __construct()
     {
@@ -141,6 +145,54 @@ class Broker extends Entity
     public function decreaseCapital(float $capital)
     {
         $this->capital -= $capital;
+
+        return $this;
+    }/**
+ * Set markets
+ *
+ * @param ArrayCollection[Market] $markets
+ *
+ * @return Entity
+ */
+    public function setMarkets(ArrayCollection $markets)
+    {
+        $this->markets = $markets;
+
+        return $this;
+    }
+
+    /**
+     * Get markets
+     *
+     * @return ArrayCollection[Market]
+     */
+    public function getMarkets()
+    {
+        return $this->markets;
+    }
+
+    /**
+     * @param Market $market
+     *
+     * @return Entity
+     */
+    public function addMarket(Market $market)
+    {
+        if (!$this->markets->contains($market)) {
+            $this->markets->add($market);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Market $market
+     *
+     * @return Entity
+     */
+    public function removeMarket(Market $market)
+    {
+        $this->markets->removeElement($market);
 
         return $this;
     }
