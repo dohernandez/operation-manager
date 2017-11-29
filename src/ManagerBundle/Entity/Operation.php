@@ -2,6 +2,7 @@
 
 namespace ManagerBundle\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class Operation extends Entity

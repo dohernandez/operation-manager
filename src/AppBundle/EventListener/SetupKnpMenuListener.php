@@ -18,27 +18,31 @@ class SetupKnpMenuListener
             ]
         )->setAttribute('class', 'header');
 
-        // Operation
-        $menu = $this->addOperationMenu($menu, $event);
+        // Trading
+        $menu = $this->addTradingMenu($menu, $event);
         // Finance
         $menu = $this->addFinanceMenu($menu, $event);
-        // Investor
-        $this->addInvestorMenu($menu, $event);
+        // Brokers
+        $this->addBrokersMenu($menu, $event);
+        // Markets
+        $this->addMarketsMenu($menu, $event);
+        // Products
+        $this->addProductsMenu($menu, $event);
     }
 
-    private function addOperationMenu(MenuItem $menu, KnpMenuEvent $event)
+    private function addTradingMenu(MenuItem $menu, KnpMenuEvent $event)
     {
         $operationItem = $this->addChildToParent($menu, [
-            'menu_item' => 'OperationMenuItem',
-            'label' => 'Operation',
+            'menu_item' => 'TradingMenuItem',
+            'label' => 'Trading',
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-bars',
         ]);
 
         // Operation > Brokers
         $this->addChildToParent($operationItem, [
-            'menu_item' => 'OperationBrokerMenuItem',
-            'label' => 'Brokers',
+            'menu_item' => 'TradingOperationMenuItem',
+            'label' => 'Operations',
 //            'route' => 'brokers_index',
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-desktop',
@@ -92,46 +96,81 @@ class SetupKnpMenuListener
         )->setLabelAttribute('icon',  $child['icon']);
     }
 
-    private function addInvestorMenu(MenuItem $menu, KnpMenuEvent $event)
+    private function addMarketsMenu(MenuItem $menu, KnpMenuEvent $event)
     {
         $managerItem = $this->addChildToParent($menu, [
-            'menu_item' => 'InvestorMenuItem',
-            'label' => 'Investor',
+            'menu_item' => 'MarketsMenuItem',
+            'label' => 'Markets',
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-bars',
         ]);
 
-        // Investor > Index
+        // Markets > Stock
         $this->addChildToParent($managerItem, [
-            'menu_item' => 'InvestorMarketMenuItem',
-            'label' => 'Markets',
-            'route' => 'markets_index',
+            'menu_item' => 'MarketsStockMarketMenuItem',
+            'label' => 'Stocks',
+//            'route' => 'markets_index',
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-industry',
         ]);
-        // Investor > Index
+        // Markets > Cryptocurrencies
         $this->addChildToParent($managerItem, [
-            'menu_item' => 'InvestorStockMenuItem',
-            'label' => 'Stocks',
-            'route' => 'stocks_index',
-            'child_options' => $event->getChildOptions(),
-            'icon' => 'fa fa-bar-chart',
-        ]);
-        // Investor > Index
-        $this->addChildToParent($managerItem, [
-            'menu_item' => 'InvestorCryptocurrencyMenuItem',
+            'menu_item' => 'MarketsCryptocurrencyMarketMenuItem',
             'label' => 'Cryptocurrencies',
-            'route' => 'cryptocurrencies_index',
+//            'route' => 'stocks_index',
             'child_options' => $event->getChildOptions(),
-            'icon' => 'fa fa-bar-chart',
+            'icon' => 'fa fa-industry',
         ]);
-        // Investor > Broker
-        $this->addChildToParent($managerItem, [
-            'menu_item' => 'InvestorBrokerMenuItem',
+
+        return $menu;
+    }
+
+    private function addBrokersMenu(MenuItem $menu, KnpMenuEvent $event)
+    {
+        $managerItem = $this->addChildToParent($menu, [
+            'menu_item' => 'BrokerMenuItem',
             'label' => 'Brokers',
-            'route' => 'brokers_index',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-bars',
+        ]);
+
+        // Brokers > Index
+        $this->addChildToParent($managerItem, [
+            'menu_item' => 'BrokersBrokersMenuItem',
+            'label' => 'Brokers',
+//            'route' => 'stocks_index',
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-desktop',
+        ]);
+
+        return $menu;
+    }
+
+    private function addProductsMenu(MenuItem $menu, KnpMenuEvent $event)
+    {
+        $managerItem = $this->addChildToParent($menu, [
+            'menu_item' => 'ProductsMenuItem',
+            'label' => 'Products',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-bars',
+        ]);
+
+        // Brokers > Stocks
+        $this->addChildToParent($managerItem, [
+            'menu_item' => 'ProductsStockMenuItem',
+            'label' => 'Stocks',
+//            'route' => 'stocks_index',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-bar-chart',
+        ]);
+
+        // Brokers > Cryptocurrencies
+        $this->addChildToParent($managerItem, [
+            'menu_item' => 'ProductsCryptocurrenciesMenuItem',
+            'label' => 'Cryptocurrencies',
+//            'route' => 'stocks_index',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-bar-chart',
         ]);
 
         return $menu;
