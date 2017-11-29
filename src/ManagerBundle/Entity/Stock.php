@@ -7,14 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Stock
  */
-class Stock extends Entity
+class Stock extends Product
 {
-    use Property\Symbol;
-    use Property\Alias;
-    use Property\Description;
-    use Property\Commissions;
-    use Property\Market;
-
     /**
      * @var string
      */

@@ -42,8 +42,8 @@ ManagerBundle\Entity\Operation:
             cascade: [ persist, merge, detach, remove ]
             fetch: EXTRA_LAZY
     manyToOne:
-        stock:
-            targetEntity: ManagerBundle\Entity\Stock
+        product:
+            targetEntity: ManagerBundle\Entity\Product
             joinColumn:
-                name: stock_id
+                name: product_id
                 referencedColumnName: id

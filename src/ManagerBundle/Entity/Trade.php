@@ -5,10 +5,10 @@ namespace ManagerBundle\Entity;
 /**
  * Trade
  */
-class Trade extends Entity
+abstract class Trade extends Entity
 {
     use Property\Type;
-    use Property\Stock;
+    use Property\Product;
 
     /**
      * @var Operation

@@ -1,3 +1,0 @@
-ManagerBundle\Entity\StockCommission:
-    type: entity
-    lifecycleCallbacks: {  }

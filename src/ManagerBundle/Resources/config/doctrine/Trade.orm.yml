@@ -7,6 +7,13 @@ ManagerBundle\Entity\Trade:
             id: true
             generator:
                 strategy: AUTO
+    inheritanceType: SINGLE_TABLE
+    discriminatorColumn:
+        name: discr
+        type: string
+    discriminatorMap:
+        cryptocurrency: ManagerBundle\Entity\CryptoCurrency
+        stock: ManagerBundle\Entity\Stock
     fields:
         type:
             type: string
@@ -25,10 +32,10 @@ ManagerBundle\Entity\Trade:
             type: float
     lifecycleCallbacks: {  }
     manyToOne:
-        stock:
-            targetEntity: ManagerBundle\Entity\Stock
+        product:
+            targetEntity: ManagerBundle\Entity\Product
             joinColumn:
-                name: stock_id
+                name: product_id
                 referencedColumnName: id
         operation:
             targetEntity: ManagerBundle\Entity\Operation

@@ -1,16 +1,12 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace ManagerBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-class Cryptocurrency extends Entity
+class Cryptocurrency extends Product
 {
     use Property\Name;
-    use Property\Symbol;
-    use Property\Alias;
-    use Property\Description;
-    use Property\Commissions;
 
     public function __construct()
     {

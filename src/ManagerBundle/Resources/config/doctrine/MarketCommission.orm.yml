@@ -1,3 +1,0 @@
-ManagerBundle\Entity\MarketCommission:
-    type: entity
-    lifecycleCallbacks: {  }

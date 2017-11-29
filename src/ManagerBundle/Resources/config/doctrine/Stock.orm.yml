@@ -1,47 +1,8 @@
 ManagerBundle\Entity\Stock:
     type: entity
-    table: null
     repositoryClass: ManagerBundle\Repository\StockRepository
-    id:
-        id:
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
     fields:
-        symbol:
-            type: string
-            length: 255
-            unique: true
         company:
             type: string
             length: 255
             unique: true
-        description:
-            type: text
-            nullable: true
-        alias:
-            type: string
-            length: 255
-    lifecycleCallbacks: {  }
-    manyToOne:
-        market:
-            targetEntity: ManagerBundle\Entity\Market
-            inversedBy: stocks
-            joinColumn:
-                name: market_id
-                referencedColumnName: id
-    manyToMany:
-        commissions:
-            targetEntity: ManagerBundle\Entity\StockCommission
-            cascade: [ persist, merge, detach ]
-            fetch: EXTRA_LAZY
-            joinTable:
-                name: stock_commission
-                joinColumns:
-                  discr_id: # reference (Stock)
-                    referencedColumnName: id
-                inverseJoinColumns:
-                  commission_id:
-                    referencedColumnName: id
-                    unique: true

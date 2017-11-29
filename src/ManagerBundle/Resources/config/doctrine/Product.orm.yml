@@ -1,4 +1,4 @@
-ManagerBundle\Entity\Market:
+ManagerBundle\Entity\Product:
     type: entity
     table: null
     id:
@@ -12,42 +12,35 @@ ManagerBundle\Entity\Market:
         name: discr
         type: string
     discriminatorMap:
-        cryptocurrency: ManagerBundle\Entity\CryptoCurrencyMarket
-        stock: ManagerBundle\Entity\StockMarket
+        cryptocurrency: ManagerBundle\Entity\CryptoCurrency
+        stock: ManagerBundle\Entity\Stock
     fields:
         symbol:
             type: string
             length: 255
             unique: true
-        name:
-            type: string
-            length: 255
+        description:
+            type: text
+            nullable: true
         alias:
             type: string
             length: 255
     lifecycleCallbacks: {  }
     manyToOne:
-        region:
-            targetEntity: ManagerBundle\Entity\Region
-            inversedBy: markets
+        market:
+            targetEntity: ManagerBundle\Entity\Market
             joinColumn:
-                name: region_id
-                referencedColumnName: id
-        country:
-            targetEntity: ManagerBundle\Entity\Country
-            inversedBy: markets
-            joinColumn:
-                name: country_id
+                name: market_id
                 referencedColumnName: id
     manyToMany:
         commissions:
             targetEntity: ManagerBundle\Entity\Commission
-            cascade: [ persist, merge, detach, remove ]
+            cascade: [ persist, merge, detach ]
             fetch: EXTRA_LAZY
             joinTable:
-                name: market_commission
+                name: product_commission
                 joinColumns:
-                  market_id: # reference (Market)
+                  product_id: # reference ()
                     referencedColumnName: id
                 inverseJoinColumns:
                   commission_id:

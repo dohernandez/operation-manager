@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Operation extends Entity
 {
     use Property\Type;
-    use Property\Stock;
+    use Property\Product;
 
     /**
      * @var ArrayCollection[Trade]

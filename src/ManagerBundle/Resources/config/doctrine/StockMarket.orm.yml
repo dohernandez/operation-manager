@@ -1,0 +1,3 @@
+ManagerBundle\Entity\StockMarket:
+    type: entity
+    repositoryClass: ManagerBundle\Repository\StockMarketRepository

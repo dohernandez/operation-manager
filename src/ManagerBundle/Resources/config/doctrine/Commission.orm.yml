@@ -6,14 +6,6 @@ ManagerBundle\Entity\Commission:
             id: true
             generator:
                 strategy: AUTO
-    inheritanceType: SINGLE_TABLE
-    discriminatorColumn:
-        name: discr
-        type: string
-    discriminatorMap:
-        commission: ManagerBundle\Entity\Commission
-        stock_commission: ManagerBundle\Entity\StockCommission
-        market_commission: ManagerBundle\Entity\MarketCommission
     fields:
         name:
             type: string

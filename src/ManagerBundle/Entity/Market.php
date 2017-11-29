@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Market
  */
-class Market extends Entity
+abstract class Market extends Entity
 {
     use Property\Name;
     use Property\Symbol;
@@ -23,15 +23,9 @@ class Market extends Entity
      * @var Region
      */
     private $region;
-
-    /**
-     * @var ArrayCollection[Stock]
-     */
-    private $stocks;
     
     public function __construct()
     {
-        $this->stocks = new ArrayCollection();
         $this->commissions = new ArrayCollection();
     }
 
@@ -73,46 +67,6 @@ class Market extends Entity
         $this->region = $region;
 
         return $this;
-    }
-
-    /**
-     * @return ArrayCollection[Stock]
-     */
-    public function getStocks()
-    {
-        return $this->stocks;
-    }
-
-    /**
-     * @param ArrayCollection[Stock] $stocks
-     *
-     * @return Market
-     */
-    public function setStocks(ArrayCollection $stocks)
-    {
-        $this->stocks = $stocks;
-
-        return $this;
-    }
-
-    /**
-     * @param MarketCommission $commission
-     *
-     * @return Market
-     */
-    public function addMarketCommission(MarketCommission $commission)
-    {
-        return $this->addCommission($commission);
-    }
-
-    /**
-     * @param MarketCommission $commission
-     *
-     * @return Market
-     */
-    public function removeMarketCommission(MarketCommission $commission)
-    {
-        return $this->removeCommission($commission);
     }
 
     /**
