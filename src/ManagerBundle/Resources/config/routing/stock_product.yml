@@ -1,31 +1,31 @@
-stocks_index:
+products_stock_product_index:
     path:     /
     defaults: { _controller: "ManagerBundle:Stock:index" }
     methods:  GET
     options:
-        avanzu_admin_route: stocks
+        avanzu_admin_route: products_stock_product
 
-stocks_show:
+products_stock_product_show:
     path:     /{id}/show
     defaults: { _controller: "ManagerBundle:Stock:show" }
     methods:  GET
 
-stocks_new:
+products_stock_product_new:
     path:     /new
     defaults: { _controller: "ManagerBundle:Stock:new" }
     methods:  [GET, POST]
 
-stocks_cancel:
+products_stock_product_cancel:
     path:     /
     defaults: { _controller: "ManagerBundle:Stock:index" }
     methods:  [GET, POST]
 
-stocks_edit:
+products_stock_product_edit:
     path:     /{id}/edit
     defaults: { _controller: "ManagerBundle:Stock:edit" }
     methods:  [GET, POST]
 
-stocks_delete:
+products_stock_product_delete:
     path:     /{id}/delete
     defaults: { _controller: "ManagerBundle:Stock:delete" }
     methods:  DELETE

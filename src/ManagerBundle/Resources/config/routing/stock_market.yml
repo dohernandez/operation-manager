@@ -1,0 +1,26 @@
+markets_stock_market_index:
+    path:     /
+    defaults: { _controller: "ManagerBundle:StockMarket:index" }
+    methods:  GET
+    options:
+        avanzu_admin_route: markets_stock_market
+
+markets_stock_market_new:
+    path:     /new
+    defaults: { _controller: "ManagerBundle:StockMarket:new" }
+    methods:  [GET, POST]
+
+markets_stock_market_cancel:
+    path:     /
+    defaults: { _controller: "ManagerBundle:StockMarket:index" }
+    methods:  [GET, POST]
+
+markets_stock_market_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ManagerBundle:StockMarket:edit" }
+    methods:  [GET, POST]
+
+markets_stock_market_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ManagerBundle:StockMarket:delete" }
+    methods:  DELETE

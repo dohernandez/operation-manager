@@ -23,7 +23,7 @@ class CryptocurrencyController extends CRUDController
     /**
      * @var string
      */
-    protected $prefix_route = 'cryptocurrencies';
+    protected $prefix_route = 'products_cryptocurrency_product';
 
     /**
      * Lists all cryptocurrency entities.

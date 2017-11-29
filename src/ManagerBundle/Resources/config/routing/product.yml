@@ -1,0 +1,7 @@
+products_stock_product:
+    resource: "@ManagerBundle/Resources/config/routing/stock_product.yml"
+    prefix:   /stock_product
+
+products_cryptocurrency_product:
+    resource: "@ManagerBundle/Resources/config/routing/cryptocurrency_product.yml"
+    prefix:   /cryptocurrency_product

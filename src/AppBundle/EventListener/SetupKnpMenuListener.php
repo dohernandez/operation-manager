@@ -159,7 +159,7 @@ class SetupKnpMenuListener
         $this->addChildToParent($managerItem, [
             'menu_item' => 'ProductsStockMenuItem',
             'label' => 'Stocks',
-//            'route' => 'stocks_index',
+            'route' => 'products_stock_product_index',
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-bar-chart',
         ]);
@@ -168,7 +168,7 @@ class SetupKnpMenuListener
         $this->addChildToParent($managerItem, [
             'menu_item' => 'ProductsCryptocurrenciesMenuItem',
             'label' => 'Cryptocurrencies',
-//            'route' => 'stocks_index',
+            'route' => 'products_cryptocurrency_product_index',
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-bar-chart',
         ]);

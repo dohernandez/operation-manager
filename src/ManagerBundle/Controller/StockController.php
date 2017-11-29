@@ -23,7 +23,7 @@ class StockController extends CRUDController
     /**
      * @var string
      */
-    protected $prefix_route = 'stocks';
+    protected $prefix_route = 'products_stock_product';
 
     /**
      * Lists all stock entities.

@@ -1,26 +1,26 @@
-cryptocurrencies_index:
+products_cryptocurrency_product_index:
     path:     /
     defaults: { _controller: "ManagerBundle:Cryptocurrency:index" }
     methods:  GET
     options:
-        avanzu_admin_route: cryptocurrencies
+        avanzu_admin_route: products_cryptocurrency_product
 
-cryptocurrencies_new:
+products_cryptocurrency_product_new:
     path:     /new
     defaults: { _controller: "ManagerBundle:Cryptocurrency:new" }
     methods:  [GET, POST]
 
-cryptocurrencies_cancel:
+products_cryptocurrency_product_cancel:
     path:     /
     defaults: { _controller: "ManagerBundle:Cryptocurrency:index" }
     methods:  [GET, POST]
 
-cryptocurrencies_edit:
+products_cryptocurrency_product_edit:
     path:     /{id}/edit
     defaults: { _controller: "ManagerBundle:Cryptocurrency:edit" }
     methods:  [GET, POST]
 
-cryptocurrencies_delete:
+products_cryptocurrency_product_delete:
     path:     /{id}/delete
     defaults: { _controller: "ManagerBundle:Cryptocurrency:delete" }
     methods:  DELETE

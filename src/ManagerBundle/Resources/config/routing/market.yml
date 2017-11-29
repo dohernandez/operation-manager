@@ -1,53 +1,7 @@
-markets_stock_market_index:
-    path:     /stock_market/
-    defaults: { _controller: "ManagerBundle:StockMarket:index" }
-    methods:  GET
-    options:
-        avanzu_admin_route: markets_stock_market
+markets_stock_market:
+    resource: "@ManagerBundle/Resources/config/routing/stock_market.yml"
+    prefix:   /stock_market
 
-markets_stock_market_new:
-    path:     /stock_market/new
-    defaults: { _controller: "ManagerBundle:StockMarket:new" }
-    methods:  [GET, POST]
-
-markets_stock_market_cancel:
-    path:     /stock_market/
-    defaults: { _controller: "ManagerBundle:StockMarket:index" }
-    methods:  [GET, POST]
-
-markets_stock_market_edit:
-    path:     /stock_market/{id}/edit
-    defaults: { _controller: "ManagerBundle:StockMarket:edit" }
-    methods:  [GET, POST]
-
-markets_stock_market_delete:
-    path:     /stock_market/{id}/delete
-    defaults: { _controller: "ManagerBundle:StockMarket:delete" }
-    methods:  DELETE
-
-markets_cryptocurrency_market_index:
-    path:     /cryptocurrency_market/
-    defaults: { _controller: "ManagerBundle:CryptocurrencyMarket:index" }
-    methods:  GET
-    options:
-        avanzu_admin_route: markets_cryptocurrency_market
-
-markets_cryptocurrency_market_new:
-    path:     /cryptocurrency_market/new
-    defaults: { _controller: "ManagerBundle:CryptocurrencyMarket:new" }
-    methods:  [GET, POST]
-
-markets_cryptocurrency_market_cancel:
-    path:     /cryptocurrency_market/
-    defaults: { _controller: "ManagerBundle:CryptocurrencyMarket:index" }
-    methods:  [GET, POST]
-
-markets_cryptocurrency_market_edit:
-    path:     /cryptocurrency_market/{id}/edit
-    defaults: { _controller: "ManagerBundle:CryptocurrencyMarket:edit" }
-    methods:  [GET, POST]
-
-markets_cryptocurrency_market_delete:
-    path:     /cryptocurrency_market/{id}/delete
-    defaults: { _controller: "ManagerBundle:CryptocurrencyMarket:delete" }
-    methods:  DELETE
+markets_cryptocurrency_market:
+    resource: "@ManagerBundle/Resources/config/routing/cryptocurrency_market.yml"
+    prefix:   /cryptocurrency_market
