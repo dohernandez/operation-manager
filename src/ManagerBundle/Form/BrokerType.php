@@ -3,11 +3,12 @@
 namespace ManagerBundle\Form;
 
 use ManagerBundle\Entity\Broker;
+use ManagerBundle\Entity\CryptocurrencyMarket;
 use ManagerBundle\Entity\Market;
+use ManagerBundle\Entity\StockMarket;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -34,69 +35,88 @@ class BrokerType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /** @var Broker $broker */
+        $broker = $options['data'];
+        if (!empty($broker->getId())) {
+            $disabled = true;
+        }
+
         $builder->add('name', TextType::class, [
             'attr' => [
                 'placeholder' => 'Enter name',
             ],
-        ]);
+        ])
+            ->add('type', ChoiceType::class, [
+                'choices'      => $this->brokerTypes,
+                'placeholder'  => 'Choose type',
+                'choice_label' => function ($value, $key, $index) {
+                    return ucfirst($value);
+                    // or if you want to translate some key
+                    //return 'form.choice.'.$key;
+                },
+                'disabled'     => $disabled,
+            ])->add('account', AccountType::class, [
+                'label' => false,
+            ]);
 
-        $brokerTypes = $this->brokerTypes;
+        if (!empty($broker->getType())) {
+            $entityClass = StockMarket::class;
 
-        // the rest of the form is build into the FormEvents::PRE_SET_DATA due we want to disable the choice type
-        // when the broker exists.
-        $builder->addEventListener(
-            FormEvents::PRE_SET_DATA,
-            function (FormEvent $event) use ($brokerTypes) {
-                $disabled = false;
-
-                /** @var Broker $broker */
-                $broker = $event->getData();
-                if (!empty($broker->getId())) {
-                    $disabled = true;
-                }
-
-                $form = $event->getForm();
-
-                $form->add('type', ChoiceType::class, [
-                    'choices'      => $brokerTypes,
-                    'placeholder'  => 'Choose type',
-                    'choice_label' => function ($value, $key, $index) {
-                        return ucfirst($value);
-                        // or if you want to translate some key
-                        //return 'form.choice.'.$key;
-                    },
-                    'disabled'     => $disabled,
-                ])->add('account', AccountType::class, [
-                    'label' => false,
-                ]);
-
-                if ($broker->getType() != 'cryptocurrencies') {
-                    $form->add('markets', EntityType::class, [
-                        'class'   => Market::class,
-                        'choice_label' => 'alias',
-                        'placeholder' => 'Choose a market',
-                        'multiple' => true,
-                        'group_by' => 'region',
-                        'attr' => [
-                            'class' => 'select2 select2-multiple'
-                        ]
-                    ]);
-                }
-
-                if (!$disabled || $broker->getType() == 'cryptocurrencies') {
-                    $form->add('commissions', CollectionType::class, [
-                        'entry_type'     => CommissionType::class,
-                        'entry_options'  => array('label' => false),
-                        'label'          => false,
-                        'allow_add'      => true,
-                        'allow_delete'   => true,
-                        'by_reference'   => false,
-                        'error_bubbling' => false,
-                        'prototype'      => true,
-                    ]);
-                }
+            if ($broker->getType() == 'cryptocurrencies') {
+                $entityClass = CryptocurrencyMarket::class;
             }
-        );
+
+            $builder->add('markets', EntityType::class, [
+                'class'   => $entityClass,
+                'choice_label' => 'alias',
+                'placeholder' => 'Choose a market',
+                'multiple' => true,
+                'group_by' => 'region',
+                'attr' => [
+                    'class' => 'select2 select2-multiple'
+                ]
+            ]);
+        } else {
+            $builder->add('markets', EntityType::class, [
+                'class'   => Market::class,
+                'choice_label' => 'alias',
+                'placeholder' => 'Choose a market',
+                'multiple' => true,
+                'group_by' => 'region',
+                'attr' => [
+                    'class' => 'select2 select2-multiple'
+                ],
+                'choices' => []
+            ]);
+
+            $builder->get('type')->addEventListener(
+                FormEvents::POST_SUBMIT,
+                function (FormEvent $event) {
+                    $type = $event->getForm()->getData();
+                    $form = $event->getForm()->getParent();
+
+                    if (!empty($type)) {
+                        $entityClass = StockMarket::class;
+
+                        if ($type == 'cryptocurrencies') {
+                            $entityClass = CryptocurrencyMarket::class;
+                        }
+
+                        $form->add('markets', EntityType::class, [
+                            'class'   => $entityClass,
+                            'choice_label' => 'alias',
+                            'placeholder' => 'Choose a market',
+                            'multiple' => true,
+                            'group_by' => 'region',
+                            'attr' => [
+                                'class' => 'select2 select2-multiple'
+                            ]
+                        ]);
+                    }
+                }
+            );
+        }
+
 
         $builder->addEventListener(
             FormEvents::PRE_SUBMIT,
