@@ -29,6 +29,7 @@ class Version20171118151735 extends AbstractMigration
         $this->addSql("INSERT INTO country (`iso`, `name`, `nice_name`, `region_id`) VALUES ('JP', 'JAPAN', 'Japan', 3)");
         $this->addSql("INSERT INTO country (`iso`, `name`, `nice_name`, `region_id`) VALUES ('CN', 'CHINA', 'China', 3)");
         $this->addSql("INSERT INTO country (`iso`, `name`, `nice_name`, `region_id`) VALUES ('HK', 'HONG KONG', 'Hong Kong', 3)");
+        $this->addSql("INSERT INTO country (`iso`, `name`, `nice_name`, `region_id`) VALUES ('DE', 'GERMANY', 'Germany', 2)");
     }
 
     public function down(Schema $schema)

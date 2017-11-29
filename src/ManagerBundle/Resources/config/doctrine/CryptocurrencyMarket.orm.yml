@@ -1,3 +1,3 @@
-ManagerBundle\Entity\CryptoCurrencyMarket:
+ManagerBundle\Entity\CryptocurrencyMarket:
     type: entity
     repositoryClass: ManagerBundle\Repository\CryptocurrencyMarketRepository

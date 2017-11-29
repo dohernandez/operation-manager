@@ -5,7 +5,6 @@ namespace ManagerBundle\Form;
 use ManagerBundle\Entity\Country;
 use ManagerBundle\Entity\Market;
 use ManagerBundle\Entity\Region;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;

@@ -4,7 +4,7 @@ namespace ManagerBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-class CryptoCurrencyMarket extends Market
+class CryptocurrencyMarket extends Market
 {
     /**
      * @var ArrayCollection[Cryptocurrency]
@@ -27,7 +27,7 @@ class CryptoCurrencyMarket extends Market
     /**
      * @param ArrayCollection[Cryptocurrency] $cryptocurrencies
      *
-     * @return CryptoCurrencyMarket
+     * @return CryptocurrencyMarket
      */
     public function setCryptocurrencies(ArrayCollection $cryptocurrencies)
     {

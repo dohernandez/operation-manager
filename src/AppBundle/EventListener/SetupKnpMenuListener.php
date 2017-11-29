@@ -138,7 +138,7 @@ class SetupKnpMenuListener
         $this->addChildToParent($managerItem, [
             'menu_item' => 'MarketsCryptocurrencyMarketMenuItem',
             'label' => 'Cryptocurrencies',
-//            'route' => 'stocks_index',
+            'route' => 'markets_cryptocurrency_market_index',
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-industry',
         ]);
