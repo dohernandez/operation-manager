@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CryptocurrencyType extends AbstractType
+class CryptocurrencyType extends ProductType
 {
     /**
      * {@inheritdoc}
@@ -24,36 +24,9 @@ class CryptocurrencyType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Enter name',
                 ],
-            ])->add('alias', TextType::class, [
-                'attr' => [
-                    'placeholder' => 'Enter alias',
-                ],
-                'required' => false,
-            ])
-            ->add('symbol', TextType::class, [
-                'attr' => [
-                    'placeholder' => 'Enter symbol',
-                ],
-            ])
-            ->add('description', TextareaType::class, [
-                'required' => false,
-                'attr' => [
-                    'rows' => '6',
-                    'placeholder' => 'Enter description',
-                ],
             ]);
 
-        $builder->addEventListener(
-            FormEvents::PRE_SUBMIT,
-            function (FormEvent $event) {
-                $data = $event->getData();
-
-                if (empty($data['alias'])) {
-                    $data['alias'] = $data['symbol'];
-                    $event->setData($data);
-                }
-            }
-        );
+        parent::buildForm($builder, $options);
     }
     
     /**
@@ -65,14 +38,4 @@ class CryptocurrencyType extends AbstractType
             'data_class' => Cryptocurrency::class
         ));
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'managerbundle_stock';
-    }
-
-
 }

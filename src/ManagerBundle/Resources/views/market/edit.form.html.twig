@@ -40,7 +40,11 @@
             });
 
             $('#managerbundle_market_name').change(function () {
-                $('#managerbundle_market_alias').prop('placeholder', $(this).val())
+                if ($(this).val()) {
+                    $('#managerbundle_market_alias').prop('placeholder', $(this).val())
+                } else {
+                    $('#managerbundle_market_alias').prop('placeholder', 'Enter alias')
+                }
             });
         });
     </script>

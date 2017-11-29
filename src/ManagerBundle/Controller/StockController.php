@@ -39,7 +39,6 @@ class StockController extends CRUDController
             [
                 [ 'name' => 'symbol', 'col_with' => '70' ],
                 [ 'name' => 'alias', 'col_with' => '100' ],
-                [ 'name' => 'market', 'col_with' => '170'],
                 [ 'name' => 'company', 'col_with' => '160' ],
                 [ 'name' => 'description', 'render' => 'slice', 'truncate' => '60'],
             ],
@@ -82,7 +81,7 @@ class StockController extends CRUDController
             'page_subtitle' => 'create',
             'box_type' => 'success',
             'submit_type' => 'Create',
-        ]);
+        ], 'ManagerBundle:product:edit.form.html.twig');
     }
 
     /**
@@ -100,7 +99,7 @@ class StockController extends CRUDController
             'page_subtitle' => 'edit',
             'box_type' => 'primary',
             'submit_type' => 'Edit',
-        ]);
+        ], 'ManagerBundle:product:edit.form.html.twig');
     }
 
     /**

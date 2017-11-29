@@ -55,7 +55,7 @@ class CryptocurrencyController extends CRUDController
             'page_subtitle' => 'create',
             'box_type' => 'success',
             'submit_type' => 'Create',
-        ]);
+        ], 'ManagerBundle:product:edit.form.html.twig');
     }
 
     /**
@@ -73,7 +73,7 @@ class CryptocurrencyController extends CRUDController
             'page_subtitle' => 'edit',
             'box_type' => 'primary',
             'submit_type' => 'Edit',
-        ]);
+        ], 'ManagerBundle:product:edit.form.html.twig');
     }
 
     /**

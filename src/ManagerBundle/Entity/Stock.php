@@ -2,8 +2,6 @@
 
 namespace ManagerBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 /**
  * Stock
  */
@@ -13,11 +11,6 @@ class Stock extends Product
      * @var string
      */
     private $company;
-
-    public function __construct()
-    {
-        $this->commissions = new ArrayCollection();
-    }
 
     /**
      * Set company
