@@ -96,35 +96,6 @@ class SetupKnpMenuListener
         )->setLabelAttribute('icon',  $child['icon']);
     }
 
-    private function addMarketsMenu(MenuItem $menu, KnpMenuEvent $event)
-    {
-        $managerItem = $this->addChildToParent($menu, [
-            'menu_item' => 'MarketsMenuItem',
-            'label' => 'Markets',
-            'child_options' => $event->getChildOptions(),
-            'icon' => 'fa fa-bars',
-        ]);
-
-        // Markets > Stock
-        $this->addChildToParent($managerItem, [
-            'menu_item' => 'MarketsStockMarketMenuItem',
-            'label' => 'Stocks',
-//            'route' => 'markets_index',
-            'child_options' => $event->getChildOptions(),
-            'icon' => 'fa fa-industry',
-        ]);
-        // Markets > Cryptocurrencies
-        $this->addChildToParent($managerItem, [
-            'menu_item' => 'MarketsCryptocurrencyMarketMenuItem',
-            'label' => 'Cryptocurrencies',
-//            'route' => 'stocks_index',
-            'child_options' => $event->getChildOptions(),
-            'icon' => 'fa fa-industry',
-        ]);
-
-        return $menu;
-    }
-
     private function addBrokersMenu(MenuItem $menu, KnpMenuEvent $event)
     {
         $managerItem = $this->addChildToParent($menu, [
@@ -141,6 +112,35 @@ class SetupKnpMenuListener
             'route' => 'brokers_index',
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-desktop',
+        ]);
+
+        return $menu;
+    }
+
+    private function addMarketsMenu(MenuItem $menu, KnpMenuEvent $event)
+    {
+        $managerItem = $this->addChildToParent($menu, [
+            'menu_item' => 'MarketsMenuItem',
+            'label' => 'Markets',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-bars',
+        ]);
+
+        // Markets > Stock
+        $this->addChildToParent($managerItem, [
+            'menu_item' => 'MarketsStockMarketMenuItem',
+            'label' => 'Stocks',
+            'route' => 'markets_stock_market_index',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-industry',
+        ]);
+        // Markets > Cryptocurrencies
+        $this->addChildToParent($managerItem, [
+            'menu_item' => 'MarketsCryptocurrencyMarketMenuItem',
+            'label' => 'Cryptocurrencies',
+//            'route' => 'stocks_index',
+            'child_options' => $event->getChildOptions(),
+            'icon' => 'fa fa-industry',
         ]);
 
         return $menu;
