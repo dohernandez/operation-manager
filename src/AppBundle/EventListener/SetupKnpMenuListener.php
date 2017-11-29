@@ -138,7 +138,7 @@ class SetupKnpMenuListener
         $this->addChildToParent($managerItem, [
             'menu_item' => 'BrokersBrokersMenuItem',
             'label' => 'Brokers',
-//            'route' => 'stocks_index',
+            'route' => 'brokers_index',
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-desktop',
         ]);
