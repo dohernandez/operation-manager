@@ -22,6 +22,8 @@ ManagerBundle\Entity\Operation:
             type: float
         earnings:
             type: float
+        ratio:
+            type: float
         commissions:
             type: float
         benefits:

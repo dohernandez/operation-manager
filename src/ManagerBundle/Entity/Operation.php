@@ -43,6 +43,11 @@ class Operation extends Entity
     /**
      * @var float
      */
+    private $ratio;
+
+    /**
+     * @var float
+     */
     private $commissions;
 
     /**
@@ -186,6 +191,26 @@ class Operation extends Entity
     public function setEarnings(float $earnings)
     {
         $this->earnings = $earnings;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getRatio()
+    {
+        return $this->ratio;
+    }
+
+    /**
+     * @param float $ratio
+     *
+     * @return Operation
+     */
+    public function setRatio(float $ratio)
+    {
+        $this->ratio = $ratio;
 
         return $this;
     }
