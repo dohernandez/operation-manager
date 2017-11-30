@@ -28,9 +28,7 @@
         $(document).ready(function () {
             var $markets = $('#managerbundle_broker_markets');
             $markets.select2({
-                placeholder: $markets.prop('placeholder')
-            }).on("select2:select", function(e) {
-                console.log(e);
+                placeholder: 'Choose a market'
             });
 
             var $type = $('#managerbundle_broker_type');
@@ -38,6 +36,8 @@
             // When region gets selected ...
             $type.change(function() {
                 var $markets = $('#managerbundle_broker_markets');
+                $markets.val(null).trigger("change");
+                $markets.prop("disabled", true);
 
                 // ... retrieve the corresponding form.
                 var $form = $(this).closest('form');
@@ -57,11 +57,12 @@
                             $(html).find('#managerbundle_broker_markets')
                         );
 
-                        $('#managerbundle_broker_markets').select2().on("select2:select", function(e) {
-                            console.log(e.params.data);
-                        }).on("select2:unselect", function(e) {
-                            console.log(e.params.data);
+                        $markets = $('#managerbundle_broker_markets')
+
+                        $markets.select2({
+                            placeholder: 'Choose a market'
                         });
+                        $markets.prop("disabled", false);
                     }
                 });
 

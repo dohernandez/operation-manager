@@ -69,7 +69,6 @@ class BrokerType extends AbstractType
             $builder->add('markets', EntityType::class, [
                 'class'   => $entityClass,
                 'choice_label' => 'alias',
-                'placeholder' => 'Choose a market',
                 'multiple' => true,
                 'group_by' => 'region',
                 'attr' => [
@@ -80,7 +79,6 @@ class BrokerType extends AbstractType
             $builder->add('markets', EntityType::class, [
                 'class'   => Market::class,
                 'choice_label' => 'alias',
-                'placeholder' => 'Choose a market',
                 'multiple' => true,
                 'group_by' => 'region',
                 'attr' => [
@@ -105,7 +103,6 @@ class BrokerType extends AbstractType
                         $form->add('markets', EntityType::class, [
                             'class'   => $entityClass,
                             'choice_label' => 'alias',
-                            'placeholder' => 'Choose a market',
                             'multiple' => true,
                             'group_by' => 'region',
                             'attr' => [
