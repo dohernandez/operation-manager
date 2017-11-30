@@ -7,24 +7,35 @@
     </div>
 {%- endblock -%}
 
-{# Broker commissions #}
-
-{%- block _managerbundle_broker_commissions_widget -%}
-    {{ block('commissions_widget', 'ManagerBundle:commission:theme-form.html.twig') }}
-{%- endblock -%}
-
-{%- block _managerbundle_broker_commissions_entry_row -%}
-    {{ block('commissions_entry_row', 'ManagerBundle:commission:theme-form.html.twig') }}
-{%- endblock -%}
-
 
 
 {# Market commissions #}
-
 {%- block _managerbundle_broker_markets_widget -%}
     {%- if form.vars.value is instanceof("Doctrine\\ORM\\PersistentCollection") -%}
         <div class="col-sm-12">
-            {{ form_widget(form) }}
+            <div {{ block('widget_container_attributes') }}>
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        {%- set active_panel = true -%}
+
+                        {%- for child in form -%}
+                            <li class="{{ active_panel ? 'active' : '' }}">
+                                <a href="#{{ child.vars.id }}" data-toggle="tab"
+                                   aria-expanded="{{ active_panel ? 'true' : 'false' }}">{{ child.vars.value.name }}</a>
+                            </li>
+                            {%- set active_panel = false -%}
+                        {%- endfor -%}
+                    </ul>
+
+                    <div class="tab-content">
+                        {%- set active_panel = true -%}
+                        {%- for child in form -%}
+                            {{ form_widget(child, {'active_panel': active_panel}) }}
+                            {%- set active_panel = false -%}
+                        {%- endfor -%}
+                    </div>
+                </div>
+            </div>
         </div>
     {%- else -%}
         {{ form_widget(form) }}
@@ -32,13 +43,14 @@
 {%- endblock -%}
 
 {%- block _managerbundle_broker_markets_entry_widget -%}
-    <div class="col-sm-12">
-        {{ form_widget(form) }}
+    <div class="tab-pane {{ active_panel ? 'active' : '' }}" {{ block('widget_container_attributes') }}>
+        <div class="col-sm-12">
+            {{ form_widget(form.commissions) }}
+        </div>
     </div>
 {%- endblock -%}
 
 {%- block _managerbundle_broker_markets_entry_commissions_widget -%}
-    {%- set form_table_title = form.parent.vars.value.name -%}
     {{ block('commissions_widget', 'ManagerBundle:commission:theme-form.html.twig') }}
 {%- endblock -%}
 
