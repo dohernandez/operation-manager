@@ -27,7 +27,11 @@
     <script>
         $(document).ready(function () {
             var $markets = $('#managerbundle_broker_markets');
-            $markets.select2();
+            $markets.select2({
+                placeholder: $markets.prop('placeholder')
+            }).on("select2:select", function(e) {
+                console.log(e);
+            });
 
             var $type = $('#managerbundle_broker_type');
 
@@ -53,7 +57,11 @@
                             $(html).find('#managerbundle_broker_markets')
                         );
 
-                        $('#managerbundle_broker_markets').select2();
+                        $('#managerbundle_broker_markets').select2().on("select2:select", function(e) {
+                            console.log(e.params.data);
+                        }).on("select2:unselect", function(e) {
+                            console.log(e.params.data);
+                        });
                     }
                 });
 
