@@ -6,7 +6,7 @@
     {%- endif -%}
     <div class="commissions-box-body" {{ block('widget_container_attributes') }} data-commissions="{{ form.children()|length }}">
 
-        {%- if form_table_title is defined and form_table_title -%}<h4 class="with-border">Commissions{%- endif -%}</h4>
+        <h4 class="with-border">Commissions</h4>
         <table class="table">
             <thead>
                 <th>{{ 'name'|title }}</th>

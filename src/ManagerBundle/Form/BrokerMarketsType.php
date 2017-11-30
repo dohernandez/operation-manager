@@ -15,7 +15,7 @@ class BrokerMarketsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('markets', CollectionType::class, [
-            'entry_type'     => MarketCommissionsType::class,
+            'entry_type'     => BrokerMarketType::class,
             'entry_options'  => array('label' => false),
             'label'          => false,
         ]);

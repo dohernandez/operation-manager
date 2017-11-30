@@ -2,8 +2,6 @@
 
 namespace ManagerBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 /**
  * Market
  */
@@ -12,7 +10,6 @@ abstract class Market extends Entity
     use Property\Name;
     use Property\Symbol;
     use Property\Alias;
-    use Property\Commissions;
 
     /**
      * @var Country
@@ -23,11 +20,6 @@ abstract class Market extends Entity
      * @var Region
      */
     private $region;
-    
-    public function __construct()
-    {
-        $this->commissions = new ArrayCollection();
-    }
 
     /**
      * @return string

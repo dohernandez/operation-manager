@@ -29,7 +29,7 @@ class Broker extends Entity
     private $capital;
 
     /**
-     * @var ArrayCollection[Market]
+     * @var ArrayCollection[BrokerMarket]
      */
     protected $markets;
 
@@ -150,7 +150,7 @@ class Broker extends Entity
     }/**
  * Set markets
  *
- * @param ArrayCollection[Market] $markets
+ * @param ArrayCollection[BrokerMarket] $markets
  *
  * @return Entity
  */
@@ -164,7 +164,7 @@ class Broker extends Entity
     /**
      * Get markets
      *
-     * @return ArrayCollection[Market]
+     * @return ArrayCollection[BrokerMarket]
      */
     public function getMarkets()
     {
@@ -178,8 +178,10 @@ class Broker extends Entity
      */
     public function addMarket(Market $market)
     {
-        if (!$this->markets->contains($market)) {
-            $this->markets->add($market);
+        $brokerMarket = BrokerMarket::createFromMarket($market);
+
+        if (!$this->markets->contains($brokerMarket)) {
+            $this->markets->add($brokerMarket);
         }
 
         return $this;
@@ -192,7 +194,19 @@ class Broker extends Entity
      */
     public function removeMarket(Market $market)
     {
-        $this->markets->removeElement($market);
+        $remove = null;
+
+        foreach ($this->markets as $brokerMarket) {
+            if ($brokerMarket->equals($market)) {
+                $remove = $brokerMarket;
+
+                break;
+            }
+        }
+
+        if (!empty($remove)) {
+            $this->markets->removeElement($remove);
+        }
 
         return $this;
     }

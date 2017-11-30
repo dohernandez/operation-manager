@@ -144,7 +144,7 @@ class BrokerController extends CRUDController
             return $this->redirectToRoute($this->getEntityCRUDRoute('index'));
         }
 
-        return $this->render('ManagerBundle:broker:commission.form.html.twig', [
+        return $this->render('ManagerBundle:broker:market.form.html.twig', [
                 'form' => $form->createView(),
                 'page_title' => 'Manage broker markets',
                 'page_subtitle' => 'markets',
