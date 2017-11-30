@@ -5,6 +5,10 @@ manager_index:
     options:
         avanzu_admin_route: manager
 
+manager_operations:
+    resource: "@ManagerBundle/Resources/config/routing/operation.yml"
+    prefix:   /operations
+
 manager_transfers:
     resource: "@ManagerBundle/Resources/config/routing/transfer.yml"
     prefix:   /transfers

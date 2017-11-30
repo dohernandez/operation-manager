@@ -43,7 +43,7 @@ class SetupKnpMenuListener
         $this->addChildToParent($operationItem, [
             'menu_item' => 'TradingOperationMenuItem',
             'label' => 'Operations',
-//            'route' => 'brokers_index',
+            'route' => 'operations_index',
             'child_options' => $event->getChildOptions(),
             'icon' => 'fa fa-desktop',
         ]);

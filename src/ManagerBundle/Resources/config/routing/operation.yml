@@ -1,0 +1,26 @@
+operations_index:
+    path:     /
+    defaults: { _controller: "ManagerBundle:Operation:index" }
+    methods:  GET
+    options:
+        avanzu_admin_route: operations
+
+operations_new:
+    path:     /new
+    defaults: { _controller: "ManagerBundle:Operation:new" }
+    methods:  [GET, POST]
+
+operations_cancel:
+    path:     /
+    defaults: { _controller: "ManagerBundle:Operation:index" }
+    methods:  [GET, POST]
+
+operations_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "ManagerBundle:Operation:edit" }
+    methods:  [GET, POST]
+
+operations_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ManagerBundle:Operation:delete" }
+    methods:  DELETE

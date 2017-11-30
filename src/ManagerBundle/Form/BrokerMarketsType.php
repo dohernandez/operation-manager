@@ -7,7 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class BrokerMarketCommissionsType extends AbstractType
+class BrokerMarketsType extends AbstractType
 {
     /**
      * {@inheritdoc}

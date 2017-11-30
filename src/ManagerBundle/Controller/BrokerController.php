@@ -46,9 +46,9 @@ class BrokerController extends CRUDController
             [
                 'extra_buttons' => [
                     [
-                        'route'  => $this->getEntityCRUDRoute('commissions'),
-                        'icon' => 'money',
-                        'action' => 'commissions',
+                        'route'  => $this->getEntityCRUDRoute('markets'),
+                        'icon' => 'industry',
+                        'action' => 'markets',
                         'type' => 'warning',
                         'modal' => false,
                     ],
@@ -133,17 +133,12 @@ class BrokerController extends CRUDController
      *
      * @return Response
      */
-    public function commissionsAction(Request $request, Broker $broker): Response
+    public function marketsAction(Request $request, Broker $broker): Response
     {
-        $form = $this->createForm('ManagerBundle\Form\BrokerMarketCommissionsType', $broker);
+        $form = $this->createForm('ManagerBundle\Form\BrokerMarketsType', $broker);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-//            $this->getDoctrine()->getManager()->clear();
-//            foreach ($broker->getMarkets() as $market) {
-//
-//            }
-//            dump($broker);die();
             $this->getEntityRepository()->save($broker);
 
             return $this->redirectToRoute($this->getEntityCRUDRoute('index'));
@@ -151,8 +146,8 @@ class BrokerController extends CRUDController
 
         return $this->render('ManagerBundle:broker:commission.form.html.twig', [
                 'form' => $form->createView(),
-                'page_title' => 'Manage broker',
-                'page_subtitle' => 'commissions',
+                'page_title' => 'Manage broker markets',
+                'page_subtitle' => 'markets',
                 'box_type' => 'warning',
                 'submit_type' => 'Edit',
                 'box_title' => $broker,

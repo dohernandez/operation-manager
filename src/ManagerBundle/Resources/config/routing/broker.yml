@@ -25,7 +25,7 @@ brokers_delete:
     defaults: { _controller: "ManagerBundle:Broker:delete" }
     methods:  DELETE
 
-brokers_commissions:
-    path:     /{id}/commissions
-    defaults: { _controller: "ManagerBundle:Broker:commissions" }
+brokers_markets:
+    path:     /{id}/markets
+    defaults: { _controller: "ManagerBundle:Broker:markets" }
     methods:  [GET, POST]
