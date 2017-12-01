@@ -21,7 +21,7 @@
                         {%- for child in form -%}
                             <li class="{{ active_panel ? 'active' : '' }}">
                                 <a href="#{{ child.vars.id }}" data-toggle="tab"
-                                   aria-expanded="{{ active_panel ? 'true' : 'false' }}">{{ child.vars.value.name }}</a>
+                                   aria-expanded="{{ active_panel ? 'true' : 'false' }}">{{ child.vars.value.market.name }}</a>
                             </li>
                             {%- set active_panel = false -%}
                         {%- endfor -%}
@@ -44,6 +44,9 @@
 
 {%- block _managerbundle_broker_markets_entry_widget -%}
     <div class="tab-pane {{ active_panel ? 'active' : '' }}" {{ block('widget_container_attributes') }}>
+        <div class="col-sm-12">
+            {{ form_widget(form.market) }}
+        </div>
         <div class="col-sm-12">
             {{ form_widget(form.commissions) }}
         </div>

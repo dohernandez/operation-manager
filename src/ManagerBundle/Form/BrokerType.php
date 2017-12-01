@@ -6,6 +6,7 @@ use ManagerBundle\Entity\Broker;
 use ManagerBundle\Entity\CryptocurrencyMarket;
 use ManagerBundle\Entity\Market;
 use ManagerBundle\Entity\StockMarket;
+use ManagerBundle\Form\DataTransformer\BrokerMarketToMarketTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -23,11 +24,18 @@ class BrokerType extends AbstractType
     private $brokerTypes;
 
     /**
-     * @param array $brokerTypes
+     * @var BrokerMarketToMarketTransformer
      */
-    public function __construct(array $brokerTypes)
+    private $marketsTransformer;
+
+    /**
+     * @param array $brokerTypes
+     * @param BrokerMarketToMarketTransformer $marketsTransformer
+     */
+    public function __construct(array $brokerTypes, BrokerMarketToMarketTransformer $marketsTransformer)
     {
         $this->brokerTypes = $brokerTypes;
+        $this->marketsTransformer = $marketsTransformer;
     }
 
     /**
@@ -40,6 +48,18 @@ class BrokerType extends AbstractType
         if (!empty($broker->getId())) {
             $disabled = true;
         }
+
+        $this->marketsTransformer->setBroker($broker);
+
+        $marketOptions = [
+            'choice_label' => 'alias',
+            'multiple' => true,
+            'group_by' => 'region',
+            'attr' => [
+                'class' => 'select2 select2-multiple'
+            ],
+            'by_reference'   => false,
+        ];
 
         $builder->add('name', TextType::class, [
             'attr' => [
@@ -68,28 +88,16 @@ class BrokerType extends AbstractType
 
             $builder->add('markets', EntityType::class, [
                 'class'   => $entityClass,
-                'choice_label' => 'alias',
-                'multiple' => true,
-                'group_by' => 'region',
-                'attr' => [
-                    'class' => 'select2 select2-multiple'
-                ]
-            ]);
+            ] + $marketOptions);
         } else {
             $builder->add('markets', EntityType::class, [
                 'class'   => Market::class,
-                'choice_label' => 'alias',
-                'multiple' => true,
-                'group_by' => 'region',
-                'attr' => [
-                    'class' => 'select2 select2-multiple'
-                ],
                 'choices' => []
-            ]);
+            ] + $marketOptions);
 
             $builder->get('type')->addEventListener(
                 FormEvents::POST_SUBMIT,
-                function (FormEvent $event) {
+                function (FormEvent $event) use ($marketOptions) {
                     $type = $event->getForm()->getData();
                     $form = $event->getForm()->getParent();
 
@@ -102,18 +110,14 @@ class BrokerType extends AbstractType
 
                         $form->add('markets', EntityType::class, [
                             'class'   => $entityClass,
-                            'choice_label' => 'alias',
-                            'multiple' => true,
-                            'group_by' => 'region',
-                            'attr' => [
-                                'class' => 'select2 select2-multiple'
-                            ]
-                        ]);
+                        ] + $marketOptions);
                     }
                 }
             );
         }
 
+        $builder->get('markets')
+            ->addModelTransformer($this->marketsTransformer);
 
         $builder->addEventListener(
             FormEvents::PRE_SUBMIT,

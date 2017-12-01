@@ -24,19 +24,24 @@ services:
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
 
     ManagerBundle\Twig\ManagerExtension:
-            tags: [twig.extension]
+        tags: [twig.extension]
+
+    manager.broker.markers.transformer:
+        class: ManagerBundle\Form\DataTransformer\BrokerMarketToMarketTransformer
+        arguments: ["@=container.get('doctrine').getManager().getRepository('ManagerBundle:BrokerMarket')"]
+        tags: [form.type]
 
     ManagerBundle\Form\BrokerType:
-            arguments: ["%broker_type%"]
-            tags: [form.type]
+        arguments: ["%broker_type%", "@manager.broker.markers.transformer"]
+        tags: [form.type]
 
     ManagerBundle\Form\CommissionType:
-            arguments: ["%commission_type%", "%commission_period%", "%commission_applied%"]
-            tags: [form.type]
+        arguments: ["%commission_type%", "%commission_period%", "%commission_applied%"]
+        tags: [form.type]
 
     ManagerBundle\Form\MarketCommissionType:
-            arguments: ["%commission_type%", "%commission_period%", "%commission_applied%"]
-            tags: [form.type]
+        arguments: ["%commission_type%", "%commission_period%", "%commission_applied%"]
+        tags: [form.type]
 
     manager.broker.saved.transfer:
         class: ManagerBundle\EventListener\SavedTransfer\BrokerListener

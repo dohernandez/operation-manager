@@ -1,3 +1,15 @@
 ManagerBundle\Entity\CryptocurrencyMarket:
     type: entity
     repositoryClass: ManagerBundle\Repository\CryptocurrencyMarketRepository
+    manyToMany:
+        cryptocurrencies:
+            targetEntity: ManagerBundle\Entity\Cryptocurrency
+            fetch: EXTRA_LAZY
+            joinTable:
+                name: broker_market_cryptocurrency
+                joinColumns:
+                    broker_market_id: # reference (BrokerMarket)
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    cryptocurrency_id:
+                        referencedColumnName: id

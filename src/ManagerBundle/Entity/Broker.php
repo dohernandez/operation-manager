@@ -172,41 +172,27 @@ class Broker extends Entity
     }
 
     /**
-     * @param Market $market
+     * @param BrokerMarket $market
      *
      * @return Entity
      */
-    public function addMarket(Market $market)
+    public function addMarket(BrokerMarket $market)
     {
-        $brokerMarket = BrokerMarket::createFromMarket($market);
-
-        if (!$this->markets->contains($brokerMarket)) {
-            $this->markets->add($brokerMarket);
+        if (!$this->markets->contains($market)) {
+            $this->markets->add($market);
         }
 
         return $this;
     }
 
     /**
-     * @param Market $market
+     * @param BrokerMarket $market
      *
      * @return Entity
      */
-    public function removeMarket(Market $market)
+    public function removeMarket(BrokerMarket $market)
     {
-        $remove = null;
-
-        foreach ($this->markets as $brokerMarket) {
-            if ($brokerMarket->equals($market)) {
-                $remove = $brokerMarket;
-
-                break;
-            }
-        }
-
-        if (!empty($remove)) {
-            $this->markets->removeElement($remove);
-        }
+        $this->markets->removeElement($market);
 
         return $this;
     }

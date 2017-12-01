@@ -7,24 +7,27 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class BrokerMarketType extends AbstractType
+class BrokerStockMarketType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add()
-            ->add('commissions', CollectionType::class, [
-                'entry_type'     => CommissionType::class,
-                'entry_options'  => array('label' => false),
-                'label'          => false,
-                'allow_add'      => true,
-                'allow_delete'   => true,
-                'by_reference'   => false,
-                'error_bubbling' => false,
-                'prototype'      => true,
-            ]);
+        $builder->add('market', BrokerMarketStocksType::class, [
+            'label' => false,
+        ]);
+
+        $builder->add('commissions', CollectionType::class, [
+            'entry_type'     => CommissionType::class,
+            'entry_options'  => array('label' => false),
+            'label'          => false,
+            'allow_add'      => true,
+            'allow_delete'   => true,
+            'by_reference'   => false,
+            'error_bubbling' => false,
+            'prototype'      => true,
+        ]);
     }
     
     /**
@@ -33,7 +36,7 @@ class BrokerMarketType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'ManagerBundle\Entity\Market'
+            'data_class' => 'ManagerBundle\Entity\BrokerMarket'
         ]);
     }
 

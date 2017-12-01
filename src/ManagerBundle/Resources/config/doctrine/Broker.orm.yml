@@ -23,14 +23,15 @@ ManagerBundle\Entity\Broker:
     lifecycleCallbacks: {  }
     oneToOne:
         account:
-          targetEntity: ManagerBundle\Entity\Account
-          cascade: [ persist, merge, detach, remove ]
-          joinColumn:
-            name: account_id
-            referencedColumnName: id
+            targetEntity: ManagerBundle\Entity\Account
+            cascade: [ persist, merge, detach, remove ]
+            joinColumn:
+                name: account_id
+                referencedColumnName: id
     oneToMany:
         markets:
             targetEntity: ManagerBundle\Entity\BrokerMarket
+            cascade: [ persist, merge, detach, remove ]
             mappedBy: broker
             fetch: EXTRA_LAZY
     manyToMany:
@@ -41,9 +42,9 @@ ManagerBundle\Entity\Broker:
             joinTable:
                 name: broker_commission
                 joinColumns:
-                  broker_id: # reference (Broker)
-                    referencedColumnName: id
+                    broker_id: # reference (Broker)
+                        referencedColumnName: id
                 inverseJoinColumns:
-                  commission_id:
-                    referencedColumnName: id
-                    unique: true
+                    commission_id:
+                        referencedColumnName: id
+                        unique: true

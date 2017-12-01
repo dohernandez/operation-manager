@@ -3,83 +3,45 @@
 namespace ManagerBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use ManagerBundle\Contract;
 
-class BrokerMarket extends Entity
+class BrokerMarket extends Entity implements Contract\Market
 {
     use Property\Market;
     use Property\Broker;
     use Property\Commissions;
 
-    private $products;
-
     public function __construct()
     {
         $this->commissions = new ArrayCollection();
-        $this->products = new ArrayCollection();
     }
 
     /**
+     * @param Broker $broker
      * @param Market $market
      *
      * @return BrokerMarket
      */
-    static public function createFromMarket(Market $market): BrokerMarket
+    static public function createFrom(Broker $broker, Market $market): BrokerMarket
     {
         $brokerContract = new static();
 
-        $brokerContract->setProducts($market);
+        $brokerContract->setMarket($market);
+        $brokerContract->setBroker($broker);
 
         return $brokerContract;
     }
 
-    /**
-     * @return ArrayCollection[Product]
-     */
-    public function getProducts()
-    {
-        return $this->products;
-    }
-
-    /**
-     * @param ArrayCollection [Product] $products
-     *
-     * @return BrokerMarket
-     */
-    public function setProducts(ArrayCollection $products)
-    {
-        $this->products = $products;
-
-        return $this;
-    }
-
-    /**
-     * @param Product $product
-     *
-     * @return BrokerMarket
-     */
-    public function addProduct(Product $product)
-    {
-        if (!$this->products->contains($product)) {
-            $this->products->add($product);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param Product $product
-     *
-     * @return BrokerMarket
-     */
-    public function removeProduct(Product $product)
-    {
-        $this->products->removeElement($product);
-
-        return $this;
-    }
-
-    public function equals(Market $market)
+    public function isThisMarket(Market $market)
     {
         return $this->market->getId() === $market->getId();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getMarket();
     }
 }

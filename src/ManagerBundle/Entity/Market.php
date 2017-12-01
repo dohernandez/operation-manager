@@ -2,10 +2,12 @@
 
 namespace ManagerBundle\Entity;
 
+use ManagerBundle\Contract;
+
 /**
  * Market
  */
-abstract class Market extends Entity
+abstract class Market extends Entity implements Contract\Market
 {
     use Property\Name;
     use Property\Symbol;

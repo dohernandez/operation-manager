@@ -7,25 +7,26 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class BrokerMarketsType extends AbstractType
+class BrokerCryptocurrencyMarketType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /** @var Broker $broker */
-        $broker = $options['data'];
-        $entityType = BrokerStockMarketType::class;
+        $builder->add('market', BrokerMarketCryptocurrenciesType::class, [
+            'label' => false,
+        ]);
 
-        if ($broker->getType() == 'cryptocurrencies') {
-            $entityType = BrokerCryptocurrencyMarketType::class;
-        }
-
-        $builder->add('markets', CollectionType::class, [
-            'entry_type'     => $entityType,
+        $builder->add('commissions', CollectionType::class, [
+            'entry_type'     => CommissionType::class,
             'entry_options'  => array('label' => false),
             'label'          => false,
+            'allow_add'      => true,
+            'allow_delete'   => true,
+            'by_reference'   => false,
+            'error_bubbling' => false,
+            'prototype'      => true,
         ]);
     }
     
@@ -35,7 +36,7 @@ class BrokerMarketsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'ManagerBundle\Entity\Broker'
+            'data_class' => 'ManagerBundle\Entity\BrokerMarket'
         ]);
     }
 
@@ -44,6 +45,6 @@ class BrokerMarketsType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'managerbundle_broker';
+        return 'managerbundle_broker_market';
     }
 }
