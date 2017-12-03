@@ -56,7 +56,8 @@ class BrokerType extends AbstractType
             'multiple' => true,
             'group_by' => 'region',
             'attr' => [
-                'class' => 'select2 select2-multiple'
+                'class' => 'select2 select2-multiple',
+                'style' => 'width: 100%',
             ],
             'by_reference'   => false,
         ];

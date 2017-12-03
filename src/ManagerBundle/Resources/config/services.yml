@@ -15,6 +15,7 @@ parameters:
       - yearly
     commission_applied:
       - per_stock
+      - per_currency
       - per_amount
       - fixed
 

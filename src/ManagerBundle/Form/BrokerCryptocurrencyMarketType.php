@@ -2,6 +2,7 @@
 
 namespace ManagerBundle\Form;
 
+use ManagerBundle\Entity\BrokerMarket;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,9 +15,9 @@ class BrokerCryptocurrencyMarketType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('market', BrokerMarketCryptocurrenciesType::class, [
-            'label' => false,
-        ]);
+//        $builder->add('market', BrokerMarketCryptocurrencyMarketType::class, [
+//            'label' => false,
+//        ]);
 
         $builder->add('commissions', CollectionType::class, [
             'entry_type'     => CommissionType::class,
@@ -36,7 +37,7 @@ class BrokerCryptocurrencyMarketType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'ManagerBundle\Entity\BrokerMarket'
+            'data_class' => BrokerMarket::class
         ]);
     }
 

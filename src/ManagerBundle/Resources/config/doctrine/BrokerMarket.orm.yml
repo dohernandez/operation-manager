@@ -9,18 +9,17 @@ ManagerBundle\Entity\BrokerMarket:
             generator:
                 strategy: AUTO
     lifecycleCallbacks: {  }
-    oneToOne:
-        market:
-            targetEntity: ManagerBundle\Entity\Market
-            joinColumn:
-                name: market_id
-                referencedColumnName: id
     manyToOne:
         broker:
             targetEntity: ManagerBundle\Entity\Broker
             inversedBy: markets
             joinColumn:
                 name: broker_id
+                referencedColumnName: id
+        market:
+            targetEntity: ManagerBundle\Entity\Market
+            joinColumn:
+                name: market_id
                 referencedColumnName: id
     manyToMany:
         commissions:
@@ -30,7 +29,7 @@ ManagerBundle\Entity\BrokerMarket:
             joinTable:
                 name: broker_market_commission
                 joinColumns:
-                    broker_market_id: # reference (BrokerMarket)
+                    broker_market_id:
                         referencedColumnName: id
                 inverseJoinColumns:
                     commission_id:

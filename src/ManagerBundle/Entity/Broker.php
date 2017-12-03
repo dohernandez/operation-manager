@@ -147,13 +147,15 @@ class Broker extends Entity
         $this->capital -= $capital;
 
         return $this;
-    }/**
- * Set markets
- *
- * @param ArrayCollection[BrokerMarket] $markets
- *
- * @return Entity
- */
+    }
+
+    /**
+     * Set markets
+     *
+     * @param ArrayCollection[BrokerMarket] $markets
+     *
+     * @return Entity
+     */
     public function setMarkets(ArrayCollection $markets)
     {
         $this->markets = $markets;

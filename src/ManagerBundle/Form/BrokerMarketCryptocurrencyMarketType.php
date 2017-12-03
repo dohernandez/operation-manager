@@ -2,22 +2,23 @@
 
 namespace ManagerBundle\Form;
 
-use ManagerBundle\Entity\Stock;
+use ManagerBundle\Entity\Cryptocurrency;
+use ManagerBundle\Entity\CryptocurrencyMarket;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class BrokerMarketStocksType extends AbstractType
+class BrokerMarketCryptocurrencyMarketType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('stocks', EntityType::class, [
-            'class' => Stock::class,
-            'placeholder'  => 'Choose stock',
+        $builder->add('cryptocurrencies', EntityType::class, [
+            'class' => Cryptocurrency::class,
+            'placeholder'  => 'Choose cryptocurrency',
             'multiple' => true,
             'required' => false,
             'attr' => [
@@ -34,7 +35,7 @@ class BrokerMarketStocksType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'ManagerBundle\Entity\StockMarket'
+            'data_class' => CryptocurrencyMarket::class
         ]);
     }
 
