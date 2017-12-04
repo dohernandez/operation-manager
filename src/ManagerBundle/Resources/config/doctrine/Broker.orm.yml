@@ -1,26 +1,13 @@
 ManagerBundle\Entity\Broker:
     type: entity
-    table: null
     repositoryClass: ManagerBundle\Repository\BrokerRepository
-    id:
-        id:
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-    fields:
-        name:
-            type: string
-            length: 255
-            unique: true
-        type:
-            type: string
-            length: 255
-        investment:
-            type: float
-        capital:
-            type: float
     lifecycleCallbacks: {  }
+    oneToMany:
+        markets:
+            targetEntity: ManagerBundle\Entity\BrokerMarket
+            cascade: [ persist, merge, detach, remove ]
+            mappedBy: broker
+            fetch: EXTRA_LAZY
     oneToOne:
         account:
             targetEntity: ManagerBundle\Entity\Account
@@ -28,12 +15,6 @@ ManagerBundle\Entity\Broker:
             joinColumn:
                 name: account_id
                 referencedColumnName: id
-    oneToMany:
-        markets:
-            targetEntity: ManagerBundle\Entity\BrokerMarket
-            cascade: [ persist, merge, detach, remove ]
-            mappedBy: broker
-            fetch: EXTRA_LAZY
     manyToMany:
         commissions:
             targetEntity: ManagerBundle\Entity\Commission

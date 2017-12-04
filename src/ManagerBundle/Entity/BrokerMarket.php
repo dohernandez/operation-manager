@@ -5,7 +5,7 @@ namespace ManagerBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use ManagerBundle\Contract;
 
-class BrokerMarket extends Entity implements Contract\Market
+class BrokerMarket extends Entity
 {
     use Property\Market;
     use Property\Broker;

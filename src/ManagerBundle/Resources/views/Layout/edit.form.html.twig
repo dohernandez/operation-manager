@@ -19,6 +19,7 @@
         <div class="{% if box_class is defined %}{{ box_class }}{% else %}col-md-6 col-md-offset-3{% endif %}">
             {% embed 'ManagerBundle:Form:horizontal-form.html.twig'%}
                 {% block box_title %}{{ box_title }}{% endblock %}
+                {% block box_button %}{{ box_button }}{% endblock %}
             {% endembed %}
         </div>
     </div>

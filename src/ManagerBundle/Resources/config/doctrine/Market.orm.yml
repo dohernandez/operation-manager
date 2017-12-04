@@ -26,11 +26,6 @@ ManagerBundle\Entity\Market:
             type: string
             length: 255
     lifecycleCallbacks: {  }
-    oneToMany:
-        brokers:
-            targetEntity: ManagerBundle\Entity\BrokerMarket
-            mappedBy: market
-            fetch: EXTRA_LAZY
     manyToOne:
         region:
             targetEntity: ManagerBundle\Entity\Region

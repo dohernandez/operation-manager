@@ -7,26 +7,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Broker
  */
-class Broker extends Entity
+class Broker extends Platform
 {
-    use Property\Name;
-    use Property\Type;
     use Property\Commissions;
 
     /**
      * @var Account
      */
-    private $account;
-
-    /**
-     * @var float
-     */
-    private $investment;
-
-    /**
-     * @var float
-     */
-    private $capital;
+    protected $account;
 
     /**
      * @var ArrayCollection[BrokerMarket]
@@ -35,8 +23,8 @@ class Broker extends Entity
 
     public function __construct()
     {
-        $this->investment = 0;
-        $this->capital = 0;
+        parent::__construct();
+
         $this->commissions = new ArrayCollection();
         $this->markets = new ArrayCollection();
     }
@@ -62,99 +50,11 @@ class Broker extends Entity
     }
 
     /**
-     * @return float
-     */
-    public function getInvestment()
-    {
-        return $this->investment;
-    }
-
-    /**
-     * @param float $investment
-     *
-     * @return Broker
-     */
-    public function setInvestment(float $investment)
-    {
-        $this->investment = $investment;
-
-        return $this;
-    }
-
-    /**
-     * @param float $investment
-     *
-     * @return Broker
-     */
-    public function increaseInvestment(float $investment)
-    {
-        $this->investment += $investment;
-
-        return $this;
-    }
-
-    /**
-     * @param float $investment
-     *
-     * @return Broker
-     */
-    public function decreaseInvestment(float $investment)
-    {
-        $this->investment -= $investment;
-
-        return $this;
-    }
-
-    /**
-     * @return float
-     */
-    public function getCapital()
-    {
-        return $this->capital;
-    }
-
-    /**
-     * @param float $capital
-     *
-     * @return Broker
-     */
-    public function setCapital(float $capital)
-    {
-        $this->capital = $capital;
-
-        return $this;
-    }
-
-    /**
-     * @param float $capital
-     *
-     * @return Broker
-     */
-    public function increaseCapital(float $capital)
-    {
-        $this->capital += $capital;
-
-        return $this;
-    }
-
-    /**
-     * @param float $capital
-     *
-     * @return Broker
-     */
-    public function decreaseCapital(float $capital)
-    {
-        $this->capital -= $capital;
-
-        return $this;
-    }
-
-    /**
      * Set markets
      *
      * @param ArrayCollection[BrokerMarket] $markets
      *
-     * @return Entity
+     * @return Broker
      */
     public function setMarkets(ArrayCollection $markets)
     {
@@ -176,7 +76,7 @@ class Broker extends Entity
     /**
      * @param BrokerMarket $market
      *
-     * @return Entity
+     * @return Broker
      */
     public function addMarket(BrokerMarket $market)
     {
@@ -190,18 +90,13 @@ class Broker extends Entity
     /**
      * @param BrokerMarket $market
      *
-     * @return Entity
+     * @return Broker
      */
     public function removeMarket(BrokerMarket $market)
     {
         $this->markets->removeElement($market);
 
         return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->getName();
     }
 }
 

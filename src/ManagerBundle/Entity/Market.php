@@ -3,12 +3,11 @@
 namespace ManagerBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use ManagerBundle\Contract;
 
 /**
  * Market
  */
-abstract class Market extends Entity implements Contract\Market
+abstract class Market extends Entity
 {
     use Property\Name;
     use Property\Symbol;
@@ -25,13 +24,13 @@ abstract class Market extends Entity implements Contract\Market
     private $region;
 
     /**
-     * @var ArrayCollection[BrokerMarket]
+     * @var ArrayCollection[Platform]
      */
-    protected $brokers;
+    protected $platforms;
 
     public function __construct()
     {
-        $this->brokers = new ArrayCollection();
+        $this->platforms = new ArrayCollection();
     }
 
     /**
@@ -77,49 +76,49 @@ abstract class Market extends Entity implements Contract\Market
     /**
      * Set markets
      *
-     * @param ArrayCollection[BrokerMarket] $brokers
+     * @param ArrayCollection[Platform] $platforms
      *
      * @return Market
      */
-    public function setBrokers(ArrayCollection $brokers)
+    public function setPlatforms(ArrayCollection $platforms)
     {
-        $this->brokers = $brokers;
+        $this->platforms = $platforms;
 
         return $this;
     }
 
     /**
-     * Get brokers
+     * Get platforms
      *
-     * @return ArrayCollection[BrokerMarket]
+     * @return ArrayCollection[Platform]
      */
-    public function getBrokers()
+    public function getPlatforms()
     {
-        return $this->brokers;
+        return $this->platforms;
     }
 
     /**
-     * @param BrokerMarket $broker
+     * @param Platform $platform
      *
      * @return Market
      */
-    public function addBroker(BrokerMarket $broker)
+    public function addPlatform(Platform $platform)
     {
-        if (!$this->brokers->contains($broker)) {
-            $this->brokers->add($broker);
+        if (!$this->platforms->contains($platform)) {
+            $this->platforms->add($platform);
         }
 
         return $this;
     }
 
     /**
-     * @param BrokerMarket $broker
+     * @param Platform $platform
      *
      * @return Market
      */
-    public function removedBroker(BrokerMarket $broker)
+    public function removedPlatform(Platform $platform)
     {
-        $this->brokers->removeElement($broker);
+        $this->platforms->removeElement($platform);
 
         return $this;
     }
@@ -132,4 +131,3 @@ abstract class Market extends Entity implements Contract\Market
         return sprintf('%s (%s)', $this->getName(), $this->getSymbol());
     }
 }
-

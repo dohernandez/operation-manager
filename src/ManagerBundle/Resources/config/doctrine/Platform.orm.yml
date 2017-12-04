@@ -1,0 +1,23 @@
+ManagerBundle\Entity\Platform:
+    type: mappedSuperclass
+    table: null
+    repositoryClass: ManagerBundle\Repository\PlataformRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            unique: true
+        type:
+            type: string
+            length: 255
+        investment:
+            type: float
+        capital:
+            type: float
+    lifecycleCallbacks: {  }

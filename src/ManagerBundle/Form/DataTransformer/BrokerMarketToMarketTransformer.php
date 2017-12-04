@@ -98,7 +98,7 @@ class BrokerMarketToMarketTransformer implements DataTransformerInterface
     public function reverseTransform($value)
     {
         $markets = new ArrayCollection();
-        $brokerMarkets = $this->repository->findAllByBroker($this->broker);
+        $brokerMarkets = $this->broker ? $this->repository->findAllByBroker($this->broker) : [];
 
         if (!empty($value)) {
             /** @var StockMarket $item */

@@ -10,10 +10,11 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-            <a href="{{ cancel_url|default('#') }}" class="btn btn-default">Cancel</a>
-            <button id="submit-btn" type="submit" class="btn btn-{{ box_type|default('info') }} pull-right">
-                <i class="fa fa-check-square" aria-hidden="true"></i> {{ submit_type|default('Submit') }}
-            </button>
+            {% if box_button is defined %}
+                {{ box_button }}
+            {% else %}
+                {% include 'ManagerBundle:Form:button-form.html.twig' %}
+            {% endif %}
         </div>
         <!-- /.box-footer -->
         {{ form_end(form) }}

@@ -45,11 +45,13 @@ class BrokerType extends AbstractType
     {
         /** @var Broker $broker */
         $broker = $options['data'];
+        $this->marketsTransformer->setBroker($broker);
+
+        $disabled = false;
+
         if (!empty($broker->getId())) {
             $disabled = true;
         }
-
-        $this->marketsTransformer->setBroker($broker);
 
         $marketOptions = [
             'choice_label' => 'alias',
@@ -87,11 +89,11 @@ class BrokerType extends AbstractType
                 $entityClass = CryptocurrencyMarket::class;
             }
 
-            $builder->add('markets', EntityType::class, [
+            $builder->add('markets', BrokerMarketEntityType::class, [
                 'class'   => $entityClass,
             ] + $marketOptions);
         } else {
-            $builder->add('markets', EntityType::class, [
+            $builder->add('markets', BrokerMarketEntityType::class, [
                 'class'   => Market::class,
                 'choices' => []
             ] + $marketOptions);
@@ -109,16 +111,13 @@ class BrokerType extends AbstractType
                             $entityClass = CryptocurrencyMarket::class;
                         }
 
-                        $form->add('markets', EntityType::class, [
+                        $form->add('markets', BrokerMarketEntityType::class, [
                             'class'   => $entityClass,
                         ] + $marketOptions);
                     }
                 }
             );
         }
-
-        $builder->get('markets')
-            ->addModelTransformer($this->marketsTransformer);
 
         $builder->addEventListener(
             FormEvents::PRE_SUBMIT,

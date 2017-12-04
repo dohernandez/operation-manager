@@ -36,6 +36,10 @@ services:
         arguments: ["%broker_type%", "@manager.broker.markers.transformer"]
         tags: [form.type]
 
+    ManagerBundle\Form\BrokerMarketEntityType:
+        arguments: ["@manager.broker.markers.transformer"]
+        tags: [form.type]
+
     ManagerBundle\Form\CommissionType:
         arguments: ["%commission_type%", "%commission_period%", "%commission_applied%"]
         tags: [form.type]
