@@ -15,10 +15,6 @@ class BrokerCryptocurrencyMarketType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-//        $builder->add('market', BrokerMarketCryptocurrencyMarketType::class, [
-//            'label' => false,
-//        ]);
-
         $builder->add('commissions', CollectionType::class, [
             'entry_type'     => CommissionType::class,
             'entry_options'  => array('label' => false),
