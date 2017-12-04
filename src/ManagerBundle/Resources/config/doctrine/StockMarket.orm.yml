@@ -6,9 +6,9 @@ ManagerBundle\Entity\StockMarket:
             targetEntity: ManagerBundle\Entity\Stock
             fetch: EXTRA_LAZY
             joinTable:
-                name: broker_market_stock
+                name: market_stock
                 joinColumns:
-                    broker_market_id: # reference (BrokerMarket)
+                    market_id:
                         referencedColumnName: id
                 inverseJoinColumns:
                     stock_id:

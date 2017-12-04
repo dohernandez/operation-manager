@@ -40,7 +40,12 @@ class MarketType extends AbstractType
             ->add('region', EntityType::class, [
                 'class'   => Region::class,
                 'placeholder' => 'Choose region',
-            ]);
+            ])
+            ->add('country', EntityType::class, array(
+                'class' => Country::class,
+                'placeholder' => 'Choose country',
+                'choices' => [],
+            ));
 
         $formModifier = function (FormInterface $form, Region $region = null) {
             $counties = null === $region ? array() : $region->getCountries();

@@ -16,12 +16,12 @@ abstract class Market extends Entity
     /**
      * @var Country
      */
-    private $country;
+    protected $country;
 
     /**
      * @var Region
      */
-    private $region;
+    protected $region;
 
     /**
      * @var ArrayCollection[Platform]

@@ -1,7 +1,18 @@
 {% extends 'ManagerBundle:Layout:edit.form.html.twig' %}
 
+{% block avanzu_head %}
+    {{ parent() }}
+
+    <!-- bootstrap multiselect -->
+    <link rel="stylesheet" href="{{ asset('theme/plugins/select2/select2.min.css') }}">
+{% endblock %}
+
 {% block avanzu_javascripts_inline %}
     {{ parent() }}
+
+    <!-- bootstrap multiselect -->
+    <script src="{{ asset('theme/plugins/select2/select2.min.js') }}"></script>
+
     <script>
         $(document).ready(function () {
             var $region = $('#managerbundle_market_region');
@@ -45,6 +56,20 @@
                     $('#managerbundle_market_alias').prop('placeholder', 'Enter alias')
                 }
             });
+
+            var $cryptocurrencies = $('#cryptocurrency_market_cryptocurrencies');
+            if ($cryptocurrencies) {
+                $cryptocurrencies.select2({
+                    placeholder: 'Choose cryptocurrency'
+                })
+            }
+
+            var $stocks = $('#stock_market_stocks');
+            if ($stocks) {
+                $stocks.select2({
+                    placeholder: 'Choose stock'
+                })
+            }
         });
     </script>
 {% endblock %}

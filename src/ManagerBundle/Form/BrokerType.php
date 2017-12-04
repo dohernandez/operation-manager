@@ -7,7 +7,6 @@ use ManagerBundle\Entity\CryptocurrencyMarket;
 use ManagerBundle\Entity\Market;
 use ManagerBundle\Entity\StockMarket;
 use ManagerBundle\Form\DataTransformer\BrokerMarketToMarketTransformer;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -53,17 +52,6 @@ class BrokerType extends AbstractType
             $disabled = true;
         }
 
-        $marketOptions = [
-            'choice_label' => 'alias',
-            'multiple' => true,
-            'group_by' => 'region',
-            'attr' => [
-                'class' => 'select2 select2-multiple',
-                'style' => 'width: 100%',
-            ],
-            'by_reference'   => false,
-        ];
-
         $builder->add('name', TextType::class, [
             'attr' => [
                 'placeholder' => 'Enter name',
@@ -81,6 +69,18 @@ class BrokerType extends AbstractType
             ])->add('account', AccountType::class, [
                 'label' => false,
             ]);
+
+        // markets
+        $marketOptions = [
+            'choice_label' => 'alias',
+            'multiple' => true,
+            'group_by' => 'region',
+            'attr' => [
+                'class' => 'select2 select2-multiple',
+                'style' => 'width: 100%',
+            ],
+            'by_reference'   => false,
+        ];
 
         if (!empty($broker->getType())) {
             $entityClass = StockMarket::class;

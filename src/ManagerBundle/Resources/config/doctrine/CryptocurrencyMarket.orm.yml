@@ -6,9 +6,9 @@ ManagerBundle\Entity\CryptocurrencyMarket:
             targetEntity: ManagerBundle\Entity\Cryptocurrency
             fetch: EXTRA_LAZY
             joinTable:
-                name: broker_market_cryptocurrency
+                name: market_cryptocurrency
                 joinColumns:
-                    broker_market_id: # reference (BrokerMarket)
+                    market_id:
                         referencedColumnName: id
                 inverseJoinColumns:
                     cryptocurrency_id:
