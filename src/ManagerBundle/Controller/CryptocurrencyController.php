@@ -33,7 +33,6 @@ class CryptocurrencyController extends CRUDController
     {
         return $this->index(
             [
-                [ 'name' => 'alias', 'col_with' => '80' ],
                 [ 'name' => 'name' ],
                 [ 'name' => 'symbol', 'col_with' => '80' ],
                 [ 'name' => 'description', 'render' => 'slice', 'truncate' => '60'],

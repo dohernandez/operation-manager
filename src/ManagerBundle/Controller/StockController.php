@@ -37,9 +37,8 @@ class StockController extends CRUDController
 
         return $this->index(
             [
-                [ 'name' => 'symbol', 'col_with' => '70' ],
-                [ 'name' => 'alias', 'col_with' => '100' ],
-                [ 'name' => 'company', 'col_with' => '160' ],
+                [ 'name' => 'symbol', 'col_with' => '80' ],
+                [ 'name' => 'company', 'col_with' => '200' ],
                 [ 'name' => 'description', 'render' => 'slice', 'truncate' => '60'],
             ],
             $stocks,

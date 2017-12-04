@@ -18,13 +18,7 @@ class ProductType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('alias', TextType::class, [
-                'attr' => [
-                    'placeholder' => 'Enter alias',
-                ],
-                'required' => false,
-            ])
-            ->add('symbol', TextType::class, [
+        $builder->add('symbol', TextType::class, [
                 'attr' => [
                     'placeholder' => 'Enter symbol',
                 ],
@@ -36,18 +30,6 @@ class ProductType extends AbstractType
                     'placeholder' => 'Enter description',
                 ],
             ]);
-
-        $builder->addEventListener(
-            FormEvents::PRE_SUBMIT,
-            function (FormEvent $event) {
-                $data = $event->getData();
-
-                if (empty($data['alias'])) {
-                    $data['alias'] = $data['symbol'];
-                    $event->setData($data);
-                }
-            }
-        );
     }
     
     /**
