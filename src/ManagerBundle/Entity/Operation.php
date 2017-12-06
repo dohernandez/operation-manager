@@ -8,12 +8,23 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Operation extends Entity
 {
     use Property\Type;
+    use Property\Broker;
     use Property\Product;
+
+    /**
+     * @var BrokerMarket
+     */
+    protected $market;
 
     /**
      * @var ArrayCollection[Trade]
      */
     private $trades;
+
+    /**
+     * @var float
+     */
+    private $size;
 
     /**
      * @var float
@@ -76,6 +87,26 @@ class Operation extends Entity
     private $closedAt;
 
     /**
+     * @return BrokerMarket
+     */
+    public function getMarket()
+    {
+        return $this->market;
+    }
+
+    /**
+     * @param BrokerMarket $market
+     *
+     * @return Operation
+     */
+    public function setMarket(BrokerMarket $market)
+    {
+        $this->market = $market;
+
+        return $this;
+    }
+
+    /**
      * @return ArrayCollection
      */
     public function getTrades()
@@ -91,6 +122,26 @@ class Operation extends Entity
     public function setTrades(ArrayCollection $trades)
     {
         $this->trades = $trades;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * @param float $size
+     *
+     * @return Operation
+     */
+    public function setSize(float $size)
+    {
+        $this->size = $size;
 
         return $this;
     }

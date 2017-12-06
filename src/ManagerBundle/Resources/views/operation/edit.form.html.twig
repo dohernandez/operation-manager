@@ -1,0 +1,125 @@
+{% extends 'ManagerBundle:Layout:edit.form.html.twig' %}
+
+{% form_theme form 'ManagerBundle:Form:horizontal-theme-form.html.twig' %}
+
+{% block avanzu_page_content %}
+    <div class="row">
+        <div class="{% if box_class is defined %}{{ box_class }}{% else %}col-md-6 col-md-offset-3{% endif %}">
+            {% embed 'ManagerBundle:Layout:box.html.twig'%}
+                {% block box_title %}{{ box_title }}{% endblock %}
+                {% block _box %}
+                    {{ form_start(form, {'attr': {'id': 'entity-form', 'class': 'form-horizontal'}}) }}
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                {{ form_row(form.type) }}
+                            </div>
+                            <div class="col-md-offset-2 col-sm-6">
+                                {{ form_row(form.broker) }}
+                                {{ form_row(form.market) }}
+                                {{ form_row(form.product) }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        {% include 'ManagerBundle:Form:button-form.html.twig' %}
+                    </div>
+                    <!-- /.box-footer -->
+                    {{ form_end(form) }}
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+
+    {% embed 'ManagerBundle:Modal:modal.html.twig' with {
+        'modal_id' : 'modal-background',
+        'request' : 'true'
+    } %}
+    {% endembed %}
+
+{% endblock %}
+
+{% block avanzu_javascripts_inline %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function () {
+            var $broker = $('#managerbundle_operation_broker');
+            var $market = $('#managerbundle_operation_market');
+            var $product = $('#managerbundle_operation_product');
+
+            var $marketOnchange = function() {
+                loading($product)
+
+                // ... retrieve the corresponding form.
+                var $form = $(this).closest('form');
+
+                var $data = {};
+                $data[$broker.attr('name')] = $broker.val();
+
+                retrieve($form, $market, function(html) {
+                    // Replace current market field ...
+                    $product.replaceWith(
+                        // ... with the returned one from the AJAX response.
+                        $(html).find('#managerbundle_operation_product')
+                    );
+
+                    $product = $('#managerbundle_operation_product');
+                    stop($product)
+                }, $data)
+            }
+
+            // When broker gets selected ...
+            $broker.change(function() {
+                loading($market)
+                loading($product)
+
+                // ... retrieve the corresponding form.
+                var $form = $(this).closest('form');
+                retrieve($form, $broker, function(html) {
+                    // Replace current market field ...
+                    $market.replaceWith(
+                        // ... with the returned one from the AJAX response.
+                        $(html).find('#managerbundle_operation_market')
+                    );
+
+                    $market = $('#managerbundle_operation_market');
+                    $market.change($marketOnchange)
+                    stop($market)
+
+                    stop($product)
+                })
+            });
+
+            // When market gets selected ...
+            $market.change($marketOnchange);
+        });
+
+        function loading($select) {
+            $select.children()
+                .first()
+                .prop('selected', true);
+
+            $select.prop("disabled", true);
+        }
+
+        function stop($select) {
+            $select.prop("disabled", false);
+        }
+
+        function retrieve($form, $select, $success, data) {
+            // Simulate form data, but only include the selected region value.
+            var $data = data ? data : {};
+            $data[$select.attr('name')] = $select.val();
+
+            // Submit data via AJAX to the form's action path.
+            $.ajax({
+                url : $form.attr('action'),
+                type: $form.attr('method'),
+                data : $data,
+                success: $success
+            });
+        }
+    </script>
+{% endblock %}

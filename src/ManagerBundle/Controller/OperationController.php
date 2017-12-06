@@ -33,8 +33,14 @@ class OperationController extends CRUDController
     {
         return $this->index(
             [
-                [ 'name' => 'name', 'col_with' => '200' ],
-                [ 'name' => 'iban' ],
+                [ 'name' => 'type', 'col_with' => '80' ],
+                [ 'name' => 'size', 'col_with' => '80' ],
+                [ 'name' => 'ratio', 'col_with' => '100' ],
+                [ 'name' => 'goal', 'col_with' => '100' ],
+                [ 'name' => 'stop', 'label' => 'Stop loss', 'col_with' => '100' ],
+                [ 'name' => 'start', 'label' => 'Enter', 'col_with' => '100' ],
+                [ 'name' => 'breakeven', 'col_with' => '100' ],
+                [ 'name' => 'benefitsAfterTaxes', 'label' => 'Benefits After Taxes' ],
             ]
         );
     }
@@ -53,7 +59,8 @@ class OperationController extends CRUDController
             'page_subtitle' => 'create',
             'box_type' => 'success',
             'submit_type' => 'Create',
-        ]);
+            'box_class' => 'col-md-10 col-md-offset-1',
+        ], 'ManagerBundle:operation:edit.form.html.twig');
     }
 
     /**

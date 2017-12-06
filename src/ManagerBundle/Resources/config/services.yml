@@ -1,23 +1,5 @@
-parameters:
-    broker_type:
-      - stocks
-      - cryptocurrencies
-    commission_type:
-      - buy
-      - sell
-      - custody
-      - initial_margin
-      - maintenance_margin
-    commission_period:
-      - only_one
-      - daily
-      - monthy
-      - yearly
-    commission_applied:
-      - per_stock
-      - per_currency
-      - per_amount
-      - fixed
+imports:
+    - { resource: "forms.yml" }
 
 services:
 #    manager.example:
@@ -26,27 +8,6 @@ services:
 
     ManagerBundle\Twig\ManagerExtension:
         tags: [twig.extension]
-
-    manager.broker.markers.transformer:
-        class: ManagerBundle\Form\DataTransformer\BrokerMarketToMarketTransformer
-        arguments: ["@=container.get('doctrine').getManager().getRepository('ManagerBundle:BrokerMarket')"]
-        tags: [form.type]
-
-    ManagerBundle\Form\BrokerType:
-        arguments: ["%broker_type%", "@manager.broker.markers.transformer"]
-        tags: [form.type]
-
-    ManagerBundle\Form\BrokerMarketEntityType:
-        arguments: ["@manager.broker.markers.transformer"]
-        tags: [form.type]
-
-    ManagerBundle\Form\CommissionType:
-        arguments: ["%commission_type%", "%commission_period%", "%commission_applied%"]
-        tags: [form.type]
-
-    ManagerBundle\Form\MarketCommissionType:
-        arguments: ["%commission_type%", "%commission_period%", "%commission_applied%"]
-        tags: [form.type]
 
     manager.broker.saved.transfer:
         class: ManagerBundle\EventListener\SavedTransfer\BrokerListener

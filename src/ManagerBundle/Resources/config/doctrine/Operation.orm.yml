@@ -44,6 +44,16 @@ ManagerBundle\Entity\Operation:
             cascade: [ persist, merge, detach, remove ]
             fetch: EXTRA_LAZY
     manyToOne:
+        broker:
+            targetEntity: ManagerBundle\Entity\Broker
+            joinColumn:
+                name: broker_id
+                referencedColumnName: id
+        market:
+            targetEntity: ManagerBundle\Entity\BrokerMarket
+            joinColumn:
+                name: broker_market_id
+                referencedColumnName: id
         product:
             targetEntity: ManagerBundle\Entity\Product
             joinColumn:
