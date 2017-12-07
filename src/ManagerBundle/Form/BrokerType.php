@@ -57,6 +57,11 @@ class BrokerType extends AbstractType
                 'placeholder' => 'Enter name',
             ],
         ])
+            ->add('website', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Enter website',
+                ],
+            ])
             ->add('type', ChoiceType::class, [
                 'choices'      => $this->brokerTypes,
                 'placeholder'  => 'Choose type',

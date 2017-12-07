@@ -6,6 +6,7 @@ abstract class Platform extends Entity
 {
     use Property\Name;
     use Property\Type;
+    use Property\Website;
 
     /**
      * @var float

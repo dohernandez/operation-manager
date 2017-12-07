@@ -13,6 +13,9 @@ ManagerBundle\Entity\Platform:
             type: string
             length: 255
             unique: true
+        website:
+            type: string
+            length: 255
         type:
             type: string
             length: 255
