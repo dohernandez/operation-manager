@@ -5,7 +5,7 @@ namespace ManagerBundle\Entity;
 /**
  * Trade
  */
-abstract class Trade extends Entity
+class Trade extends Entity
 {
     use Property\Type;
     use Property\Product;
@@ -44,6 +44,11 @@ abstract class Trade extends Entity
      * @var float
      */
     private $expenses;
+
+    /**
+     * @var float
+     */
+    private $size;
 
     /**
      * @return Operation
@@ -193,6 +198,26 @@ abstract class Trade extends Entity
     public function setExpenses(float $expenses)
     {
         $this->expenses = $expenses;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * @param float $size
+     *
+     * @return Trade
+     */
+    public function setSize(float $size)
+    {
+        $this->size = $size;
 
         return $this;
     }

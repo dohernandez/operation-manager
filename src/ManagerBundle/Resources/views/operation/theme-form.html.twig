@@ -1,0 +1,9 @@
+{% extends 'ManagerBundle:Form:theme-form.html.twig' %}
+
+{%- block _managerbundle_operation_trades_widget -%}
+    {{ block('trades_widget', 'ManagerBundle:trade:theme-form.html.twig') }}
+{%- endblock -%}
+
+{%- block _managerbundle_operation_trades_entry_row -%}
+    {{ block('trades_entry_row', 'ManagerBundle:trade:theme-form.html.twig') }}
+{%- endblock -%}

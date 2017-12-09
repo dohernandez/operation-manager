@@ -21,6 +21,11 @@ parameters:
     operation_type:
       - short
       - long
+    operation_close_reason:
+      - goal_reached
+      - stop_loss
+      - caution_stop_loss
+      - trend_deterioration
 
 services:
     manager.broker.markers.transformer:
@@ -44,7 +49,7 @@ services:
         arguments: ["%commission_type%", "%commission_period%", "%commission_applied%"]
         tags: [form.type]
 
-    ManagerBundle\Form\OperationType:
+    ManagerBundle\Form\NewOperationType:
         arguments:
           - "%operation_type%"
           - "@=container.get('doctrine').getManager().getRepository('ManagerBundle:Broker')"

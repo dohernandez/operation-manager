@@ -1,6 +1,6 @@
 {% extends 'ManagerBundle:Layout:edit.form.html.twig' %}
 
-{% form_theme form 'ManagerBundle:Form:horizontal-theme-form.html.twig' %}
+{% form_theme form 'ManagerBundle:operation:theme-form.html.twig' %}
 
 {% block avanzu_page_content %}
     <div class="row">
@@ -11,13 +11,138 @@
                     {{ form_start(form, {'attr': {'id': 'entity-form', 'class': 'form-horizontal'}}) }}
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-sm-4">
-                                {{ form_row(form.type) }}
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Type</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p style="margin-top: 8px;margin-bottom: 0px;"><span>{{ form.vars.value.type }}</span></p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Product</label>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p style="margin-top: 8px;margin-bottom: 0px;"><span>{{ form.vars.value.product }}</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 20px;" class="col-sm-12">
+                                        <table class="table table-bordered table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="35%">
+                                                        {{ form_label(form.openedAt) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ form_widget(form.openedAt) }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        {{ form_label(form.order) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ form_widget(form.order) }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        {{ form_label(form.breakeven) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ form_widget(form.breakeven) }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        {{ form_label(form.invested) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ form_widget(form.invested) }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        {{ form_label(form.risk) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ form_widget(form.risk) }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-offset-2 col-sm-6">
-                                {{ form_row(form.broker) }}
-                                {{ form_row(form.market) }}
-                                {{ form_row(form.product) }}
+                            <div class="col-sm-6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-bordered table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="35%">
+                                                        {{ form_label(form.valor) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ form_widget(form.valor) }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        {{ form_label(form.open) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ form_widget(form.open) }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        {{ form_label(form.goal) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ form_widget(form.goal) }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        {{ form_label(form.stop) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ form_widget(form.stop) }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        {{ form_label(form.size) }}
+                                                    </td>
+                                                    <td>
+                                                        {{ form_widget(form.size) }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        {{ form_label(form.ratio) }}
+                                                    </td>
+                                                    <td>
+                                                        <p style="margin-top: 7px;margin-bottom: 0px;"><span>{{ form.vars.value.ratio }}</span></p>
+                                                        {{ form_widget(form.ratio) }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {#<hr />#}
+                        <div class="row">
+                            <div class="col-sm-12">
+                                {{ form_widget(form.trades) }}
                             </div>
                         </div>
                     </div>
@@ -122,4 +247,8 @@
             });
         }
     </script>
+
+    {% include 'ManagerBundle:trade:_scripts.form.html.twig' with {
+        'entity': 'trades'
+    } %}
 {% endblock %}

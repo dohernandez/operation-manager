@@ -38,7 +38,7 @@ class OperationController extends CRUDController
                 [ 'name' => 'ratio', 'col_with' => '100' ],
                 [ 'name' => 'goal', 'col_with' => '100' ],
                 [ 'name' => 'stop', 'label' => 'Stop loss', 'col_with' => '100' ],
-                [ 'name' => 'start', 'label' => 'Enter', 'col_with' => '100' ],
+                [ 'name' => 'open', 'col_with' => '100' ],
                 [ 'name' => 'breakeven', 'col_with' => '100' ],
                 [ 'name' => 'benefitsAfterTaxes', 'label' => 'Benefits After Taxes' ],
             ]
@@ -54,13 +54,25 @@ class OperationController extends CRUDController
      */
     public function newAction(Request $request): Response
     {
-        return $this->edit($request, new Operation(), [
-            'page_title' => 'Manage operation',
-            'page_subtitle' => 'create',
-            'box_type' => 'success',
-            'submit_type' => 'Create',
-            'box_class' => 'col-md-10 col-md-offset-1',
-        ], 'ManagerBundle:operation:edit.form.html.twig');
+        $operation = new Operation();
+
+        $form = $this->createForm('ManagerBundle\Form\NewOperationType', $operation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->performanceEdit($operation, $form);
+
+            return $this->redirectToRoute($this->getEntityCRUDRoute('edit'));
+        }
+
+        return $this->render('ManagerBundle:operation:new.form.html.twig', [
+                'form' => $form->createView(),
+                'cancel_url' => $this->getEntityCRUDUrl('cancel'),
+                'page_title' => 'Manage operation',
+                'page_subtitle' => 'create',
+                'box_type' => 'success',
+                'submit_type' => 'Create',
+            ]);
     }
 
     /**
@@ -78,7 +90,8 @@ class OperationController extends CRUDController
             'page_subtitle' => 'edit',
             'box_type' => 'primary',
             'submit_type' => 'Edit',
-        ]);
+            'box_class' => 'col-md-10 col-md-offset-1',
+        ], 'ManagerBundle:operation:edit.form.html.twig');
     }
 
     /**

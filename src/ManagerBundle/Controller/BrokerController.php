@@ -140,7 +140,7 @@ class BrokerController extends CRUDController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getEntityRepository()->save($broker);
+            $this->performanceEdit($broker, $form);
 
             return $this->redirectToRoute($this->getEntityCRUDRoute('index'));
         }

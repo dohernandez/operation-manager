@@ -1,0 +1,127 @@
+{% extends 'ManagerBundle:Layout:edit.form.html.twig' %}
+
+{% block avanzu_javascripts_inline %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function () {
+            var $broker = $('#managerbundle_operation_broker');
+            var $market = $('#managerbundle_operation_market');
+            var $product = $('#managerbundle_operation_product');
+
+            var $marketOnchange = function() {
+                loading($product)
+
+                // ... retrieve the corresponding form.
+                var $form = $(this).closest('form');
+
+                var $data = {};
+                $data[$broker.attr('name')] = $broker.val();
+
+                retrieve($form, $market, function(html) {
+                    // Replace current market field ...
+                    $product.replaceWith(
+                        // ... with the returned one from the AJAX response.
+                        $(html).find('#managerbundle_operation_product')
+                    );
+
+                    $product = $('#managerbundle_operation_product');
+                    stop($product)
+                }, $data)
+            }
+
+            // When broker gets selected ...
+            $broker.change(function() {
+                loading($market)
+                loading($product)
+
+                // ... retrieve the corresponding form.
+                var $form = $(this).closest('form');
+                retrieve($form, $broker, function(html) {
+                    // Replace current market field ...
+                    $market.replaceWith(
+                        // ... with the returned one from the AJAX response.
+                        $(html).find('#managerbundle_operation_market')
+                    );
+
+                    $market = $('#managerbundle_operation_market');
+                    $market.change($marketOnchange)
+                    stop($market)
+
+                    stop($product)
+                })
+            });
+
+            // When market gets selected ...
+            $market.change($marketOnchange);
+        });
+
+        function loading($select) {
+            $select.children()
+                .first()
+                .prop('selected', true);
+
+            $select.prop("disabled", true);
+        }
+
+        function stop($select) {
+            $select.prop("disabled", false);
+        }
+
+        function retrieve($form, $select, $success, data) {
+            // Simulate form data, but only include the selected region value.
+            var $data = data ? data : {};
+            $data[$select.attr('name')] = $select.val();
+
+            // Submit data via AJAX to the form's action path.
+            $.ajax({
+                url : $form.attr('action'),
+                type: $form.attr('method'),
+                data : $data,
+                success: $success
+            });
+        }
+    </script>
+    
+    <script>
+        $('input[id$="goal"], input[id$="open"], input[id$="stop"]').each(function () {
+            $(this).change(function () {
+                var benefitsRisk = calculateRatioBR();
+                console.log("benefitsRisk: " + benefitsRisk);
+                if (benefitsRisk) {
+                    $('#managerbundle_operation_ratio').val(benefitsRisk.toFixed(2));
+
+                    var ratio = $('#benefits_risk');
+                    if (!ratio.length) {
+                        ratioContainer = $('<p style="margin: 0; padding-top: 6px;"><span id="benefits_risk"></span></p>');
+                        ratioContainer.appendTo($('#managerbundle_operation_ratio').parent());
+
+                        ratio = ratioContainer.children().first();
+                    }
+
+                    ratio.html(benefitsRisk.toFixed(2))
+                }
+            });
+        });
+
+        function calculateRatioBR() {
+            var goal = parseFloat($('#managerbundle_operation_goal').val());
+            console.log("goal: " + goal);
+            var open = parseFloat($('#managerbundle_operation_open').val());
+            console.log("open: " + open);
+            var stop = parseFloat($('#managerbundle_operation_stop').val());
+            console.log("stop: " + stop);
+
+            if (goal && open && stop) {
+                var unityBenefeit = goal - open;
+                console.log("unityBenefeit: " + unityBenefeit);
+                var unityRisk = open - stop;
+                console.log("unityRisk: " + unityRisk);
+
+                return unityBenefeit/unityRisk;
+            }
+
+            return null;
+        }
+    </script>
+{% endblock %}

@@ -114,25 +114,15 @@ abstract class CRUDController extends Controller
         // $entity has been updated with the form inputs at this point when the form is submitted.
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->dispatch(
-                sprintf('%s.%s', CRUDEvents::PRE_SAVED, $this->getEntityClass()),
-                new CRUDEvent($entity, $form)
-            );
-
-            $this->getEntityRepository()->save($entity);
-
-            $this->dispatch(
-                sprintf('%s.%s', CRUDEvents::POST_SAVED, $this->getEntityClass()),
-                new CRUDEvent($entity, $form)
-            );
+            $this->performanceEdit($entity, $form);
 
             return $this->redirectToRoute($this->getEntityCRUDRoute('index'));
         }
 
 
         $options['page_subtitle'] = $options['page_subtitle'] ?: 'info';
-        $options['page_subtitle'] = $options['box_type'] ?: 'info';
-        $options['page_subtitle'] = $options['submit_type'] ?: 'Info';
+        $options['box_type'] = $options['box_type'] ?: 'info';
+        $options['submit_type'] = $options['submit_type'] ?: 'Info';
 
         return $this->render($view, [
             'form' => $form->createView(),
@@ -140,7 +130,30 @@ abstract class CRUDController extends Controller
         ] + $options);
     }
 
-    protected function dispatch(string $eventName, CRUDEvent $event)
+    /**
+     * @param Entity $entity
+     * @param Form $form
+     */
+    protected function performanceEdit(Entity $entity, Form $form)
+    {
+        $this->dispatch(
+            sprintf('%s.%s', CRUDEvents::PRE_SAVED, $this->getEntityClass()),
+            new CRUDEvent($entity, $form)
+        );
+
+        $this->getEntityRepository()->save($entity);
+
+        $this->dispatch(
+            sprintf('%s.%s', CRUDEvents::POST_SAVED, $this->getEntityClass()),
+            new CRUDEvent($entity, $form)
+        );
+    }
+
+    /**
+     * @param string $eventName
+     * @param CRUDEvent $event
+     */
+    private function dispatch(string $eventName, CRUDEvent $event)
     {
         if ($this->container->has('event_dispatcher')) {
             $dispatcher = $this->get('event_dispatcher');

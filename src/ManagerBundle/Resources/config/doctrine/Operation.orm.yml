@@ -12,30 +12,54 @@ ManagerBundle\Entity\Operation:
         type:
             type: string
             length: 255
+        size:
+            type: float
+        valor:
+            type: float
         goal:
             type: float
         stop:
             type: float
-        start:
+        open:
             type: float
         breakeven:
             type: float
+            nullable: true
         earnings:
             type: float
+            nullable: true
         ratio:
             type: float
+        order:
+            type: float
+            nullable: true
+        invested:
+            type: float
+            nullable: true
+        risk:
+            type: float
+            nullable: true
         commissions:
             type: float
+            nullable: true
         benefits:
             type: float
+            nullable: true
         taxes:
             type: float
+            nullable: true
         benefitsAfterTaxes:
             type: float
+            nullable: true
         openedAt:
             type: date
+            nullable: true
         closedAt:
             type: date
+            nullable: true
+        closeReason:
+            type: string
+            nullable: true
     lifecycleCallbacks: {  }
     oneToMany:
         trades:

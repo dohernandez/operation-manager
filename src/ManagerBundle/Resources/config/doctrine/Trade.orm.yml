@@ -8,18 +8,14 @@ ManagerBundle\Entity\Trade:
             generator:
                 strategy: AUTO
     inheritanceType: SINGLE_TABLE
-    discriminatorColumn:
-        name: discr
-        type: string
-    discriminatorMap:
-        cryptocurrency: ManagerBundle\Entity\CryptoCurrency
-        stock: ManagerBundle\Entity\Stock
     fields:
         type:
             type: string
             length: 255
         tradedAt:
             type: date
+        size:
+            type: float
         price:
             type: float
         order:

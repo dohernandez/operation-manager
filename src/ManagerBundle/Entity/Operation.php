@@ -29,6 +29,11 @@ class Operation extends Entity
     /**
      * @var float
      */
+    private $valor;
+
+    /**
+     * @var float
+     */
     private $goal;
 
     /**
@@ -39,7 +44,27 @@ class Operation extends Entity
     /**
      * @var float
      */
-    private $start;
+    private $open;
+
+    /**
+     * @var float
+     */
+    private $ratio;
+
+    /**
+     * @var float
+     */
+    private $order;
+
+    /**
+     * @var float
+     */
+    private $invested;
+
+    /**
+     * @var float
+     */
+    private $risk;
 
     /**
      * @var float
@@ -52,9 +77,9 @@ class Operation extends Entity
     private $earnings;
 
     /**
-     * @var float
+     * @var string
      */
-    private $ratio;
+    private $closeReason;
 
     /**
      * @var float
@@ -149,6 +174,26 @@ class Operation extends Entity
     /**
      * @return float
      */
+    public function getValor()
+    {
+        return $this->valor;
+    }
+
+    /**
+     * @param float $valor
+     *
+     * @return Operation
+     */
+    public function setValor(float $valor)
+    {
+        $this->valor = $valor;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
     public function getGoal()
     {
         return $this->goal;
@@ -189,19 +234,19 @@ class Operation extends Entity
     /**
      * @return float
      */
-    public function getStart()
+    public function getOpen()
     {
-        return $this->start;
+        return $this->open;
     }
 
     /**
-     * @param float $start
+     * @param float $open
      *
      * @return Operation
      */
-    public function setStart(float $start)
+    public function setOpen(float $open)
     {
-        $this->start = $start;
+        $this->open = $open;
 
         return $this;
     }
@@ -229,6 +274,86 @@ class Operation extends Entity
     /**
      * @return float
      */
+    public function getRatio()
+    {
+        return $this->ratio;
+    }
+
+    /**
+     * @param float $ratio
+     *
+     * @return Operation
+     */
+    public function setRatio(float $ratio)
+    {
+        $this->ratio = $ratio;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param float $order
+     *
+     * @return Operation
+     */
+    public function setOrder(float $order)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getInvested()
+    {
+        return $this->invested;
+    }
+
+    /**
+     * @param float $invested
+     *
+     * @return Operation
+     */
+    public function setInvested(float $invested)
+    {
+        $this->invested = $invested;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getRisk()
+    {
+        return $this->risk;
+    }
+
+    /**
+     * @param float $risk
+     *
+     * @return Operation
+     */
+    public function setRisk(float $risk)
+    {
+        $this->risk = $risk;
+
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
     public function getEarnings()
     {
         return $this->earnings;
@@ -247,21 +372,21 @@ class Operation extends Entity
     }
 
     /**
-     * @return float
+     * @return string
      */
-    public function getRatio()
+    public function getCloseReason()
     {
-        return $this->ratio;
+        return $this->closeReason;
     }
 
     /**
-     * @param float $ratio
+     * @param string $closeReason
      *
      * @return Operation
      */
-    public function setRatio(float $ratio)
+    public function setCloseReason(string $closeReason)
     {
-        $this->ratio = $ratio;
+        $this->closeReason = $closeReason;
 
         return $this;
     }

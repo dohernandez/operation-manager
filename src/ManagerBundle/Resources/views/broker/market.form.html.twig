@@ -33,22 +33,4 @@
     {% include 'ManagerBundle:commission:_scripts.form.html.twig' with {
         'entity': 'broker_markets'
     } %}
-
-    {#<script>#}
-        {#{%- for borker_market in form.vars.value.markets -%}#}
-            {#{%- if borker_market.market is instanceof("ManagerBundle\\Entity\\CryptocurrencyMarket")-%}#}
-                {#var $cryprocurrency = $('#managerbundle_broker_markets_{{ loop.index0 }}_market_cryptocurrencies');#}
-
-                {#$cryprocurrency.select2({#}
-                    {#placeholder: 'Choose a cryprocurrency'#}
-                {#});#}
-            {#{%- else -%}#}
-                {#var $stocks = $('#managerbundle_broker_markets_{{ loop.index0 }}_market_stocks');#}
-
-                {#$stocks.select2({#}
-                    {#placeholder: 'Choose a stock'#}
-                {#});#}
-            {#{%- endif -%}#}
-        {#{%- endfor -%}#}
-    {#</script>#}
 {% endblock %}

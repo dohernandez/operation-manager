@@ -1,0 +1,55 @@
+{% include 'ManagerBundle:Form:_scripts-datepicker-form.html.twig' %}
+<script>
+    $(document).ready(function() {
+        $('.add-trade').click(function (e) {
+            e.preventDefault();
+
+            var $trades = $(this).closest('div.trades-box-body');
+            var $table = $trades.find('table');
+
+            count =  $trades.data('trades');
+
+            // grab the prototype template
+            var newWidget = $trades.attr('data-prototype');
+            // replace the "__name__" used in the id and name of the prototype
+            // with a number that's unique to your emails
+            // end name attribute looks like name="contact[emails][2]"
+            newWidget = newWidget.replace(/__name__/g, count);
+
+            count++;
+            $trades.data('trades', count);
+
+            var trade = $(newWidget).appendTo($table);
+
+            trade.find('[data-datepickerenable="on"]').each(function () {
+                $(this).datepicker({
+                    showOn: 'button',
+                    buttonImageOnly: true,
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: 'dd/mm/yyyy',
+                    yearRange: "-0:+1",
+                    autoclose: true
+                });
+            });
+
+            trade.children('.entry-buttons').each(function () {
+                addTradeFormDeleteLink($(this));
+            });
+        });
+    });
+
+    function addTradeFormDeleteLink($widget) {
+        var $removeFormA = $('<button type="button" class="btn btn-sm btn-icon btn-pure"><i class="fa fa-minus-square" aria-hidden="true"></i></button>');
+
+        $removeFormA.appendTo($widget);
+
+        $removeFormA.on('click', function(e) {
+            // prevent the link from creating a "#" on the URL
+            e.preventDefault();
+
+            // remove the div for the tag form
+            $widget.parent().remove();
+        });
+    }
+</script>
